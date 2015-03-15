@@ -1,10 +1,10 @@
 ARFLAGS = rvs
 AR = ar $(ARFLAGS)
-INC = ./include/
-SRC = ./src/
-OBJ = ./obj/
-LIB = ./lib/
-BIN = ./bin/
+INC = include/
+SRC = src/
+OBJ = obj/
+LIB = lib/
+BIN = bin/
 LDFLAGS = -L$(LIB)
 LDLIBS = -lformas
 CXXFLAGS = -Wall -g -I$(INC)
