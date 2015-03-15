@@ -10,7 +10,7 @@ void Intercambia(double &a, double &b)
 {
   double auxiliar = a;
   a = b;
-  b = a;
+  b = auxiliar;
 }
 
 // Comprueba si los vértices del rectángulo son los de las esquinas correctas y en el orden deseado.
