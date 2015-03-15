@@ -5,6 +5,7 @@
 #include "circulo.h"
 using namespace std;
 
+//OBSOLETA
 // Lee círculo en formato radio-centro, incluyendo '-' y leyendo "centro" con LeerPunto
 Circulo LeerCirculo()
 {
@@ -15,8 +16,7 @@ Circulo LeerCirculo()
     return salida;
 }
 
-// Igual, pero devuelve si se ha leído con éxito
-
+// Lee círculo en formato radio-centro y devuelve si se ha leído con éxito
 bool Leer(istream& is, Circulo& c)
 {
     is >> c.radio;
@@ -26,6 +26,7 @@ bool Leer(istream& is, Circulo& c)
     return !is.fail();
 }
 
+//OBSOLETA
 // Escribe círculo en formato radio-centro,  incluyendo '-' y escribiendo "centro" con EscribirPunto
 void EscribirCirculo(const Circulo& c)
 {
@@ -33,7 +34,7 @@ void EscribirCirculo(const Circulo& c)
     EscribirPunto(c.centro);
 }
 
-// Igual, pero devolviendo si hubo error
+// Escribe círculo en formato radio-centro y devuelve si hubo error
 bool Escribir(ostream& os, const Circulo& c)
 {
     os << c.radio << '-';

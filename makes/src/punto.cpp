@@ -17,11 +17,10 @@ Punto LeerPunto()
     return salida;
 }
 
-// Igual, pero devolviendo si hubo error
-
+/// Lee un punto en el formato (x,y) y devuelve si hubo error
 bool Leer(istream& is, Punto& p)
 {
-    is.ignore(65536, '(');
+    is.ignore();
     is >> p.x;
     is.ignore();
     is >> p.y;
@@ -37,7 +36,7 @@ void EscribirPunto (const Punto& p)
     cout << '(' << p.x << ',' << p.y << ')';
 }
 
-// Igual, pero devolviendo si hubo error
+// Escribe un punto en formato (x,y) y devuelve si hubo error
 bool Escribir(ostream& os, const Punto& p)
 {
     os << '(' << p.x << ',' << p.y << ')';

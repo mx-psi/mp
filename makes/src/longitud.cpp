@@ -18,7 +18,7 @@ void Avanzar(istream& is)
   }
 }
 
-// Lee puntos de un flujo dado y devuelve la distancia del trayecto que forman
+// Lee puntos de un flujo dado y devuelve la distancia del trayecto que forman.
 double Longitud(istream& is)
 {
   double l = 0;
@@ -40,10 +40,10 @@ double Longitud(istream& is)
 int main(int argc, char* argv[]){
 
   double longitud= 0;
-  bool fin_entrada;
+  bool todo_correcto;
   if (argc==1) {
     longitud = Longitud(cin);
-    fin_entrada = cin.eof();
+    todo_correcto = cin.eof();
   }
   else {
     ifstream f(argv[1]);
@@ -52,10 +52,10 @@ int main(int argc, char* argv[]){
       return 1;
     }
     longitud = Longitud(f);
-    fin_entrada = f.eof();
+    todo_correcto = f.eof();
   }
 
-  if (!fin_entrada) {
+  if (!todo_correcto) {
      cerr << "Error inesperado. No se ha leído toda la entrada" << endl;
      return 1;
   }
