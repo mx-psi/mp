@@ -11,10 +11,8 @@
   */
 
 #include <iostream>
-#include <cmath> // sqrt, M_PI
-#include "punto.h"
-#include "circulo.h"
-
+#include <cmath>        // sqrt, M_PI
+#include "circulo.h"    // Llama a punto.h
 using namespace std;
 
 // Atención: NO DEBE TOCAR LA FUNCION main.

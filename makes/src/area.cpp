@@ -1,19 +1,11 @@
-/*
-  Calcula el área de un círculo.
-*/
-
 #include <iostream>
-#include "circulo.h"
-
+#include "circulo.h"    // Llama a punto.h
 using namespace std;
 
 int main()
 {
-  Circulo c1;
+    cout << "Introduzca un circulo en formato radio-(x,y): ";
+    Circulo circulo = LeerCirculo();
 
-  cout << "Introduzca un circulo en formato radio-(x,y): ";
-  c1 = LeerCirculo();
-
-  cout << "El área del círculo es: " << Area(c1);
-  cout << endl;
+    cout << "El area del circulo es: " << Area(circulo) << endl;
 }

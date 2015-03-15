@@ -1,83 +1,81 @@
-/* Módulo de funciones para trabajar con puntos. */
-
 #include <iostream>
 #include <cmath>
 #include "punto.h"
 using namespace std;
 
-// OBSOLETA
-Punto LeerPunto()
-{
-  Punto p;
-
-  cin.ignore();
-  cin >> p.x;
-
-  cin.ignore();
-
-  cin >> p.y;
-  cin.ignore();
-
-  return p;
-}
+// Funciones para manejar puntos __________________________________
 
 // Lee un punto en el formato (x,y), incluyendo la lectura de '(' ',' y ')'
-bool Leer(istream& is, Punto& p){
-
-  if(is.get() != '(') return false;
-  is >> p.x;
-  if(is.get() != ',') return false;
-  is >> p.y;
-  if(is.get() != ')') return false;
-
-  return is.good();
+Punto LeerPunto()
+{
+    Punto salida;
+    cin.ignore();
+    cin >> salida.x;
+    cin.ignore();
+    cin >> salida.y;
+    cin.ignore();
+    return salida;
 }
 
-// OBSOLETA
-void EscribirPunto (const Punto& p)
+// Igual, pero devolviendo si hubo error
+
+bool Leer(istream& is, Punto& p)
 {
-  cout << '(' << p.x << ',' << p.y << ')';
+    is.ignore(65536, '(');
+    is >> p.x;
+    is.ignore();
+    is >> p.y;
+    is.ignore();
+
+    return !is.fail();
 }
 
 // Escribe un punto en formato (x,y), incluyendo la escritura de '(' ',' y ')'
-bool Escribir(ostream& os, const Punto& p){
-  os << '(' << p.x << ',' << p.y << ')';
-  return os.good();
+void EscribirPunto (const Punto& p)
+{
+    cout << '(' << p.x << ',' << p.y << ')';
+}
+
+// Igual, pero devolviendo si hubo error
+bool Escribir(ostream& os, const Punto& p)
+{
+    os << '(' << p.x << ',' << p.y << ')';
+    return !os.fail();
 }
 
 // Inicializa un punto con dos valores cx cy
 void InicializarPunto (Punto &p, double cx, double cy)
 {
-  p.x = cx;
-  p.y = cy;
+    p.x = cx;
+    p.y = cy;
 }
 
 // Devuelve la coordenada X del punto p
 double GetX (const Punto& p)
 {
-  return p.x;
+    return p.x;
 }
 
 // Devuelve la coordenada Y del punto p
 double GetY (const Punto& p)
 {
-  return p.y;
+    return p.y;
 }
 
 // Devuelve la distancia euclídea entre p1 y p2
 double Distancia (const Punto& p1, const Punto& p2)
 {
-  int d_x = p1.x - p2.x;
-  int d_y = p1.y - p2.y;
-  return sqrt(d_x*d_x + d_y*d_y);
+    double dist_x = p1.x-p2.x;
+    double dist_y = p1.y-p2.y;
+    return sqrt(dist_x*dist_x + dist_y*dist_y);
 }
 
-// Devuelve el punto entre p1 y p2 (más cercano a igual distancia de p1 y p2)
+// Devuelve el punto que está entre p1 y p2 (más cercano a igual distancia de p1 y p2)
 Punto PuntoMedio (const Punto& p1, const Punto& p2)
 {
-  Punto medio;
-  medio.x = .5*(p1.x + p2.x);
-  medio.y = .5*(p1.y + p2.y);
-
-  return medio;
+    Punto salida;
+    salida.x = (p1.x + p2.x)/2;
+    salida.y = (p1.y + p2.y)/2;
+    return salida;
 }
+

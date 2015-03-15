@@ -8,7 +8,7 @@ A continuación haz:
 ```
 
 Se copiarán todos los archivos necesarios. Luego para subir cosas nuevas lo básico
-son 3 comandos:
+son 4 comandos:
 
 - `git add #nombre de archivo(s)#` Añade archivos para que se rastreen los cambios (sólo hace falta una vez).
 - `git pull` Actualiza tus archivos con respecto al servidor.
