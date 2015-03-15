@@ -1,9 +1,11 @@
+/* Cabeceras de las funciones para manejar puntos. */
+
 #ifndef _PUNTO_H_
 #define _PUNTO_H_
 
 using namespace std;
 
-// Definimos tipo Punto ___________________________________________
+// Definición del struct Punto ___________________________________________
 
 struct Punto {
     double x,y;

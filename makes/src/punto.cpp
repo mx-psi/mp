@@ -1,10 +1,10 @@
+/* Módulo de funciones para manejar puntos. */
 #include <iostream>
 #include <cmath>
 #include "punto.h"
 using namespace std;
 
-// Funciones para manejar puntos __________________________________
-
+// OBSOLETA
 // Lee un punto en el formato (x,y), incluyendo la lectura de '(' ',' y ')'
 Punto LeerPunto()
 {
@@ -30,6 +30,7 @@ bool Leer(istream& is, Punto& p)
     return !is.fail();
 }
 
+// OBSOLETA
 // Escribe un punto en formato (x,y), incluyendo la escritura de '(' ',' y ')'
 void EscribirPunto (const Punto& p)
 {
@@ -78,4 +79,3 @@ Punto PuntoMedio (const Punto& p1, const Punto& p2)
     salida.y = (p1.y + p2.y)/2;
     return salida;
 }
-

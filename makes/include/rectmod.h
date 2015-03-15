@@ -1,9 +1,11 @@
+/* Cabeceras de las funciones para manejar rectángulos. */
+
 #ifndef _RECTMOD_H_
 #define _RECTMOD_H_
 
 #include "punto.h"
 
-// Definición del tipo Rectangulo
+// Definición del struct Rectangulo
 
 struct Rectangulo {
     Punto vert1, vert2;

@@ -1,9 +1,9 @@
+/* Módulo de funciones para manejar círculos. */
+
 #include <iostream>
 #include <cmath>
 #include "circulo.h"
 using namespace std;
-
-// Funciones para manejar circulos __________________________________
 
 // Lee círculo en formato radio-centro, incluyendo '-' y leyendo "centro" con LeerPunto
 Circulo LeerCirculo()
@@ -78,4 +78,3 @@ double Distancia (const Circulo& c1, const Circulo& c2)
 {
     return Distancia(Centro(c1), Centro(c2)) - Radio(c1) - Radio(c2);
 }
-

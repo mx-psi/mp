@@ -1,9 +1,10 @@
+/* Módulo de funciones para manejar rectángulos. */
+
 #include <iostream>
 #include <cmath>
 #include "rectmod.h"
 using namespace std;
 
-// Funciones para manejar rectángulos
 
 // Comprueba si los vértices del rectángulo son los de las esquinas correctas y en el orden deseado.
 // En caso contrario los sustituye por los correctos
@@ -84,4 +85,3 @@ bool Interior(const Punto& p, const Rectangulo& r)
 {
     return p.x >= r.vert1.x && p.x <= r.vert2.x && p.y >= r.vert1.y && p.y <= r.vert2.y;
 }
-

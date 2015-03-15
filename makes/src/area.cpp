@@ -1,3 +1,5 @@
+/* Calcula el area de un círculo dado en la entrada estándar.*/
+
 #include <iostream>
 #include "circulo.h"    // Llama a punto.h
 using namespace std;

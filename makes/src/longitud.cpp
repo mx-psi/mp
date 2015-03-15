@@ -1,3 +1,5 @@
+/* Módulo que calcula la longitud de un trayecto entre puntos.*/
+
 #include <iostream>
 #include <fstream>
 #include "punto.h"
@@ -5,6 +7,7 @@ using namespace std;
 
 const char COM = '#'; // Comienzo de comentario.
 
+// Avanza hasta la siguiente linea con puntos.
 void Avanzar(istream& is)
 {
   while (isspace(is.peek()) || is.peek() == COM) {
@@ -15,6 +18,7 @@ void Avanzar(istream& is)
   }
 }
 
+// Lee puntos de un flujo dado y devuelve la distancia del trayecto que forman
 double Longitud(istream& is)
 {
   double l = 0;

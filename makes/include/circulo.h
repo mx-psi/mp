@@ -1,9 +1,11 @@
+/* Cabeceras de las funciones para manejar círculos. */
+
 #ifndef _CIRCULO_H_
 #define _CIRCULO_H_
 
 #include "punto.h"
 
-// Definimos tipo Circulo ___________________________________________
+// Definición del struct Circulo ___________________________________________
 
 struct Circulo {
     Punto centro;
