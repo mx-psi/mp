@@ -7,7 +7,7 @@ LIB = lib/
 BIN = bin/
 LDFLAGS = -L$(LIB)
 LDLIBS = -lformas
-CXXFLAGS = -Wall -g -I$(INC)
+CXXFLAGS = -Wall -g -I$(INC) -Wextra -pedantic -std=c++03
 CXX = g++ $(CXXFLAGS)
 
 
