@@ -5,6 +5,13 @@
 #include "rectmod.h"
 using namespace std;
 
+// Intercambia dos doubles.
+void Intercambia(double &a, double &b)
+{
+  double auxiliar = a;
+  a = b;
+  b = a;
+}
 
 // Comprueba si los vértices del rectángulo son los de las esquinas correctas y en el orden deseado.
 // En caso contrario los sustituye por los correctos
@@ -13,16 +20,12 @@ bool CorrigeVertices(Rectangulo& r)
     bool correcto = true;
     if (r.vert1.x > r.vert2.x)
     {
-        double apoyo = r.vert1.x;
-        r.vert1.x = r.vert2.x;
-        r.vert2.x = apoyo;
+        Intercambia(r.vert1.x, r.vert2.x);
         correcto = false;
     }
     if (r.vert1.y > r.vert2.y)
     {
-        double apoyo = r.vert1.y;
-        r.vert1.y = r.vert2.y;
-        r.vert2.y = apoyo;
+        Intercambia(r.vert1.y, r.vert2.y);
         correcto = false;
     }
 
