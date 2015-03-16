@@ -48,8 +48,18 @@ int main(){
   cin >> salida;
 
   cout << "Introduzca el mensaje: ";
-  string mensaje[pixeles];
+  const int capacidad = Capacidad(tipo, filas, columnas);
+  string mensaje[capacidad];
+  cin >> mensaje;
 
+  cout << "Ocultando...\n";
+
+  Ocultar(buffer, capacidad, mensaje);
+
+  if(tipo == IMG_PGM)
+    EscribirImagenPGM(salida, buffer, filas, columnas);
+  else
+    EscribirImagenPPM(salida, buffer, filas, columnas);
 }
 
 /* Fin fichero: ocultar.cpp */
