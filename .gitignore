@@ -1,3 +1,9 @@
+# Docs
+*.html
+*.js
+*.png
+*.css
+
 # Backup files
 *~
 

@@ -1,4 +1,4 @@
-
+BIN = bin
 SRC = src
 INC = include
 OBJ = obj
@@ -16,7 +16,7 @@ $(OBJ)/imagenES.o : $(SRC)/imagenES.cpp $(INC)/imagenES.h
 
 # ************ Limpieza ************
 clean :
-	-rm $(OBJ)/* $(SRC)/*~ $(INC)/*~ ./*~
+	rm  -f $(OBJ)/* $(SRC)/*~ $(INC)/*~ ./*~
 
 mrproper : clean
-	-rm $(BIN)/* doc/html/*
+	rm -f $(BIN)/* doc/html/*
