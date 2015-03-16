@@ -61,7 +61,7 @@ bool LeerCabecera (ifstream& f, int& filas, int& columnas)
       f.ignore(10000,'\n');
 
     f >> columnas >> filas >> maxvalor;
-    
+
     if (/*str &&*/ f && filas>0 && filas <5000 && columnas >0 && columnas<5000) {
         f.get(); // Saltamos separador
         return true;
@@ -95,12 +95,12 @@ bool LeerImagenPPM (const char nombre[], int& filas, int& columnas, unsigned cha
   filas=0;
   columnas=0;
   ifstream f(nombre,ios::in|ios::binary);
-  
+
   if (LeerTipo(f)==IMG_PPM)
     if (LeerCabecera (f, filas, columnas))
 	if (f.read(reinterpret_cast<char *>(buffer),filas*columnas*3))
 	  exito= true;
-  
+
   return exito;
 }
 
@@ -113,12 +113,12 @@ bool LeerImagenPGM (const char nombre[], int& filas, int& columnas, unsigned cha
   filas=0;
   columnas=0;
   ifstream f(nombre,ios::in|ios::binary);
-  
+
   if (LeerTipo(f)==IMG_PGM)
     if (LeerCabecera (f, filas, columnas))
 	if (f.read(reinterpret_cast<char *>(buffer),filas*columnas))
 	  exito= true;
-  
+
   return exito;
 }
 
@@ -129,7 +129,7 @@ bool EscribirImagenPPM (const char nombre[], const unsigned char datos[], int fi
 {
   ofstream f(nombre,ios::out|ios::binary);
   bool res= true;
-  
+
   if (f) {
     f << "P6" << endl;
     f << columnas << ' ' << filas << endl;
@@ -145,7 +145,7 @@ bool EscribirImagenPGM (const char nombre[], const unsigned char datos[], int fi
 {
   ofstream f(nombre,ios::out|ios::binary);
   bool res= true;
-  
+
   if (f) {
     f << "P5" << endl;
     f << columnas << ' ' << filas << endl;
@@ -158,4 +158,3 @@ bool EscribirImagenPGM (const char nombre[], const unsigned char datos[], int fi
 
 
 /* Fin Fichero: imagenES.cpp */
-
