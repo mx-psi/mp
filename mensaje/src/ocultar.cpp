@@ -22,13 +22,13 @@ int main()
    cout << "Introduzca la imagen de entrada: ";
    cin >> nombre;
    TipoImagen tipo = LeerTipoImagen(nombre, filas, columnas);
-   unsigned char imagen[filas*columnas*(1+2*(tipo == IMG_PPM))];     // TODO: que sea el triple si la imagen es en color pero de forma menos fea.
+   unsigned char imagen[filas*columnas*(1+2*(tipo == IMG_PPM))];     // TODO: que sea el triple si la imagen es en color pero de forma menos fea. Otro TODO: el estándar no deja usar vectores de longitud variable.
 
    if (tipo == IMG_PGM && LeerImagenPGM(nombre, filas, columnas, imagen)
     || tipo == IMG_PPM && LeerImagenPPM(nombre, filas, columnas, imagen))
    {
       char salida[256];
-      int bytes = filas*columnas*(1+2*(tipo == IMG_PPM))/8;   // TODO: ídem arriba. Quizá una variable las relacione
+      int bytes = filas*columnas*(1+2*(tipo == IMG_PPM))/8;   // TODO: ídem arriba. Quizá una variable las relacione. Otro TODO: el estándar no deja usar vectores de longitud variable.
       char mensaje[bytes];
       cout << "Introduzca la imagen de salida: ";
       cin >> salida;
