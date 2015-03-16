@@ -23,9 +23,10 @@ bool Bit(const unsigned char &bits, const int &pos);
   * @brief Cambia el bit en la posción menos significativa.
   *
   * @param bits Bits dados.
-  * @param bit Bit cambiado
+  * @param bit Bit a cambiar.
+  * @param pos Posición a cambiar.
   */
-void CambiaBit(unsigned char &bits, const bool &bit);
+void CambiaBit(unsigned char &bits, const bool &bit, const int &pos);
 
 /**
   * @brief Oculta un mensaje en una imagen.
