@@ -6,7 +6,6 @@
   *
   */
 
-#include <string>
 #include "imagenES.h"
 using namespace std;
 
@@ -20,5 +19,6 @@ void CambiaBit(unsigned char &bits, const bool &bit, const int &pos){
   else
     bits &= (1 << pos);
 }
+
 
 /* Fin fichero: codificar.cpp */
