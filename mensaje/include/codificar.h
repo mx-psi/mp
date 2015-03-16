@@ -17,36 +17,45 @@
   * @return Valor del bit.
   * @pre @a pos < log2(@a bits)
   */
-bool Bit(const unsigned char &bits, const int &pos);
+bool Bit(unsigned char bits, int pos);
 
 /**
-  * @brief Cambia el bit en la posción menos significativa.
+  * @brief Cambia el bit en la posción pedida.
   *
   * @param bits Bits dados.
-  * @param bit Bit a cambiar.
+  * @param valor Valor a asignar al bit.
   * @param pos Posición a cambiar.
   */
-void CambiaBit(unsigned char &bits, const bool &bit, const int &pos);
+void CambiaBit(unsigned char& bits, bool valor, int pos);
+
+/**
+  * @brief Cambia el bit en la posción pedida.
+  *
+  * @param bits Bits dados.
+  * @param valor Valor a asignar al bit.
+  * @param pos Posición a cambiar.
+  */
+void CambiaBit(char& bits, bool valor, int pos);
 
 /**
   * @brief Oculta un mensaje en una imagen.
   *
-  * @param buffer Imagen.
-  * @param pixeles Tamaño de la imagen.
+  * @param imagen Imagen.
+  * @param capacidad Tamaño de la imagen en bytes.
   * @param mensaje Mensaje a guardar.
   * @ret Éxito de la operación.
   */
-bool Ocultar(unsigned char buffer[], const int &pixeles, char mensaje[]);
+bool Ocultar(unsigned char imagen[], int capacidad, char texto[]);
 
 /**
   * @brief Revela un mensaje oculto en una imagen.
   *
   * @param buffer Imagen.
-  * @param pixeles Tamaño de la imagen.
+  * @param capacidad Tamaño de la imagen en bytes.
   * @param mensaje Mensaje a obtener.
   * @ret Éxito de la operación.
   */
-bool Revelar(unsigned char buffer[], const int &pixeles, char mensaje[]);
+bool Revelar(unsigned char imagen[], int capacidad, char texto[]);
 
 
 #endif

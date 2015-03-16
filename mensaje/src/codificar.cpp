@@ -6,32 +6,68 @@
   *
   */
 
-#include "imagenES.h"
-using namespace std;
+#include "codificar.h"
 
-bool Bit(const unsigned char &bits, const int &pos)
+bool Bit(unsigned char bits, int pos)
 {
-  return (1<<pos) & bits != 0;
+  return (1<<pos) & bits != 0;   // TODO: Tal vez no haga falta poner "!= 0". Al menos en los if funciona
 }
 
-void CambiaBit(unsigned char &bits, const bool &bit, const int &pos)
+void CambiaBit(unsigned char& bits, bool valor, int pos)
 {
-  if(bit)
+  if(valor)
     bits |= (1 << pos);
   else
-    bits &= (1 << pos);
+    bits &= ~(1 << pos);
 }
 
-bool Ocultar(unsigned char buffer[], const int &pixeles, char mensaje[])
+void CambiaBit(char& bits, bool valor, int pos) // TODO: Posiblemente no tenga que separarse en dos, pero es necesario que admita char y unsigned char (o que se modifique Revelar)
 {
-  bool fin_texto = false;
-  int i = 0;
-  for(int pix = 0; pix < pixeles && !fin_texto; pix++)
-  {
-    fin_texto = mensaje[i] != '\0';
-    for(int b = 7; b >= 0; b--)
-      CambiaBit(buffer[pix], Bit(mensaje[i++], b), 1);
-  }
+  if(valor)
+    bits |= (1 << pos);
+  else
+    bits &= ~(1 << pos);
+}
+
+// Oculta un mensaje en una imagen
+// Prec: La imagen es correcta
+bool Ocultar(unsigned char imagen[], int capacidad, char texto[])
+{
+   bool fin_texto = false;
+   int i = 0;  // Posición en la imagen
+   for (unsigned int byte = 0; byte < capacidad && !fin_texto; byte++)
+   {
+      if (texto[byte] == '\0')   // TODO: Discutir si sobreescribir siempre o si comprobar
+         fin_texto = true;
+      for (int bit = 7; bit > -1; bit--)
+         if ((1<<bit) & texto[byte])
+            imagen[i++] |= 1;
+         else
+            imagen[i++] &= ~1;
+         //CambiaBit(imagen[i++], Bit(texto[byte], bit), 0);   TODO: A ver por qué rayos no funciona el módulo este
+   }
+   return fin_texto;
+}
+
+// Revela el mensaje contenido en una imagen
+bool Revelar(unsigned char imagen[], int capacidad, char texto[])
+{
+   bool fin_texto = false;
+   int i = 0;
+   for (unsigned int byte = 0; byte < capacidad && !fin_texto; byte++)
+   {
+      for (int bit = 7; bit > -1; bit--)
+         if (imagen[i++] & 1)
+            texto[byte] |= (1 << bit);
+         else
+            texto[byte] &= ~(1 << bit);
+         //CambiaBit(texto[byte], Bit(imagen[i++], 0), bit);   TODO: Ídem
+
+      if (texto[byte] == '\0')
+         fin_texto = true; // TODO: Sobreescribir o comprobar
+   }
+
+   return fin_texto;
 }
 
 /* Fin fichero: codificar.cpp */
