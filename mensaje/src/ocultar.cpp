@@ -5,19 +5,19 @@
 
 #include <iostream>
 #include "codificar.h"
-#include "bufferES.h"
+#include "imagenES.h"
 using namespace std;
 
 const int MAX_BUFFER  = 1000000;
 const int MAX_MENSAJE = MAX_BUFFER/8;
 const int MAX_NOMBRES = 256;
 
-int Dimension(const TipoImagen &tipo, const int &filas, const int &columnas)
+int Dimension(TipoImagen tipo, int filas, int columnas)
 {
   return filas*columnas*(1+2*(tipo == IMG_PPM));
 }
 
-int Bytes(const TipoImagen &tipo, const int &filas, const int &columnas)
+int Bytes(TipoImagen tipo, int filas, int columnas)
 {
   return Dimension(tipo, filas, columnas)/8;
 }
@@ -30,14 +30,14 @@ int main(int argc, char* argv[])
 
    /* Lectura del tipo de imagen */
 
-   cout << "Introduzca la buffer de entrada: ";
+   cout << "Introduzca la imagen de entrada: ";
    cin >> nombre;
 
    TipoImagen tipo = LeerTipoImagen(nombre, filas, columnas);
-   unsigned char imagen[MAX_BUFFER];
+   unsigned char buffer[MAX_BUFFER];
 
    if(tipo == IMG_DESCONOCIDO){
-     cerr << argv[0] << ": Tipo de buffer desconocido";
+     cerr << argv[0] << ": Tipo de imagen desconocido";
      return 1;
    }
 
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 
     int bytes = Bytes(tipo, filas, columnas);
     char mensaje[MAX_MENSAJE];
-    cout << "Introduzca la buffer de salida: ";
+    cout << "Introduzca la imagen de salida: ";
     cin >> salida;
     cout << "Introduzca el mensaje: ";
     cin >> mensaje;
