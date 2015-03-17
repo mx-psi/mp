@@ -10,7 +10,7 @@
 
 bool Bit(unsigned char bits, int pos)
 {
-  return (1<<pos) & bits != 0;   // TODO: Tal vez no haga falta poner "!= 0". Al menos en los if funciona
+  return (1<<pos) & bits;
 }
 
 void CambiaBit(unsigned char& bits, bool valor, int pos)
@@ -40,11 +40,7 @@ bool Ocultar(unsigned char imagen[], int capacidad, char texto[])
       if (texto[byte] == '\0')   // TODO: Discutir si sobreescribir siempre o si comprobar
          fin_texto = true;
       for (int bit = 7; bit > -1; bit--)
-         if ((1<<bit) & texto[byte])
-            imagen[i++] |= 1;
-         else
-            imagen[i++] &= ~1;
-         //CambiaBit(imagen[i++], Bit(texto[byte], bit), 0);   TODO: A ver por qué rayos no funciona el módulo este
+         CambiaBit(imagen[i++], Bit(texto[byte], bit), 0);
    }
    return fin_texto;
 }
@@ -57,11 +53,7 @@ bool Revelar(unsigned char imagen[], int capacidad, char texto[])
    for (unsigned int byte = 0; byte < capacidad && !fin_texto; byte++)
    {
       for (int bit = 7; bit > -1; bit--)
-         if (imagen[i++] & 1)
-            texto[byte] |= (1 << bit);
-         else
-            texto[byte] &= ~(1 << bit);
-         //CambiaBit(texto[byte], Bit(imagen[i++], 0), bit);   TODO: Ídem
+         CambiaBit(texto[byte], Bit(imagen[i++], 0), bit);
 
       if (texto[byte] == '\0')
          fin_texto = true; // TODO: Sobreescribir o comprobar
