@@ -12,17 +12,20 @@ const int MAX_BUFFER  = 1000000;
 const int MAX_MENSAJE = MAX_BUFFER/8;
 const int MAX_NOMBRES = 256;
 
+
+// Devuelve el número de píxeles de una imagen
 int Dimension(TipoImagen tipo, int filas, int columnas)
 {
   return filas*columnas*(1+2*(tipo == IMG_PPM));
 }
 
+// Calcula el número de bytes ocultables en una imagen
 int Bytes(TipoImagen tipo, int filas, int columnas)
 {
   return Dimension(tipo, filas, columnas)/8;
 }
 
-int main(int argc, char* argv[])
+int main()
 {
    char nombre[MAX_NOMBRES];
    char salida[MAX_NOMBRES];
@@ -37,22 +40,26 @@ int main(int argc, char* argv[])
    unsigned char buffer[MAX_BUFFER];
 
    if(tipo == IMG_DESCONOCIDO){
-     cerr << argv[0] << ": Tipo de imagen desconocido";
+     cerr << "ocultar: Tipo de imagen desconocido";
      return 1;
    }
 
    if (tipo == IMG_PGM)
+   {
      if(!LeerImagenPGM(nombre, filas, columnas, buffer))
      {
-       cerr << argv[0] << ": Fallo en la lectura de la imagen.";
+       cerr << "ocultar: Fallo en la lectura de la imagen.";
        return 1;
      }
+   }
    else
+   {
       if(!LeerImagenPPM(nombre, filas, columnas, buffer))
       {
-        cerr << argv[0] << ": Fallo en la lectura de la imagen.";
+        cerr << "ocultar: Fallo en la lectura de la imagen.";
         return 1;
       }
+   }
 
     /* Salida y mensaje */
 
@@ -63,7 +70,7 @@ int main(int argc, char* argv[])
     cout << "Introduzca el mensaje: ";
     cin >> mensaje;
 
-    /* Ocultación. */
+    /* Ocultación */
 
     cout << "Ocultando..." << endl;
     if (Ocultar(buffer, bytes, mensaje + '\0'))
@@ -73,7 +80,7 @@ int main(int argc, char* argv[])
           EscribirImagenPPM(salida, buffer, filas, columnas);
     else
     {
-       cout << "Error al intentar ocultar el mensaje.";
+       cerr << "ocultar: Error al intentar ocultar el mensaje.";
        return 1;
     }
 }

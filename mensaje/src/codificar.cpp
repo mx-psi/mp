@@ -21,7 +21,7 @@ void CambiaBit(unsigned char& bits, bool valor, int pos)
     bits &= ~(1 << pos);
 }
 
-void CambiaBit(char& bits, bool valor, int pos) // TODO: Posiblemente no tenga que separarse en dos, pero es necesario que admita char y unsigned char (o que se modifique Revelar)
+void CambiaBit(char& bits, bool valor, int pos)
 {
   if(valor)
     bits |= (1 << pos);
@@ -35,9 +35,9 @@ bool Ocultar(unsigned char imagen[], int capacidad, char texto[])
 {
    bool fin_texto = false;
    int i = 0;  // Posición en la imagen
-   for (unsigned int byte = 0; byte < capacidad && !fin_texto; byte++)
+   for (int byte = 0; byte < capacidad && !fin_texto; byte++)
    {
-      if (texto[byte] == '\0')   // TODO: Discutir si sobreescribir siempre o si comprobar
+      if (texto[byte] == '\0')
          fin_texto = true;
       for (int bit = 7; bit > -1; bit--)
          CambiaBit(imagen[i++], Bit(texto[byte], bit), 0);
@@ -50,13 +50,13 @@ bool Revelar(unsigned char imagen[], int capacidad, char texto[])
 {
    bool fin_texto = false;
    int i = 0;
-   for (unsigned int byte = 0; byte < capacidad && !fin_texto; byte++)
+   for (int byte = 0; byte < capacidad && !fin_texto; byte++)
    {
       for (int bit = 7; bit > -1; bit--)
          CambiaBit(texto[byte], Bit(imagen[i++], 0), bit);
 
       if (texto[byte] == '\0')
-         fin_texto = true; // TODO: Sobreescribir o comprobar
+         fin_texto = true;
    }
 
    return fin_texto;
