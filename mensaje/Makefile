@@ -48,4 +48,4 @@ clean :
 	rm  -f $(OBJ)/* $(SRC)/*~ $(INC)/*~ ./*~
 
 mrproper : clean
-	rm -f $(BIN)/* doc/html/* imagenes/test*
+	rm -f $(BIN)/* doc/html/* imagenes/test* tests/*salida
