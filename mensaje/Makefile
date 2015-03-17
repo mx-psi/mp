@@ -7,7 +7,17 @@ CXX = g++
 CPPFLAGS = -Wall -g  -I$(INC) -Wextra -pedantic -std=c++03
 
 
+# ************ Todos y tests ******************
 all: $(BIN)/ocultar $(BIN)/revelar
+
+test: test1
+
+test1: all
+	@echo "Probando frase sin espacios..."
+	$(BIN)/ocultar < tests/test1_input
+	echo "imagenes/test_no_esp" | $(BIN)/revelar > tests/test1_salida
+	diff -q tests/test1_salida tests/test1_correcto
+
 
 # ************ Generación de documentación ******************
 documentacion:
@@ -38,4 +48,4 @@ clean :
 	rm  -f $(OBJ)/* $(SRC)/*~ $(INC)/*~ ./*~
 
 mrproper : clean
-	rm -f $(BIN)/* doc/html/*
+	rm -f $(BIN)/* doc/html/* imagenes/test*
