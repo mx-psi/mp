@@ -5,8 +5,12 @@
 
 #include <iostream>
 #include "codificar.h"
-#include "imagenES.h"
+#include "bufferES.h"
 using namespace std;
+
+const int MAX_BUFFER  = 1000000;
+const int MAX_MENSAJE = MAX_BUFFER/8;
+const int MAX_NOMBRES = 256;
 
 int Dimension(const TipoImagen &tipo, const int &filas, const int &columnas)
 {
@@ -20,45 +24,53 @@ int Bytes(const TipoImagen &tipo, const int &filas, const int &columnas)
 
 int main(int argc, char* argv[])
 {
-   char nombre[256];
+   char nombre[MAX_NOMBRES];
+   char salida[MAX_NOMBRES];
    int filas, columnas;
-   cout << "Introduzca la imagen de entrada: ";
+
+   /* Lectura del tipo de imagen */
+
+   cout << "Introduzca la buffer de entrada: ";
    cin >> nombre;
+
    TipoImagen tipo = LeerTipoImagen(nombre, filas, columnas);
-   unsigned char imagen[Dimension(tipo, filas, columnas)];
+   unsigned char imagen[MAX_BUFFER];
 
    if(tipo == IMG_DESCONOCIDO){
-     cerr << argv[0] << ": Tipo de imagen desconocido";
+     cerr << argv[0] << ": Tipo de buffer desconocido";
      return 1;
    }
 
    if (tipo == IMG_PGM)
-     if(!LeerImagenPGM(nombre, filas, columnas, imagen))
+     if(!LeerImagenPGM(nombre, filas, columnas, buffer))
      {
        cerr << argv[0] << ": Fallo en la lectura de la imagen.";
        return 1;
      }
    else
-      if(!LeerImagenPPM(nombre, filas, columnas, imagen))
+      if(!LeerImagenPPM(nombre, filas, columnas, buffer))
       {
         cerr << argv[0] << ": Fallo en la lectura de la imagen.";
         return 1;
       }
 
-    char salida[256];
+    /* Salida y mensaje */
+
     int bytes = Bytes(tipo, filas, columnas);
-    char mensaje[bytes];
-    cout << "Introduzca la imagen de salida: ";
+    char mensaje[MAX_MENSAJE];
+    cout << "Introduzca la buffer de salida: ";
     cin >> salida;
     cout << "Introduzca el mensaje: ";
     cin >> mensaje;
 
+    /* Ocultación. */
+
     cout << "Ocultando..." << endl;
-    if (Ocultar(imagen, bytes, mensaje + '\0'))
+    if (Ocultar(buffer, bytes, mensaje + '\0'))
        if (tipo == IMG_PGM)
-          EscribirImagenPGM(salida, imagen, filas, columnas);
+          EscribirImagenPGM(salida, buffer, filas, columnas);
        else
-          EscribirImagenPPM(salida, imagen, filas, columnas);
+          EscribirImagenPPM(salida, buffer, filas, columnas);
     else
     {
        cout << "Error al intentar ocultar el mensaje.";
