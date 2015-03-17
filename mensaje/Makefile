@@ -6,8 +6,8 @@ OBJ = obj
 CXX = g++
 CPPFLAGS = -Wall -g  -I$(INC) -c -Wextra -pedantic -std=c++03
 
-# TODO: Ahora resulta que el profesor no usa barras en las variables de directorios. ¿Qué hacemos?
-# TODO: En general pueden toquetearse las variables
+
+all: $(BIN)/ocultar $(BIN)/revelar
 
 # ************ Generación de documentación ******************
 documentacion:
@@ -24,16 +24,14 @@ $(OBJ)/ocultar.o: $(SRC)/ocultar.cpp $(INC)/codificar.h $(INC)/imagenES.h
 	$(CXX) $(CPPFLAGS) $(SRC)/ocultar.cpp -o $(OBJ)/ocultar.o
 
 $(OBJ)/revelar.o: $(SRC)/revelar.cpp $(INC)/codificar.h $(INC)/imagenES.h
-	$(CXX) $(CPPFLAGS) $(SRC)/revelar.cpp -o $(OBJ)/ocultar.o
+	$(CXX) $(CPPFLAGS) $(SRC)/revelar.cpp -o $(OBJ)/revelar.o
 
 # ************ Compilación de programas finales ************
-$(BIN)/ocultar: $(OBJ)/ocultar
+$(BIN)/ocultar: $(OBJ)/ocultar.o
 	$(CXX) $(CPPFLAGS) -o $(BIN)/ocultar $(OBJ)/ocultar.o
 
-$(BIN)/revelar: $(OBJ)/revelar
+$(BIN)/revelar: $(OBJ)/revelar.o
 	$(CXX) $(CPPFLAGS) -o $(BIN)/revelar $(OBJ)/revelar.o
-
-all: $(BIN)/ocultar $(BIN)/revelar
 
 # ************ Limpieza ************
 clean :
