@@ -37,10 +37,10 @@ bool Ocultar(unsigned char imagen[], int capacidad, char texto[])
    int i = 0;  // Posición en la imagen
    for (int byte = 0; byte < capacidad && !fin_texto; byte++)
    {
-      if (texto[byte] == '\0')
-         fin_texto = true;
-      for (int bit = 7; bit > -1; bit--)
-         CambiaBit(imagen[i++], Bit(texto[byte], bit), 0);
+    if (texto[byte] == '\0')
+     fin_texto = true;
+    for (int bit = 7; bit > -1; bit--)
+     CambiaBit(imagen[i++], Bit(texto[byte], bit), 0);
    }
    return fin_texto;
 }
@@ -52,11 +52,11 @@ bool Revelar(unsigned char imagen[], int capacidad, char texto[])
    int i = 0;
    for (int byte = 0; byte < capacidad && !fin_texto; byte++)
    {
-      for (int bit = 7; bit > -1; bit--)
-         CambiaBit(texto[byte], Bit(imagen[i++], 0), bit);
+    for (int bit = 7; bit > -1; bit--)
+     CambiaBit(texto[byte], Bit(imagen[i++], 0), bit);
 
-      if (texto[byte] == '\0')
-         fin_texto = true;
+    if (texto[byte] == '\0')
+     fin_texto = true;
    }
 
    return fin_texto;

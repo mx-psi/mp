@@ -25,6 +25,23 @@ int Bytes(TipoImagen tipo, int filas, int columnas)
   return Dimension(tipo, filas, columnas)/8;
 }
 
+// Añade extensión de tipo
+void AniadeExtension(char nombre[], TipoImagen tipo){
+  int pos = 0;
+  char pgm[5] = ".pgm";
+  char ppm[5] = ".ppm";
+
+  while(nombre[pos] != '\0')
+    pos++;
+
+  if(tipo == IMG_PGM)
+    for(int i = 0; i < 5; i++)
+      nombre[pos+i] = pgm[i];
+  else
+    for(int i = 0; i < 5; i++)
+      nombre[pos+i] = ppm[i];
+}
+
 int main()
 {
    char nombre[MAX_NOMBRES];
@@ -65,8 +82,11 @@ int main()
 
     int bytes = Bytes(tipo, filas, columnas);
     char mensaje[MAX_MENSAJE];
+
     cout << "Introduzca la imagen de salida: ";
     cin >> salida;
+    AniadeExtension(salida, tipo);
+
     cout << "Introduzca el mensaje: ";
     cin >> mensaje;
 
