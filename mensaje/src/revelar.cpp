@@ -66,7 +66,7 @@ int main()
      cout << mensaje << endl;
   else
   {
-    cerr << "revelar: Error al intentar revelar el mensaje" << endl;
+    cerr << "revelar: No se encuentra terminador de cadena en la imagen" << endl;
     return 1;
   }
 }

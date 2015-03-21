@@ -104,7 +104,7 @@ int main()
 
     if (!escribir)
     {
-       cerr << "ocultar: Error al intentar guardar la imagen" << endl;
+       cerr << "ocultar: No se pudo guardar la imagen" << endl;
        return 1;
     }
 
