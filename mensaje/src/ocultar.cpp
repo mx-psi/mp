@@ -56,26 +56,22 @@ int main()
    TipoImagen tipo = LeerTipoImagen(nombre, filas, columnas);
    unsigned char buffer[MAX_BUFFER];
 
-   if(tipo == IMG_DESCONOCIDO){
-     cerr << "ocultar: Tipo de imagen desconocido";
+   if (tipo == IMG_DESCONOCIDO)
+   {
+     cerr << "ocultar: Archivo no existente o tipo de imagen desconocido" << endl;
      return 1;
    }
 
+   bool leer;
    if (tipo == IMG_PGM)
-   {
-     if(!LeerImagenPGM(nombre, filas, columnas, buffer))
-     {
-       cerr << "ocultar: Fallo en la lectura de la imagen.";
-       return 1;
-     }
-   }
+     leer = LeerImagenPGM(nombre, filas, columnas, buffer);
    else
+     leer = LeerImagenPPM(nombre, filas, columnas, buffer);
+
+   if(!leer)
    {
-      if(!LeerImagenPPM(nombre, filas, columnas, buffer))
-      {
-        cerr << "ocultar: Fallo en la lectura de la imagen.";
-        return 1;
-      }
+     cerr << "ocultar: Fallo en la lectura de la imagen" << endl;
+     return 1;
    }
 
     /* Salida y mensaje */
@@ -93,16 +89,25 @@ int main()
     /* Ocultación */
 
     cout << "Ocultando..." << endl;
+
+    bool escribir;
     if (Ocultar(buffer, bytes, mensaje + '\0'))
        if (tipo == IMG_PGM)
-          EscribirImagenPGM(salida, buffer, filas, columnas);
+          escribir = EscribirImagenPGM(salida, buffer, filas, columnas);
        else
-          EscribirImagenPPM(salida, buffer, filas, columnas);
+          escribir = EscribirImagenPPM(salida, buffer, filas, columnas);
     else
     {
-       cerr << "ocultar: Mensaje demasiado grande.";
+       cerr << "ocultar: Mensaje demasiado grande" << endl;
        return 1;
     }
+
+    if (!escribir)
+    {
+       cerr << "ocultar: Error al intentar guardar la imagen" << endl;
+       return 1;
+    }
+
 }
 
 /* Fin fichero: ocultar.cpp */
