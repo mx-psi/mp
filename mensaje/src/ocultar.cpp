@@ -100,7 +100,7 @@ int main()
           EscribirImagenPPM(salida, buffer, filas, columnas);
     else
     {
-       cerr << "ocultar: Error al intentar ocultar el mensaje.";
+       cerr << "ocultar: Mensaje demasiado grande.";
        return 1;
     }
 }

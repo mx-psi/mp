@@ -10,7 +10,7 @@
 
 bool Bit(unsigned char bits, int pos)
 {
-  return (1<<pos) & bits;
+  return (1 << pos) & bits;
 }
 
 void CambiaBit(unsigned char& bits, bool valor, int pos)
