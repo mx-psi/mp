@@ -14,7 +14,7 @@ all: $(BIN)/ocultar $(BIN)/revelar
 test: all
 	@echo "Probando frase sin espacios..."
 	$(BIN)/ocultar < tests/test1_input
-	echo "imagenes/test_no_esp" | $(BIN)/revelar > tests/test1_salida
+	echo "imagenes/test_no_esp.pgm" | $(BIN)/revelar > tests/test1_salida
 	diff -q tests/test1_salida tests/test1_correcto
 
 # Compilación de módulos

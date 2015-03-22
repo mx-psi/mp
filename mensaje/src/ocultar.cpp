@@ -26,7 +26,8 @@ int Bytes(TipoImagen tipo, int filas, int columnas)
 }
 
 // Añade extensión de tipo
-void AniadeExtension(char nombre[], TipoImagen tipo){
+void AniadeExtension(char nombre[], TipoImagen tipo)
+{
   int pos = 0;
   char pgm[5] = ".pgm";
   char ppm[5] = ".ppm";
@@ -88,7 +89,8 @@ int main()
     AniadeExtension(salida, tipo);
 
     cout << "Introduzca el mensaje: ";
-    cin >> mensaje;
+    cin.ignore(); // Ignora el salto de línea anterior
+    cin.getline(mensaje, MAX_MENSAJE);
 
     /* Ocultación */
 
