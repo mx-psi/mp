@@ -13,18 +13,6 @@ const int MAX_MENSAJE = MAX_BUFFER/8;
 const int MAX_NOMBRES = 256;
 
 
-// Devuelve el número de píxeles de una imagen
-int Dimension(TipoImagen tipo, int filas, int columnas)
-{
-  return filas*columnas*(1+2*(tipo == IMG_PPM));
-}
-
-// Calcula el número de bytes ocultables en una imagen
-int Bytes(TipoImagen tipo, int filas, int columnas)
-{
-  return Dimension(tipo, filas, columnas)/8;
-}
-
 // Añade extensión de tipo
 void AniadeExtension(char nombre[], TipoImagen tipo)
 {
@@ -77,7 +65,9 @@ int main()
 
     /* Salida y mensaje */
 
-    int bytes = Bytes(tipo, filas, columnas);
+    int bytes = filas*columnas*(1+2*(tipo == IMG_PPM))/8;
+    if (bytes > MAX_MENSAJE)
+        bytes = MAX_MENSAJE;
     char mensaje[MAX_MENSAJE];
 
     cout << "Introduzca la imagen de salida: ";
@@ -93,7 +83,7 @@ int main()
     cout << "Ocultando..." << endl;
 
     bool escribir;
-    if (Ocultar(buffer, bytes, mensaje + '\0'))
+    if (Ocultar(buffer, bytes, mensaje))
        if (tipo == IMG_PGM)
           escribir = EscribirImagenPGM(salida, buffer, filas, columnas);
        else
