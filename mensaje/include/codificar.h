@@ -20,7 +20,7 @@
 bool Bit(unsigned char bits, int pos);
 
 /**
-  * @brief Cambia el bit en la posción pedida.
+  * @brief Cambia el bit en la posición pedida.
   *
   * @param bits Bits dados.
   * @param valor Valor a asignar al bit.
