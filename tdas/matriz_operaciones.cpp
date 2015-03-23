@@ -21,13 +21,13 @@ bool Leer(std::istream& is, MatrizBit& m)
     for (int j = 0; j < columnas; j++)
     {
       is >> leido;
-      if (is.good() && (leido == '0' || leido == '1'))  // TODO: Asegurarse de que eof() NO desactiva good()
-        Set(m, i, j, leido == '1');   // TODO: Podría hacerse suponiendo que el archivo está bien. O podría quedarse así.
+      if (is.good() && (leido == '0' || leido == '1'))
+        Set(m, i, j, leido == '1');
       else
         return false;
     }
 
-  return is.eof();  // TODO: Probar a ver si se lee el end of file.
+  return is.eof();
 }
 
 bool Escribir(std::ostream& os, const MatrizBit& m)
