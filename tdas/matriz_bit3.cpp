@@ -30,7 +30,7 @@ int Columnas( const MatrizBit& m)
 
 bool Get(const MatrizBit& m, int f, int c)
 {
-  return m.vec[f*Columnas(m) + c];
+  return m.vec[f*Columnas(m) + c] == '1';
 }
 
 void Set(MatrizBit& m, int f, int c, bool v)
