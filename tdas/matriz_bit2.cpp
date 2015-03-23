@@ -3,6 +3,7 @@
   * @brief Fichero para la segunda representación de matrices.
   */
 
+#include "matriz_bit2.h"
 using namespace std;
 
 

@@ -3,6 +3,7 @@
   * @brief Fichero para la primera representación de matrices.
   */
 
+#include "matriz_bit1.h"
 using namespace std;
 
 bool Inicializar(MatrizBit& m, int filas, int columnas)

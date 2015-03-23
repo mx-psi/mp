@@ -3,6 +3,7 @@
   * @brief Fichero para la tercera representación de matrices.
   */
 
+#include "matriz_bit3.h"
 using namespace std;
 
 
