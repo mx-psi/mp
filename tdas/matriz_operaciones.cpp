@@ -74,7 +74,7 @@ bool Escribir(const char nombre[], const MatrizBit& m)
 
   f << Filas(m) << ' ' << Columnas(m);
   for (int i = 0; f && i < Filas(m); i++)
-    for (int j = 0; j < f && Columnas(m); j++)
+    for (int j = 0; f && j < Columnas(m); j++)
       f << (j == 0 ? '\n' : ' ') << Get(m, i, j);
 
   return f;   // TODO: Comprobar que la única posibilidad de fallo es que el flujo falle
