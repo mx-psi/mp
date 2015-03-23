@@ -14,6 +14,8 @@ bool Inicializar(MatrizBit& m, int filas, int columnas)
   for(int i = 0; i < 10; i++)
     for(int j = 0; j < 10; j++)
       m.mat[i][j] = false;
+
+  return true;
 }
 
 int Filas (const MatrizBit& m)

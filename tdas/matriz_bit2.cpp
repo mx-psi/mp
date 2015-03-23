@@ -13,6 +13,8 @@ bool Inicializar(MatrizBit& m, int filas, int columnas)
 
   for(int i = 0; i < 100; i++)
     m.vec[i] = false;
+
+  return true;
 }
 
 int Filas (const MatrizBit& m)
