@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const int TAM_DIM = 16; // Tamaño de cada componente guardada en fils_cols
+
 struct MatrizBit
 {
   unsigned int fils_cols;

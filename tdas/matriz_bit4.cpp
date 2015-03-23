@@ -24,7 +24,7 @@ bool Inicializar(MatrizBit& m, int filas, int columnas)
   if(filas*columnas > 128)
     return false;
 
-  m.fils_cols = (filas << 8) + columnas;
+  m.fils_cols = (filas << TAM_DIM) + columnas;
 
   for(int i = 0; i < 4; i++)
     m.vec[i] = 0;
@@ -32,12 +32,12 @@ bool Inicializar(MatrizBit& m, int filas, int columnas)
 
 int Filas (const MatrizBit& m)
 {
-  return m.fils_cols >> 8;
+  return m.fils_cols >> TAM_DIM;
 }
 
 int Columnas( const MatrizBit& m)
 {
-  return (m.fils_cols << 8) >> 8;
+  return m.fils_cols - (Filas(m) << TAM_DIM);
 }
 
 bool Get(const MatrizBit& m, int f, int c)
