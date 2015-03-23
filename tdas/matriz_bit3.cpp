@@ -3,8 +3,6 @@
   * @brief Fichero para la tercera representación de matrices.
   */
 
-#include "matriz_bit3.h"
-
 bool Inicializar(MatrizBit& m, int filas, int columnas)
 {
   if(filas*columnas > 100)

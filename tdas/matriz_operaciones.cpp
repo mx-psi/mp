@@ -37,7 +37,7 @@ bool Escribir(std::ostream& os, const MatrizBit& m)
     for (int j = 0; j < os.good() && Columnas(m); j++)
       os << (j == 0 ? '\n' : ' ') << Get(m, i, j);
 
-  return os.good();   // TODO: Comprobar que la única posibilidad de fallo es que el flujo falle
+  return os.good();
 }
 
 bool Leer(const char nombre[], MatrizBit& m)

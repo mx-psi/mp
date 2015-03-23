@@ -3,8 +3,6 @@
   * @brief Fichero para la primera representación de matrices.
   */
 
-#include "matriz_bit1.h"
-
 bool Inicializar(MatrizBit& m, int filas, int columnas)
 {
   if(filas > 10 || columnas > 10)

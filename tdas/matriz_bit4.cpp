@@ -3,8 +3,6 @@
   * @brief Fichero para la cuarta representación de matrices.
   */
 
-#include "matriz_bit4.h"
-
 bool Bit(unsigned int bits, int pos)
 {
   return (1 << pos) & bits;
