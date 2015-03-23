@@ -4,7 +4,6 @@
   */
 
 #include "matriz_bit4.h"
-using namespace std;
 
 bool Bit(unsigned int bits, int pos)
 {

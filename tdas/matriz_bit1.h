@@ -3,8 +3,6 @@
   * @brief Cabeceras para la primera representación de matrices.
   */
 
-using namespace std;
-
 struct MatrizBit
 {
   int filas, columnas;
