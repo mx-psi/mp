@@ -10,30 +10,30 @@ bool Inicializar(MatrizBit& m, int filas, int columnas)
   if(filas > 10 || columnas > 10)
     return false;
 
-  MatrizBit.filas = filas;
-  MatrizBit.columnas = columnas;
+  m.filas = filas;
+  m.columnas = columnas;
 
   for(int i = 0; i < 10; i++)
     for(int j = 0; j < 10; j++)
-      MatrizBit.m[i][j] = false;
+      m.mat[i][j] = false;
 }
 
 int Filas (const MatrizBit& m)
 {
-  return MatrizBit.filas;
+  return m.filas;
 }
 
 int Columnas( const MatrizBit& m)
 {
-  return MatrizBit.columnas;
+  return m.columnas;
 }
 
 bool Get(const MatrizBit& m, int f, int c)
 {
-  return MatrizBit.m[f][c];
+  return m.mat[f][c];
 }
 
 void Set(MatrizBit& m, int f, int c, bool v)
 {
-  MatrizBit.m[f][c] = v;
+  m.mat[f][c] = v;
 }
