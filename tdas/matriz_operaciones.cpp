@@ -85,7 +85,7 @@ void And(MatrizBit& res, const MatrizBit& m1, const MatrizBit& m2)
 {
   Inicializar(res, Filas(m1), Columnas(m1));
   for (int i = 0; i < Filas(m1); i++)
-    for (int j = 0; j < Columnas(m1); m++)
+    for (int j = 0; j < Columnas(m1); j++)
       Set(res, i, j, Get(m1, i, j) && Get(m2, i, j));
 }
 
@@ -93,7 +93,7 @@ void Or(MatrizBit& res, const MatrizBit& m1, const MatrizBit& m2)
 {
   Inicializar(res, Filas(m1), Columnas(m1));
   for (int i = 0; i < Filas(m1); i++)
-    for (int j = 0; j < Columnas(m1); m++)
+    for (int j = 0; j < Columnas(m1); j++)
       Set(res, i, j, Get(m1, i, j) || Get(m2, i, j));
 }
 
@@ -101,7 +101,7 @@ void Not(MatrizBit& res, const MatrizBit& m)
 {
   Inicializar(res, Filas(m), Columnas(m));
   for (int i = 0; i < Filas(m); i++)
-    for (int j = 0; j < Columnas(m); m++)
+    for (int j = 0; j < Columnas(m); j++)
       Set(res, i, j, !Get(m, i, j));
 }
 
@@ -109,6 +109,6 @@ void Traspuesta(MatrizBit& res, const MatrizBit& m)
 {
   Inicializar(res, Columnas(m), Filas(m));
   for (int i = 0; i < Filas(m); i++)
-    for (int j = 0; j < Columnas(m); m++)
+    for (int j = 0; j < Columnas(m); j++)
       Set(res, j, i, Get(m, i, j));
 }
