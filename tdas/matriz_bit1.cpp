@@ -5,12 +5,6 @@
 
 using namespace std;
 
-struct MatrizBit
-{
-  int filas, columnas;
-  bool mat[10][10];
-}
-
 bool Inicializar(MatrizBit& m, int filas, int columnas)
 {
   if(filas > 10 || columnas > 10)
