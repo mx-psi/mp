@@ -63,7 +63,7 @@ bool Leer(const char nombre[], MatrizBit& m)
         return false;
     }
 
-  return f && f.eof();  // TODO: Los mismos del otro Leer más comprobar que este return es correcto
+  return f && f.eof();
 }
 
 bool Escribir(const char nombre[], const MatrizBit& m)
@@ -77,7 +77,7 @@ bool Escribir(const char nombre[], const MatrizBit& m)
     for (int j = 0; f && j < Columnas(m); j++)
       f << (j == 0 ? '\n' : ' ') << Get(m, i, j);
 
-  return f;   // TODO: Comprobar que la única posibilidad de fallo es que el flujo falle
+  return f;
 
 }
 
