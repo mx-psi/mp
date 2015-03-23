@@ -95,7 +95,7 @@ int main()
     cout << "Ocultando..." << endl;
 
     bool escribir;
-    if (Ocultar(buffer, bytes, mensaje + '\0'))
+    if (Ocultar(buffer, bytes, mensaje))
        if (tipo == IMG_PGM)
           escribir = EscribirImagenPGM(salida, buffer, filas, columnas);
        else
