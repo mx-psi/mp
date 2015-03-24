@@ -2,9 +2,23 @@
 #include "matriz_operaciones.h"
 using namespace std;
 
+bool Iguales(const char cad1[], const char cad2[])
+{
+  bool iguales = true;
+  int i = 0;
+
+  while(iguales && (cad1[i] != '\0' || cad2[i] != '\0'))
+  {
+    iguales = cad2[i] == cad1[i];
+    i++;
+  }
+
+  return iguales;
+}
+
 int main(int argc, char* argv[])
 {
-  if (argc > 1 && (argv[1] == "NOT" || argv[1] == "TRS"))
+  if (argc > 1 && (Iguales(argv[1], "NOT") || Iguales(argv[1], "TRS")))
   {
     MatrizBit matriz;
     if ((argc == 2 && !Leer(cin, matriz)) || !Leer(argv[2], matriz))  // TODO: Si no te gusta esto así de agrupado, puede toquetearse
@@ -13,14 +27,14 @@ int main(int argc, char* argv[])
       return 1;
     }
     MatrizBit salida;
-    if (argv[1] == "NOT")
+    if (Iguales(argv[1], "NOT"))
       Not(salida, matriz);
-    else  // argv[1] == "TRS"
-      Traspuesta(salida, matriz); 
+    else  // Iguales(argv[1], "TRS")
+      Traspuesta(salida, matriz);
 
     Escribir(cout, salida);
   }
-  else if (argc > 1 && (argv[1] == "AND" || argv[1] == "OR"))
+  else if (argc > 1 && (Iguales(argv[1], "AND") || Iguales(argv[1], "OR")))
   {
     MatrizBit matriz1, matriz2;
     if ((argc == 2 && !Leer(cin, matriz1)) || !Leer(argv[2], matriz1))  // TODO: Si no te gusta esto así de agrupado, puede toquetearse
@@ -34,14 +48,13 @@ int main(int argc, char* argv[])
       return 1;
     }
     MatrizBit salida;
-    if (argv[1] == "AND")
+    if (Iguales(argv[1], "AND"))
       And(salida, matriz1, matriz2);
-    else  // argv[1] == "OR"
-      Or(salida, matriz1, matriz2); 
+    else  // Iguales(argv[1], "OR")
+      Or(salida, matriz1, matriz2);
 
     Escribir(cout, salida);
   }
   else
     return 1; // TODO: Una parrafada indicando el uso del programa molaría.
 }
-
