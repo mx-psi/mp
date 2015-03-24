@@ -27,14 +27,14 @@ bool Leer(std::istream& is, MatrizBit& m)
         return false;
     }
 
-  return is.eof();
+  return true;
 }
 
 bool Escribir(std::ostream& os, const MatrizBit& m)
 {
   os << Filas(m) << ' ' << Columnas(m);
   for (int i = 0; os.good() && i < Filas(m); i++)
-    for (int j = 0; j < os.good() && Columnas(m); j++)
+    for (int j = 0; os.good() && j < Columnas(m); j++)
       os << (j == 0 ? '\n' : ' ') << Get(m, i, j);
 
   return os.good();
@@ -63,7 +63,7 @@ bool Leer(const char nombre[], MatrizBit& m)
         return false;
     }
 
-  return f && f.eof();
+  return f;
 }
 
 bool Escribir(const char nombre[], const MatrizBit& m)

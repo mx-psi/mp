@@ -7,13 +7,8 @@ using namespace std;
 bool Iguales(const char cad1[], const char cad2[])
 {
   bool iguales = true;
-  int i = 0;
-
-  while(iguales && (cad1[i] != '\0' || cad2[i] != '\0'))
-  {
+  for (int i = 0; iguales && (cad1[i] != '\0' || cad2[i] != '\0'); i++)
     iguales = cad2[i] == cad1[i];
-    i++;
-  }
 
   return iguales;
 }
@@ -23,11 +18,18 @@ int main(int argc, char* argv[])
   if (argc > 1 && (Iguales(argv[1], "NOT") || Iguales(argv[1], "TRS")))
   {
     MatrizBit matriz;
-    if ((argc == 2 && !Leer(cin, matriz)) || !Leer(argv[2], matriz))
+    bool todo_correcto;
+    if (argc == 2)
+      todo_correcto = Leer(cin, matriz);
+    else
+      todo_correcto = Leer(argv[2], matriz);
+
+    if (!todo_correcto)
     {
       cerr << "calcular: No se pudo leer la matriz" << endl;
       return 1;
     }
+
     MatrizBit salida;
     if (Iguales(argv[1], "NOT"))
       Not(salida, matriz);
@@ -35,20 +37,34 @@ int main(int argc, char* argv[])
       Traspuesta(salida, matriz);
 
     Escribir(cout, salida);
+    cout << endl;
   }
   else if (argc > 1 && (Iguales(argv[1], "AND") || Iguales(argv[1], "OR")))
   {
     MatrizBit matriz1, matriz2;
-    if ((argc == 2 && !Leer(cin, matriz1)) || !Leer(argv[2], matriz1))
+    bool todo_correcto;
+    if (argc == 2)
+      todo_correcto = Leer(cin, matriz1);
+    else
+      todo_correcto = Leer(argv[2], matriz1);
+
+    if (!todo_correcto)
     {
       cerr << "calcular: No se pudo leer la primera matriz" << endl;
       return 1;
     }
-    if ((argc <= 3 && !Leer(cin, matriz2)) || !Leer(argv[3], matriz2))
+
+    if (argc <= 3)
+      todo_correcto = Leer(cin, matriz2);
+    else
+      todo_correcto = Leer(argv[3], matriz2);
+
+    if (!todo_correcto)
     {
       cerr << "calcular: No se pudo leer la segunda matriz" << endl;
       return 1;
     }
+
     MatrizBit salida;
     if (Iguales(argv[1], "AND"))
       And(salida, matriz1, matriz2);
@@ -56,6 +72,7 @@ int main(int argc, char* argv[])
       Or(salida, matriz1, matriz2);
 
     Escribir(cout, salida);
+    cout << endl;
   }
   else
     return 1;
