@@ -15,23 +15,22 @@ const int MAX_NOMBRES = 256;
 
 int main()
 {
-   char nombre[MAX_NOMBRES];
-   int filas, columnas;
+  char nombre[MAX_NOMBRES];
+  int filas, columnas;
 
-   /* Lectura del tipo de imagen */
+  /* Lectura del tipo de imagen */
 
-   cout << "Introduzca la imagen de entrada: ";
-   cin >> nombre;
+  cout << "Introduzca la imagen de entrada: ";
+  cin >> nombre;
 
-   TipoImagen tipo = LeerTipoImagen(nombre, filas, columnas);
-   unsigned char buffer[MAX_BUFFER];
-
+  TipoImagen tipo = LeerTipoImagen(nombre, filas, columnas);
   if (tipo == IMG_DESCONOCIDO)
   {
     cerr << "revelar: Archivo no existente o tipo de imagen desconocido" << endl;
     return 1;
   }
-
+  
+  unsigned char buffer[MAX_BUFFER];
   bool leer;
   if (tipo == IMG_PGM)
     leer = LeerImagenPGM(nombre, filas, columnas, buffer);
@@ -53,7 +52,7 @@ int main()
 
   cout << "Revelando..." << endl;
   if (Revelar(buffer, bytes, mensaje))
-     cout << mensaje << endl;
+    cout << mensaje << endl;
   else
   {
     cerr << "revelar: No se encuentra terminador de cadena en la imagen" << endl;
