@@ -34,7 +34,6 @@ void AniadeExtension(char nombre[], TipoImagen tipo)
 int main()
 {
    char nombre[MAX_NOMBRES];
-   char salida[MAX_NOMBRES];
    int filas, columnas;
 
    /* Lectura del tipo de imagen */
@@ -43,7 +42,6 @@ int main()
    cin >> nombre;
 
    TipoImagen tipo = LeerTipoImagen(nombre, filas, columnas);
-   unsigned char buffer[MAX_BUFFER];
 
    if (tipo == IMG_DESCONOCIDO)
    {
@@ -51,6 +49,7 @@ int main()
      return 1;
    }
 
+   unsigned char buffer[MAX_BUFFER];
    bool leer;
    if (tipo == IMG_PGM)
      leer = LeerImagenPGM(nombre, filas, columnas, buffer);
@@ -65,6 +64,7 @@ int main()
 
     /* Salida y mensaje */
 
+    char salida[MAX_NOMBRES];
     int bytes = filas*columnas*(1+2*(tipo == IMG_PPM))/8;
     if (bytes > MAX_MENSAJE)
         bytes = MAX_MENSAJE;
@@ -99,7 +99,6 @@ int main()
        cerr << "ocultar: No se pudo guardar la imagen" << endl;
        return 1;
     }
-
 }
 
 /* Fin fichero: ocultar.cpp */
