@@ -27,14 +27,6 @@ bool Bit(unsigned char bits, int pos);
   * @param pos Posición a cambiar.
   */
 void CambiaBit(unsigned char& bits, bool valor, int pos);
-
-/**
-  * @brief Cambia el bit en la posción pedida.
-  *
-  * @param bits Bits dados.
-  * @param valor Valor a asignar al bit.
-  * @param pos Posición a cambiar.
-  */
 void CambiaBit(char& bits, bool valor, int pos);
 
 /**

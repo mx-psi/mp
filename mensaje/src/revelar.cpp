@@ -1,7 +1,6 @@
 /**
   * @file revelar.cpp
   * @brief Fichero para revelar mensajes en imágenes.
-  *
   */
 
 #include <iostream>
@@ -29,7 +28,7 @@ int main()
     cerr << "revelar: Archivo no existente o tipo de imagen desconocido" << endl;
     return 1;
   }
-  
+
   unsigned char buffer[MAX_BUFFER];
   bool leer;
   if (tipo == IMG_PGM)
