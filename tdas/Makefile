@@ -9,4 +9,4 @@ calcular: matriz_bit.h matriz_bit.cpp matriz_operaciones.h matriz_operaciones.cp
 
 # ************ Limpieza ************
 clean :
-	-rm calcular ./*~ ./*.o
+	rm -f calcular ./*~ ./*.o
