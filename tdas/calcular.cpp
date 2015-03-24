@@ -2,6 +2,8 @@
 #include "matriz_operaciones.h"
 using namespace std;
 
+const int N_ARGS = 4; // Número de argumentos
+const char* ARGS[N_ARGS] = {"NOT", "OR", "AND", "TRS"}; // Argumentos posibles
 
 // Comprueba si dos cadenas son iguales.
 bool Iguales(const char cad1[], const char cad2[])
@@ -13,16 +15,36 @@ bool Iguales(const char cad1[], const char cad2[])
   return iguales;
 }
 
+// Comprueba que una cadena dada es uno de los argumentos posibles
+bool Valido(const char arg[])
+{
+  for(int i = 0; i < N_ARGS; i++)
+    if(Iguales(arg, ARGS[i]))
+      return true;
+
+  return false;
+}
+
 int main(int argc, char* argv[])
 {
-  if (argc > 1 && (Iguales(argv[1], "NOT") || Iguales(argv[1], "TRS")))
+
+  MatrizBit salida, matriz1, matriz2;
+  bool todo_correcto;
+
+  if(argc == 1 || argc > 4 || !Valido(argv[1]))
   {
-    MatrizBit matriz;
-    bool todo_correcto;
+    cerr << "calcular: Llamada incorrecta a la función" << endl;
+    return 1;
+  }
+
+  // Operaciones unarias: NOT, TRS
+  if ((Iguales(argv[1], "NOT") || Iguales(argv[1], "TRS")))
+  {
+    // Lectura de la matriz
     if (argc == 2)
-      todo_correcto = Leer(cin, matriz);
+      todo_correcto = Leer(cin, matriz1);
     else
-      todo_correcto = Leer(argv[2], matriz);
+      todo_correcto = Leer(argv[2], matriz1);
 
     if (!todo_correcto)
     {
@@ -30,19 +52,15 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-    MatrizBit salida;
     if (Iguales(argv[1], "NOT"))
-      Not(salida, matriz);
-    else  // Iguales(argv[1], "TRS")
-      Traspuesta(salida, matriz);
-
-    Escribir(cout, salida);
-    cout << endl;
+      Not(salida, matriz1);
+    else
+      Traspuesta(salida, matriz1);
   }
-  else if (argc > 1 && (Iguales(argv[1], "AND") || Iguales(argv[1], "OR")))
+  else // Operaciones binarias: AND, OR
   {
-    MatrizBit matriz1, matriz2;
-    bool todo_correcto;
+
+    // Lectura de la primera matriz
     if (argc == 2)
       todo_correcto = Leer(cin, matriz1);
     else
@@ -54,6 +72,7 @@ int main(int argc, char* argv[])
       return 1;
     }
 
+    // Lectura de la segunda matriz
     if (argc <= 3)
       todo_correcto = Leer(cin, matriz2);
     else
@@ -65,15 +84,12 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-    MatrizBit salida;
     if (Iguales(argv[1], "AND"))
       And(salida, matriz1, matriz2);
-    else  // Iguales(argv[1], "OR")
+    else
       Or(salida, matriz1, matriz2);
-
-    Escribir(cout, salida);
-    cout << endl;
   }
-  else
-    return 1;
+
+  Escribir(cout, salida);
+  cout << endl;
 }
