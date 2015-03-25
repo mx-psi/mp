@@ -37,41 +37,24 @@ int main(int argc, char* argv[])
     return 1;
   }
 
-  // Operaciones unarias: NOT, TRS
-  if ((Iguales(argv[1], "NOT") || Iguales(argv[1], "TRS")))
+  // Lectura de la (primera) matriz
+  if (argc == 2)
+    todo_correcto = Leer(cin, matriz1);
+  else
+    todo_correcto = Leer(argv[2], matriz1);
+
+  if (!todo_correcto)
   {
-    // Lectura de la matriz
-    if (argc == 2)
-      todo_correcto = Leer(cin, matriz1);
-    else
-      todo_correcto = Leer(argv[2], matriz1);
-
-    if (!todo_correcto)
-    {
-      cerr << "calcular: No se pudo leer la matriz" << endl;
-      return 1;
-    }
-
-    if (Iguales(argv[1], "NOT"))
-      Not(salida, matriz1);
-    else
-      Traspuesta(salida, matriz1);
+    cerr << "calcular: No se pudo leer la (primera) matriz" << endl;
+    return 1;
   }
-  else // Operaciones binarias: AND, OR
+
+  if (Iguales(argv[1], "NOT"))
+    Not(salida, matriz1);
+  else if (Iguales(argv[1], "TRS"))
+    Traspuesta(salida, matriz1);
+  else
   {
-
-    // Lectura de la primera matriz
-    if (argc == 2)
-      todo_correcto = Leer(cin, matriz1);
-    else
-      todo_correcto = Leer(argv[2], matriz1);
-
-    if (!todo_correcto)
-    {
-      cerr << "calcular: No se pudo leer la primera matriz" << endl;
-      return 1;
-    }
-
     // Lectura de la segunda matriz
     if (argc <= 3)
       todo_correcto = Leer(cin, matriz2);
