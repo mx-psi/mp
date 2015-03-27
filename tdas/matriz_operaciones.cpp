@@ -1,7 +1,6 @@
 /**
   * @file matriz_operaciones.cpp
   * @brief Fichero de definiciones para funciones del tipo independientes de la representación
-  *
   */
 
 #include <iostream>
@@ -43,42 +42,13 @@ bool Escribir(std::ostream& os, const MatrizBit& m)
 bool Leer(const char nombre[], MatrizBit& m)
 {
   std::ifstream f(nombre, std::ios::in|std::ios::binary);
-  int filas, columnas;
-  if (!f)
-    return false;
-
-  f >> filas >> columnas;
-  if (!f || filas < 1 || columnas < 1)
-    return false;
-
-  Inicializar(m, filas, columnas);
-  char leido;
-  for (int i = 0; i < filas; i++)
-    for (int j = 0; j < columnas; j++)
-    {
-      f >> leido;
-      if (f && (leido == '0' || leido == '1'))
-        Set(m, i, j, leido == '1');
-      else
-        return false;
-    }
-
-  return f;
+  return Leer(f, m);
 }
 
 bool Escribir(const char nombre[], const MatrizBit& m)
 {
   std::ofstream f(nombre, std::ios::out|std::ios::binary);
-  if (!f)
-    return false;
-
-  f << Filas(m) << ' ' << Columnas(m);
-  for (int i = 0; f && i < Filas(m); i++)
-    for (int j = 0; f && j < Columnas(m); j++)
-      f << (j == 0 ? '\n' : ' ') << Get(m, i, j);
-
-  return f;
-
+  return Escribir(f, m);
 }
 
 void And(MatrizBit& res, const MatrizBit& m1, const MatrizBit& m2)
