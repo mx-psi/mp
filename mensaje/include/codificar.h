@@ -2,7 +2,7 @@
   * @file codificar.h
   * @brief Fichero cabecera para la E/S de imágenes
   *
-  * Permite la E/S de archivos de tipos PGM,PPM
+  * Incluye funciones para ocultar o revelar mensajes en imágenes
   *
   */
 
@@ -10,42 +10,55 @@
 #define _CODIFICAR_H_
 
 /**
-  * @brief Devuelve el bit en la posición dada
+  * @brief Lee el bit en la posición dada de un byte
   *
-  * @param bits Bits dados.
-  * @param pos Posición a leer.
-  * @return Valor del bit.
-  * @pre @a pos < log2(@a bits)
+  * @param bits Byte del que se quiere leer un bit
+  * @param pos Posición del bit a leer
+  * @return Valor del bit
+  * @pre -1 < @a pos < 8
   */
 bool Bit(unsigned char bits, int pos);
 
 /**
-  * @brief Cambia el bit en la posición pedida.
+  * @brief Asigna un valor a uno de los bits de un byte
   *
-  * @param bits Bits dados.
-  * @param valor Valor a asignar al bit.
-  * @param pos Posición a cambiar.
+  * @param bits Byte en el que asignar un valor a un bit
+  * @param valor Valor a asignar al bit
+  * @param pos Posición del bit a cambiar
   */
 void CambiaBit(unsigned char& bits, bool valor, int pos);
+
+/**
+  * @brief Asigna un valor a uno de los bits de un byte
+  *
+  * @param bits Byte en el que asignar un valor a un bit
+  * @param valor Valor a asignar al bit
+  * @param pos Posición del bit a cambiar
+  */
 void CambiaBit(char& bits, bool valor, int pos);
 
 /**
-  * @brief Oculta un mensaje en una imagen.
+  * @brief Oculta un mensaje en una imagen
   *
-  * @param imagen Imagen.
-  * @param capacidad Tamaño de la imagen en bytes.
-  * @param mensaje Mensaje a guardar.
-  * @ret Éxito de la operación.
+  * @param imagen Imagen en la que ocultar el mensaje
+  * @param capacidad Cantidad de bytes de texto insertables en la imagen
+  * (como máximo 1/8 de los bytes de la imagen)
+  * @param texto Mensaje a guardar en la imagen
+  * @retval true si la escritura se ha efectuado con éxito.
+  * @retval false si ha habido alguna anomalía en la escritura.
+  * @pre @a imagen es una imagen correcta
   */
 bool Ocultar(unsigned char imagen[], int capacidad, char texto[]);
 
 /**
   * @brief Revela un mensaje oculto en una imagen.
   *
-  * @param buffer Imagen.
-  * @param capacidad Tamaño de la imagen en bytes.
-  * @param mensaje Mensaje a obtener.
-  * @ret Éxito de la operación.
+  * @param imagen Imagen de la que extraer el mensaje
+  * @param capacidad Cantidad de bytes de texto que podrían extraerse de la imagen
+  * (como máximo 1/8 de los bytes de la imagen)
+  * @param texto Cadena en la que almacenar el texto extraído
+  * @retval true si la lectura se ha efectuado con éxito.
+  * @retval false si ha habido alguna anomalía en la lectura.
   */
 bool Revelar(unsigned char imagen[], int capacidad, char texto[]);
 
