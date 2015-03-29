@@ -7,7 +7,7 @@ CXX = g++
 CPPFLAGS = -Wall -g  -I$(INC) -Wextra -pedantic -std=c++03
 
 .SECONDARY: $(wildcard "obj/*.o")
-.PHONY: all test documentacion clean mrproper
+.PHONY: all documentacion clean mrproper
 
 # Genera todo
 all: $(BIN)/ocultar $(BIN)/revelar
