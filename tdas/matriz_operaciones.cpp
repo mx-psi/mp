@@ -19,8 +19,7 @@ bool Leer(std::istream& is, MatrizBit& m)
   for (int i = 0; i < filas; i++)
     for (int j = 0; j < columnas; j++)
     {
-      is >> leido;
-      if (is.good() && (leido == '0' || leido == '1'))
+      if ((is >> leido) && !is.eof())
         Set(m, i, j, leido == '1');
       else
         return false;
