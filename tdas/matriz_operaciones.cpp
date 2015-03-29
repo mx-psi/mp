@@ -14,7 +14,9 @@ bool Leer(std::istream& is, MatrizBit& m)
   if (is.fail() || filas < 1 || columnas < 1)
     return false;
 
-  Inicializar(m, filas, columnas);
+  if (!Inicializar(m, filas, columnas))
+    return false;
+
   char leido;
   for (int i = 0; i < filas; i++)
     for (int j = 0; j < columnas; j++)
