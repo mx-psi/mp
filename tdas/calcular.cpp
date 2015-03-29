@@ -25,13 +25,18 @@ bool Valido(const char arg[])
   return false;
 }
 
+// Comprueba que dos matrices tienen las mismas dimensiones
+bool CoincidenDimensiones(MatrizBit m1, MatrizBit m2)
+{
+  return Filas(m1) == Filas(m2) && Columnas(m1) == Columnas(m2); 
+}
+
 int main(int argc, char* argv[])
 {
-
-  MatrizBit salida, matriz1, matriz2;
+  MatrizBit salida, matriz1;
   bool todo_correcto;
 
-  if(argc == 1 || argc > 4 || !Valido(argv[1]))
+  if (argc == 1 || argc > 4 || !Valido(argv[1]))
   {
     cerr << "calcular: Llamada incorrecta a la función" << endl;
     return 1;
@@ -45,7 +50,8 @@ int main(int argc, char* argv[])
 
   if (!todo_correcto)
   {
-    cerr << "calcular: No se pudo leer la (primera) matriz" << endl;
+    cerr << "calcular: No se pudo leer la" << (Iguales(argv[1], "AND") || Iguales(argv[1], "OR")
+            ? " primera " : " ") << "matriz" << endl;
     return 1;
   }
 
@@ -56,6 +62,8 @@ int main(int argc, char* argv[])
   else
   {
     // Lectura de la segunda matriz
+    MatrizBit matriz2;
+
     if (argc <= 3)
       todo_correcto = Leer(cin, matriz2);
     else
@@ -67,6 +75,11 @@ int main(int argc, char* argv[])
       return 1;
     }
 
+    if (!CoincidenDimensiones(matriz1, matriz2))
+    {
+      cerr << "calcular: Las dimensiones de las matrices no coinciden" << endl;
+      return -1;
+    }
     if (Iguales(argv[1], "AND"))
       And(salida, matriz1, matriz2);
     else
