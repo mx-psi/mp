@@ -7,6 +7,7 @@
 #include <fstream>
 #include "matriz_operaciones.h"   // Llama a matriz_bit.h
 
+
 bool Leer(std::istream& is, MatrizBit& m)
 {
   int filas, columnas;
@@ -21,7 +22,7 @@ bool Leer(std::istream& is, MatrizBit& m)
   for (int i = 0; i < filas; i++)
     for (int j = 0; j < columnas; j++)
     {
-      if ((is >> leido) && !is.eof())
+      if ((is >> leido).good() && (leido == '1' || leido == '0'))
         Set(m, i, j, leido == '1');
       else
         return false;
