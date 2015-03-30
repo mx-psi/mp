@@ -1,3 +1,8 @@
+/**
+  * @file calcular.cpp
+  * @brief Fichero para gestión de E/S.
+  */
+
 #include <iostream>
 #include "matriz_operaciones.h"
 using namespace std;
@@ -28,7 +33,7 @@ bool Valido(const char arg[])
 // Comprueba que dos matrices tienen las mismas dimensiones
 bool CoincidenDimensiones(MatrizBit m1, MatrizBit m2)
 {
-  return Filas(m1) == Filas(m2) && Columnas(m1) == Columnas(m2); 
+  return Filas(m1) == Filas(m2) && Columnas(m1) == Columnas(m2);
 }
 
 int main(int argc, char* argv[])

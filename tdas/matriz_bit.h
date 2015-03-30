@@ -26,7 +26,7 @@
   * @brief Inicializa un objeto de tipo Matriz de booleanos
   *
   * @param m objeto a inicializar
-  * @param fils número de filas 
+  * @param fils número de filas
   * @param cols número de columnas
   * @return si ha tenido éxito la inicialización, en cuyo caso @a m es una matriz @a fils x @a cols con valores 0
   */
