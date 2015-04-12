@@ -10,6 +10,14 @@
 
 bool Leer(std::istream& is, MatrizBit& m)
 {
+  char leido = is.get();
+
+  /* Lectura del formato de X y . */
+  if (leido == 'X' || leido == '.')
+    return false;
+
+  /* Lectura del formato de 1 y 0 */
+  is.unget();
   int filas, columnas;
   is >> filas >> columnas;
   if (is.fail() || filas < 1 || columnas < 1)
@@ -18,7 +26,6 @@ bool Leer(std::istream& is, MatrizBit& m)
   if (!Inicializar(m, filas, columnas))
     return false;
 
-  char leido;
   for (int i = 0; i < filas; i++)
     for (int j = 0; j < columnas; j++)
     {
