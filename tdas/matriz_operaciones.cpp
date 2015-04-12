@@ -11,13 +11,53 @@
 bool Leer(std::istream& is, MatrizBit& m)
 {
   char leido = is.get();
+  is.unget();
 
   /* Lectura del formato de X y . */
   if (leido == 'X' || leido == '.')
-    return false;
+  {
+    const int CAPACIDAD = 256;
+    char entrada[CAPACIDAD];
+    for (int i = 0; i < 256 && is.good(); i++)
+      entrada[i] = is.get();
+    
+    if (!is.eof())
+      return false;
+
+    int filas = 1;
+    int columnas;
+    for (columnas = 0; entrada[columnas] != '\n'; columnas++);
+    for (int i = columnas+2; entrada[i] != '\0'; i++)
+    {
+      bool salto = (i+1)%(columnas+1) == 0;
+      if (entrada[i] == '\n')
+      {
+        if (salto)
+          filas++;
+        else if (entrada[i+1] == 'X' || entrada[i+1] == '.')
+          return false;
+      }
+      else if (salto && entrada[i] != '\0')
+        return false;
+    }
+
+    if (!Inicializar(m, filas, columnas))
+      return false;
+
+    for (int i = 0; i < filas; i++)
+      for (int j = 0; j < columnas; j++)
+      {
+        leido = entrada[i*(columnas+1)+j];
+        if (leido == 'X' || leido == '.')
+          Set(m, i, j, leido == 'X');
+        else
+          return false;
+      }
+    
+    return true;
+  }
 
   /* Lectura del formato de 1 y 0 */
-  is.unget();
   int filas, columnas;
   is >> filas >> columnas;
   if (is.fail() || filas < 1 || columnas < 1)
