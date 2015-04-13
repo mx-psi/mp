@@ -16,31 +16,33 @@ bool Leer(std::istream& is, MatrizBit& m)
   /* Lectura del formato de X y . */
   if (leido == 'X' || leido == '.')
   {
+
+    // Guarda la entrada en un vector de char
     const int CAPACIDAD = 256;
     char entrada[CAPACIDAD];
     for (int i = 0; i < 256 && is.good(); i++)
       entrada[i] = is.get();
-    
-    if (!is.eof())
-      return false;
 
-    int filas = 1;
-    int columnas;
+    int filas = 1, columnas;
+
+    // Calcula el número de columnas
     for (columnas = 0; entrada[columnas] != '\n'; columnas++);
-    for (int i = columnas+2; entrada[i] != '\0'; i++)
+
+    for (int i = columnas + 2; entrada[i] != '\0'; i++)
     {
-      bool salto = (i+1)%(columnas+1) == 0;
+      bool salto = (i + 1) % (columnas + 1) == 0;
       if (entrada[i] == '\n')
       {
         if (salto)
           filas++;
-        else if (entrada[i+1] == 'X' || entrada[i+1] == '.')
+        else if (entrada[i + 1] == 'X' || entrada[i + 1] == '.')
           return false;
       }
       else if (salto && entrada[i] != '\0')
         return false;
     }
 
+    // Guarda los datos en la matriz m
     if (!Inicializar(m, filas, columnas))
       return false;
 
@@ -53,7 +55,7 @@ bool Leer(std::istream& is, MatrizBit& m)
         else
           return false;
       }
-    
+
     return true;
   }
 
