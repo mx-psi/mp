@@ -43,7 +43,15 @@ bool Leer(std::istream& is, MatrizBit& m)
           return false;
       }
 
-    return true;
+    // Comprueba que la matriz ha terminado
+    leido = entrada[filas*(columnas+1)];
+    if (leido == '\0')
+      return true;
+    else if (leido != '\n')
+      return false;
+
+    leido = entrada[filas*(columnas+1)+1];
+    return leido == '\n' || leido == '\0';
   }
 
   /* Lectura del formato de 1 y 0 */
