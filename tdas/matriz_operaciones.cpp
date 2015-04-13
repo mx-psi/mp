@@ -10,8 +10,7 @@
 
 bool Leer(std::istream& is, MatrizBit& m)
 {
-  char leido = is.get();
-  is.unget();
+  char leido = is.peek();
 
   /* Lectura del formato de X y . */
   if (leido == 'X' || leido == '.')
@@ -43,7 +42,8 @@ bool Leer(std::istream& is, MatrizBit& m)
           return false;
       }
 
-    // Comprueba que la matriz ha terminado y solo queda el fin de fichero o uno (o más) saltos de línea
+    // Comprueba que la matriz ha terminado y solo queda
+    // el fin de fichero o uno (o más) saltos de línea
     if (filas*(columnas+1)+1 == tam)
       return true;
     else if (entrada[filas*(columnas+1)-1] != '\n')
