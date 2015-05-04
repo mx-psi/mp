@@ -98,7 +98,7 @@ bool CampoMinas::Abre(int x, int y){
 bool CampoMinas::CoordCorrectas(int x, int y) const
 {
   /* Devuelve si las coordenadas son correctas. */
-  return x <= tab.Filas() && y <= tab.Columnas() && x >= 0 && y >= 0;
+  return x < tab.Filas() && y < tab.Columnas() && x >= 0 && y >= 0;
 }
 
 bool CampoMinas::HayBomba(int x, int y) const
