@@ -1,6 +1,6 @@
 // Módulo principal del programa
 #include <iostream>
-#include "CampoMinas.h" // tablero.h
+#include "CampoMinas.h" // Tablero.h
 using namespace std;
 
 int main()
