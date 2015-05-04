@@ -1,4 +1,5 @@
-#include "tablero.h"
+#include "Tablero.h"
+using namespace std;
 
 CampoMinas::CampoMinas(int filas, int columnas, int minas):tab(filas, columnas){}
 int CampoMinas::Filas() const {return tab.Filas();}
@@ -59,4 +60,45 @@ int CampoMinas::NumeroBombas(int x, int y)
     for(int j = -1; j <= 1; j++)
       n += (i + j) != 0 && HayBomba(x + i, y + j);
   return n;
+}
+
+void CampoMinas::PrettyPrint()
+{
+  /* Imprime el estado actual del tablero. */
+
+  // Columnas
+  for(int i = 0; i < Filas(); i++)
+    cout << setw(3) << i;
+  cout << endl;
+
+  // Linea
+  for(int i = 0; i < Filas(); i++)
+    cout << "----";
+  cout << endl;
+
+  // Tablero
+  for(int i = 0; i < Filas(); i++)
+  {
+    cout << endl << i << " |";
+    for(int j = 0; j < Columnas(); j++)
+    {
+      Casilla actual = tab.Get(i,j);
+      if(actual.abierta)
+        cout << " *|";
+      else if(actual.marcada)
+        cout << " ?|";
+      else{
+        int n = NumeroBombas(i, j);
+        if(n == 0)
+          cout << "  |";
+        else
+          cout << n << " |";
+      }
+    }
+  }
+
+  // Linea
+  for(int i = 0; i < Filas(); i++)
+    cout << "----";
+  cout << endl;
 }
