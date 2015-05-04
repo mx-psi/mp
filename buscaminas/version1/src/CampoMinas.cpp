@@ -1,5 +1,8 @@
 #include <cstdlib>
 #include <ctime>
+#include <iostream> // cin, cout
+#include <iomanip>  // setw
+#include <assert.h>
 #include "CampoMinas.h" // Tablero.h
 using namespace std;
 
@@ -63,7 +66,7 @@ bool CampoMinas::Marca(int x, int y)
   return true;
 }
 
-bool Abre(int x, int y){
+bool CampoMinas::Abre(int x, int y){
   /* Abre una casilla y comprueba apertura del resto */
 
   assert(CoordCorrectas(x, y));
@@ -83,21 +86,23 @@ bool Abre(int x, int y){
     for(int j = -1; j <= 1; j++)
       if(i != 0 || j != 0)
         Abre(x + i, y + j);
+
+  return true;
 }
 
-bool CampoMinas::CoordCorrectas(int x, int y)
+bool CampoMinas::CoordCorrectas(int x, int y) const
 {
   /* Devuelve si las coordenadas son correctas. */
-  return x <= tab.Filas() && y <= Tab.Columnas() && x >= 0 && y >= 0;
+  return x <= tab.Filas() && y <= tab.Columnas() && x >= 0 && y >= 0;
 }
 
-bool CampoMinas::HayBomba(int x, int y)
+bool CampoMinas::HayBomba(int x, int y) const
 {
   /* Devuelve si hay una bomba en la coordenada dada. */
   return CoordCorrectas(x, y) && tab.Get(x, y).bomba;
 }
 
-int CampoMinas::NumeroBombas(int x, int y)
+int CampoMinas::NumeroBombas(int x, int y) const
 {
   /* Devuelve el número de bombas en casillas adyacentes. */
   int n = 0;
@@ -107,7 +112,7 @@ int CampoMinas::NumeroBombas(int x, int y)
   return n;
 }
 
-void CampoMinas::PrettyPrint()
+void CampoMinas::PrettyPrint() const
 {
   /* Imprime el estado actual del tablero. */
 
@@ -148,7 +153,7 @@ void CampoMinas::PrettyPrint()
   cout << endl;
 }
 
-void CampoMinas::ImprimeTablero()
+void CampoMinas::ImprimeTablero() const
 {
   /* Imprime el estado final del tablero. */
 

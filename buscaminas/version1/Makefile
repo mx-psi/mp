@@ -12,6 +12,10 @@ CPPFLAGS = -Wall -g -Wextra -pedantic -std=c++03 -I$(INC)
 # Genera todo
 all: $(BIN)/BuscaMinas
 
+# Compilación de módulo central
+$(OBJ)/BuscaMinas.o: $(SRC)/BuscaMinas.cpp $(INC)/CampoMinas.h
+	$(CXX) $(CPPFLAGS) -c $< -o $@
+
 # Compilación de módulos
 $(OBJ)/%.o: $(SRC)/%.cpp $(INC)/%.h
 	$(CXX) $(CPPFLAGS) -c $< -o $@
