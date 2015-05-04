@@ -36,6 +36,6 @@ int main()
   campo.ImprimeTablero();
   if (campo.Explotado())
     cout << "¡Has perdido!";
-  else
+  else  // (campo.Ganado())
     cout << "¡Has ganado!";
 }
