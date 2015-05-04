@@ -1,7 +1,27 @@
+#include <cstdlib>
+#include <ctime>
 #include "Tablero.h"
 using namespace std;
 
-CampoMinas::CampoMinas(int filas, int columnas, int minas):tab(filas, columnas){}
+CampoMinas::CampoMinas(int filas, int columnas, int minas)
+:tab(filas, columnas)
+{
+  int minas_puestas = 0;
+  srand (time(0));
+  int aleatorio;
+
+  while (minas_puestas < minas)
+  {
+    aleatorio = rand()%(filas*columnas);
+    fila = aleatorio/columnas;
+    columna = aleatorio%columnas;
+    if (!tab.Get(fila, columna).bomba)
+    {
+      tab.Set(fila, columna, {true,false,false});
+      minas_puestas++;
+    }
+  }
+}
 int CampoMinas::Filas() const {return tab.Filas();}
 int CampoMinas::Columnas() const {return tab.Columnas();}
 
