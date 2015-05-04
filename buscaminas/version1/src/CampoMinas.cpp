@@ -138,10 +138,10 @@ void CampoMinas::PrettyPrint() const
     for(int j = 0; j < Columnas(); j++)
     {
       Casilla actual = tab.Get(i,j);
-      if(!actual.abierta)
-        cout << " *|";
-      else if(actual.marcada)
+      if(actual.marcada)
         cout << " ?|";
+      else if(!actual.abierta)
+        cout << " *|";
       else{
         int n = NumeroBombas(i, j);
         if(n == 0)
