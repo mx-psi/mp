@@ -2,6 +2,8 @@
 
 CampoMinas::CampoMinas(int filas, int columnas, int minas):tab(filas, columnas){}
 
+/* Consulta del estado de CampoMinas*/
+
 int CampoMinas::Filas() const {return tab.Filas();}
 int CampoMinas::Columnas() const {return tab.Columnas();}
 
@@ -38,9 +40,5 @@ bool CampoMinas::Marca(int x, int y)
   Casilla nueva = tab.Get(x,y);
   nueva.marcada = !nueva.marcada;
   tab.Set(x,y,nueva);
-}
-
-void CampoMinas::PrettyPrint() const
-{
-  /* Imprime el estado actual del tablero. */
+  return true;
 }
