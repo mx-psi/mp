@@ -9,7 +9,7 @@ CPPFLAGS = -Wall -g -Wextra -pedantic -std=c++03
 .PHONY: all clean mrproper
 
 # Genera todo
-all: $(BIN)/ocultar $(BIN)/revelar
+all: $(BIN)/BuscaMinas
 
 # Compilación de módulos
 $(OBJ)/%.o: $(SRC)/%.cpp
