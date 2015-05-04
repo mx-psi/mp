@@ -2,6 +2,8 @@
 
 class CampoMinas{
   Tablero tab;
+  bool HayBomba(int x, int y) const;
+  int NumeroBombas(int x, int y) const;
 public:
   CampoMinas(int filas, int columnas, int minas);
   int Filas() const;
