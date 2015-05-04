@@ -18,7 +18,7 @@ int main()
 
   while (!campo.Explotado() && !campo.Ganado())
   {
-    campo.ImprimeTablero()
+    campo.PrettyPrint();
     char accion;
     int fila, columna;
     cout << "Acción y posición (fila y columna): ";
