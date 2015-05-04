@@ -1,6 +1,5 @@
 #include "tablero.h"
 
-
 CampoMinas::CampoMinas(int filas, int columnas, int minas):tab(filas, columnas){}
 
 int CampoMinas::Filas() const {return tab.Filas();}

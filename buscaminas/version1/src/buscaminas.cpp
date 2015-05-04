@@ -1,3 +1,4 @@
+// Módulo principal del programa
 #include <iostream>
 #include "CampoMinas.h"
 using namespace std;
@@ -15,18 +16,21 @@ int main()
   }while (minas < 5 || minas > filas*columnas/2);
 
   CampoMinas campo(filas, columnas, minas);
+  bool algo_ha_pasado = true; // Almacena si ha pasado algo tras cada acción
 
   while (!campo.Explotado() && !campo.Ganado())
   {
-    campo.PrettyPrint();
+    if (algo_ha_pasado)
+      campo.PrettyPrint();
+
     char accion;
     int fila, columna;
     cout << "Acción y posición (fila y columna): ";
     cin >> accion >> fila >> columna;
     if (accion == 'a')
-      campo.Abre(fila, columna);
+      algo_ha_pasado = campo.Abre(fila, columna);
     else  // (accion == 'm')
-      campo.Marca(fila, columna);
+      algo_ha_pasado = campo.Marca(fila, columna);
   }
 
   campo.ImprimeTablero();

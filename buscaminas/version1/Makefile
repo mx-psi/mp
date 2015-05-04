@@ -14,15 +14,15 @@ all: $(BIN)/BuscaMinas
 
 # Compilación de módulos
 $(OBJ)/%.o: $(SRC)/%.cpp $(INC)/%.h
-  $(CXX) $(CPPFLAGS) -c $< -o $@
+	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 #  Compilación del programa final
 $(BIN)/BuscaMinas: $(OBJ)/BuscaMinas.o $(OBJ)/CampoMinas.o $(OBJ)/Tablero.o
-  $(CXX) $(CPPFLAGS) -o $@ $^
+	$(CXX) $(CPPFLAGS) -o $@ $^
 
 # Limpieza
 clean :
-  rm  -f $(OBJ)/* $(SRC)/*~ ./*~
+	rm  -f $(OBJ)/* $(SRC)/*~ ./*~
 
 mrproper : clean
-  rm -f $(BIN)/*
+	rm -f $(BIN)/*
