@@ -56,7 +56,7 @@ bool CampoMinas::Marca(int x, int y)
 {
   /* Marca o desmarca una casilla cerrada. Devuelve éxito. */
   assert(CoordCorrectas(x, y));
-  
+
   if(tab.Get(x,y).abierta)
     return false;
 
@@ -123,18 +123,18 @@ void CampoMinas::PrettyPrint() const
 
   // Columnas
   cout << ' ';
-  for(int i = 0; i < Filas(); i++)
+  for(int i = 0; i < Columnas(); i++)
     cout << setw(3) << i;
   cout << endl;
 
   // Linea
-  for(int i = 0; i < Filas(); i++)
+  for(int i = 0; i < Columnas(); i++)
     cout << "----";
 
   // Tablero
   for(int i = 0; i < Filas(); i++)
   {
-    cout << endl << i << " |";
+    cout << endl << " " << i << "|";
     for(int j = 0; j < Columnas(); j++)
     {
       Casilla actual = tab.Get(i,j);
@@ -154,7 +154,7 @@ void CampoMinas::PrettyPrint() const
 
   // Linea
   cout << endl;
-  for(int i = 0; i < Filas(); i++)
+  for(int i = 0; i < Columnas(); i++)
     cout << "----";
   cout << endl;
 }
