@@ -12,10 +12,10 @@ int Tablero::Columnas() const
 
 Casilla Tablero::Get(int fila, int columna) const
 {
-  return datos[fila][columna];
+  return *datos[Columnas()*fila+columna];
 }
 
 void Tablero::Set(int fila, int columna, const Casilla &c)
 {
-  datos[fila][columna] = c;
+  *datos[Columnas()*fila+columna] = c;
 }

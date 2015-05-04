@@ -17,13 +17,40 @@ struct Casilla
 // Clase Tablero y cabeceras
 class Tablero
 {
-  Casilla datos[20][20];
+  Casilla* datos;
+  Casilla matriz[20][20];
   int filas, columnas;
 
 public:
   Tablero(int f, int c)
   :filas(f), columnas(c)
-  {}
+  {
+    datos = new Casilla[filas*columnas];
+  }
+
+  // Constructor de copia
+  Tablero(const Tablero& t)
+  :filas(t.filas), columnas(t.columnas)
+  {
+    datos = new Casilla(filas*columnas);
+    for (int i = 0; i < filas*columnas; i++)
+      datos[i] = t.datos[i];
+  }
+
+  // Sobrecarga de operador de asignación
+  &Tablero operator=(const Tablero& t)
+  :filas(t.filas), columnas(t.columnas)
+  {
+    datos = new Casilla(filas*columnas);
+    for (int i = 0; i < filas*columnas; i++)
+      datos[i] = t.datos[i];
+  }
+
+  // Destructor
+  ~Tablero()
+  {
+    delete [] datos;
+  }
 
   // Devuelve el número de filas del tablero
   int Filas() const;
