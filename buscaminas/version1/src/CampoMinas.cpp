@@ -1,4 +1,4 @@
-#include "Tablero.h"
+#include "tablero.h"
 using namespace std;
 
 class CampoMinas
