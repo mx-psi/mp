@@ -17,7 +17,7 @@ struct Casilla
 // Clase Tablero y cabeceras
 class Tablero
 {
-  Casilla matriz[20][20];
+  Casilla datos[20][20];
   int filas, columnas;
 
 public:
