@@ -122,6 +122,7 @@ void CampoMinas::PrettyPrint() const
   /* Imprime el estado actual del tablero. */
 
   // Columnas
+  cout << ' ';
   for(int i = 0; i < Filas(); i++)
     cout << setw(3) << i;
   cout << endl;
@@ -162,11 +163,12 @@ void CampoMinas::ImprimeTablero() const
 {
   /* Imprime el estado final del tablero. */
 
-  if(!Ganado())
+  if(!Ganado() && !Explotado())
     cout << "No hagas trampa.";
   else
   {
     // Columnas
+    cout << ' ';
     for(int i = 0; i < Filas(); i++)
       cout << setw(3) << i;
     cout << endl;
@@ -195,6 +197,7 @@ void CampoMinas::ImprimeTablero() const
     }
 
     // Linea
+    cout << endl;
     for(int i = 0; i < Filas(); i++)
       cout << "----";
     cout << endl;

@@ -38,7 +38,7 @@ int main()
   // Se muestra si el jugador ha ganado o perdido
   campo.ImprimeTablero();
   if (campo.Explotado())
-    cout << "¡Has perdido!";
+    cout << "¡Has perdido!" << endl;
   else  // (campo.Ganado())
-    cout << "¡Has ganado!";
+    cout << "¡Has ganado!" << endl;
 }
