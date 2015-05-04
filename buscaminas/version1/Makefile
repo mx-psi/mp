@@ -1,9 +1,10 @@
 BIN = bin
 SRC = src
 OBJ = obj
+INC = include
 OBJS = $(wildcard "obj/*.o")
 CXX = g++
-CPPFLAGS = -Wall -g -Wextra -pedantic -std=c++03
+CPPFLAGS = -Wall -g -Wextra -pedantic -std=c++03 -I$(INC)
 
 .SECONDARY: OBJS
 .PHONY: all clean mrproper
@@ -12,7 +13,7 @@ CPPFLAGS = -Wall -g -Wextra -pedantic -std=c++03
 all: $(BIN)/BuscaMinas
 
 # Compilación de módulos
-$(OBJ)/%.o: $(SRC)/%.cpp
+$(OBJ)/%.o: $(SRC)/%.cpp $(INC)/%.h
   $(CXX) $(CPPFLAGS) -c $< -o $@
 
 #  Compilación del programa final
