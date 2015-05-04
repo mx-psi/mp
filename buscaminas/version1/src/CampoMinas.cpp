@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <ctime>
-#include "Tablero.h"
+#include "CampoMinas.h" // Tablero.h
 using namespace std;
 
 CampoMinas::CampoMinas(int filas, int columnas, int minas)
@@ -9,15 +9,17 @@ CampoMinas::CampoMinas(int filas, int columnas, int minas)
   int minas_puestas = 0;
   srand (time(0));
   int aleatorio;
+  Casilla con_bomba;
+  con_bomba.bomba = true;
 
   while (minas_puestas < minas)
   {
     aleatorio = rand()%(filas*columnas);
-    fila = aleatorio/columnas;
-    columna = aleatorio%columnas;
+    int fila = aleatorio/columnas;
+    int columna = aleatorio%columnas;
     if (!tab.Get(fila, columna).bomba)
     {
-      tab.Set(fila, columna, {true,false,false});
+      tab.Set(fila, columna, con_bomba);
       minas_puestas++;
     }
   }

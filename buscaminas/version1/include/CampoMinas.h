@@ -1,3 +1,4 @@
+#include "Tablero.h"
 /* Cabeceras de las funciones del módulo CampoMinas.cpp */
 
 class CampoMinas{
