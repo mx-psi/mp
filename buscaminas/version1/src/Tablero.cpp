@@ -1,4 +1,4 @@
-#include "tablero.h"
+#include "Tablero.h"
 
 int Tablero::Filas() const
 {
