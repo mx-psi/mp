@@ -105,38 +105,43 @@ void CampoMinas::PrettyPrint()
 
 void CampoMinas::ImprimeTablero()
 {
-  /* Imprime el estado actual del tablero. */
+  /* Imprime el estado final del tablero. */
 
-  // Columnas
-  for(int i = 0; i < Filas(); i++)
-    cout << setw(3) << i;
-  cout << endl;
-
-  // Linea
-  for(int i = 0; i < Filas(); i++)
-    cout << "----";
-
-  // Tablero
-  for(int i = 0; i < Filas(); i++)
+  if(!Ganado())
+    cout << "No hagas trampa.";
+  else
   {
-    cout << endl << i << " |";
-    for(int j = 0; j < Columnas(); j++)
+    // Columnas
+    for(int i = 0; i < Filas(); i++)
+      cout << setw(3) << i;
+    cout << endl;
+
+    // Linea
+    for(int i = 0; i < Filas(); i++)
+      cout << "----";
+
+    // Tablero
+    for(int i = 0; i < Filas(); i++)
     {
-      Casilla actual = tab.Get(i,j);
-      if(actual.bomba)
-        cout << " X|";
-      else{
-        int n = NumeroBombas(i, j);
-        if(n == 0)
-          cout << "  |";
-        else
-          cout << n << " |";
+      cout << endl << i << " |";
+      for(int j = 0; j < Columnas(); j++)
+      {
+        Casilla actual = tab.Get(i,j);
+        if(actual.bomba)
+          cout << " X|";
+        else{
+          int n = NumeroBombas(i, j);
+          if(n == 0)
+            cout << "  |";
+          else
+            cout << n << " |";
+        }
       }
     }
-  }
 
-  // Linea
-  for(int i = 0; i < Filas(); i++)
-    cout << "----";
-  cout << endl;
+    // Linea
+    for(int i = 0; i < Filas(); i++)
+      cout << "----";
+    cout << endl;
+  }
 }
