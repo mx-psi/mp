@@ -1,5 +1,3 @@
-
-
 // Estructura con información para cada casilla
 struct Casilla
 {
@@ -7,19 +5,25 @@ struct Casilla
   bool abierta;
   bool marcada;
 
-  Casilla();  // TODO: Que no se me olvide definir este constructor. Que es muy olvidable.
-}
+  Casilla()
+  :bomba(false),abierta(false),marcada(false)
+  {}
+};
 
 
 // Clase Tablero y cabeceras
 class Tablero
 {
+  Casilla matriz[20][20];
+  int filas, columnas;
 
 public:
-  int Filas();
-  int Columnas();
-  
+  Tablero(int f, int c)
+  :filas(f), columnas(c)
+  {}
 
-
-
+  int Filas() const;
+  int Columnas() const;
+  Casilla Get(int fila, int columna) const;
+  void Set(int fila, int columna, const Casilla &c);
 };
