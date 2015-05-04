@@ -1,10 +1,11 @@
 // Módulo principal del programa
 #include <iostream>
-#include "CampoMinas.h"
+#include "CampoMinas.h" // tablero.h
 using namespace std;
 
 int main()
 {
+  // Se piden valores iniciales para el tablero (esta versión no comprueba la validez de valores)
   int filas, columnas, minas;
 
   cout << "Dimensiones del tablero (filas y columnas): ";
@@ -18,6 +19,7 @@ int main()
   CampoMinas campo(filas, columnas, minas);
   bool algo_ha_pasado = true; // Almacena si ha pasado algo tras cada acción
 
+  // Hasta que el juego termine, se pide una acción al usuario
   while (!campo.Explotado() && !campo.Ganado())
   {
     if (algo_ha_pasado)
@@ -33,6 +35,7 @@ int main()
       algo_ha_pasado = campo.Marca(fila, columna);
   }
 
+  // Se muestra si el jugador ha ganado o perdido
   campo.ImprimeTablero();
   if (campo.Explotado())
     cout << "¡Has perdido!";
