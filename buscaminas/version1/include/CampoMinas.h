@@ -2,6 +2,7 @@
 
 class CampoMinas{
   Tablero tab;
+  bool CoordCorrectas(int x, int y) const;
   bool HayBomba(int x, int y) const;
   int NumeroBombas(int x, int y) const;
 public:

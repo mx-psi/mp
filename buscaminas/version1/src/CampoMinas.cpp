@@ -1,9 +1,6 @@
 #include "tablero.h"
 
 CampoMinas::CampoMinas(int filas, int columnas, int minas):tab(filas, columnas){}
-
-/* Consulta del estado de CampoMinas*/
-
 int CampoMinas::Filas() const {return tab.Filas();}
 int CampoMinas::Columnas() const {return tab.Columnas();}
 
@@ -32,13 +29,34 @@ bool CampoMinas::Ganado() const
 bool CampoMinas::Marca(int x, int y)
 {
   /* Marca o desmarca una casilla cerrada. Devuelve éxito. */
-
-  if(tab.Get(x,y).abierta) || x > tab.Filas()
-    || y > Tab.Columnas() || x < 0 || y < 0)
+  // TODO: Assert?
+  if(tab.Get(x,y).abierta) && CoordCorrectas(x,y))
     return false;
 
   Casilla nueva = tab.Get(x,y);
   nueva.marcada = !nueva.marcada;
   tab.Set(x,y,nueva);
   return true;
+}
+
+bool CampoMinas::CoordCorrectas(int x, int y)
+{
+  /* Devuelve si las coordenadas son correctas. */
+  return x <= tab.Filas() && y <= Tab.Columnas() && x >= 0 && y >= 0;
+}
+
+bool CampoMinas::HayBomba(int x, int y)
+{
+  /* Devuelve si hay una bomba en la coordenada dada. */
+  return CoordCorrectas(x, y) && tab.Get(x, y).bomba;
+}
+
+int CampoMinas::NumeroBombas(int x, int y)
+{
+  /* Devuelve el número de bombas en casillas adyacentes. */
+  int n = 0;
+  for(int i = -1; i <= 1; i++)
+    for(int j = -1; j <= 1; j++)
+      n += (i + j) != 0 && HayBomba(x + i, y + j);
+  return n;
 }
