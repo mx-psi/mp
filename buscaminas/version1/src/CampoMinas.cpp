@@ -30,14 +30,37 @@ bool CampoMinas::Ganado() const
 bool CampoMinas::Marca(int x, int y)
 {
   /* Marca o desmarca una casilla cerrada. Devuelve éxito. */
-  // TODO: Assert?
-  if(tab.Get(x,y).abierta) && CoordCorrectas(x,y))
+  assert(CoordCorrectas(x, y));
+  
+  if(tab.Get(x,y).abierta)
     return false;
 
   Casilla nueva = tab.Get(x,y);
   nueva.marcada = !nueva.marcada;
   tab.Set(x,y,nueva);
   return true;
+}
+
+bool Abre(int x, int y){
+  /* Abre una casilla y comprueba apertura del resto */
+
+  assert(CoordCorrectas(x, y));
+  Casilla cas = tab.Get(x, y);
+
+  // Comprueba si está marcada o abierta
+  if(cas.marcada || cas.abierta)
+    return false;
+
+  // Comprueba si tiene bombas alrededor
+  int n = NumeroBombas(x, y);
+  if(cas.bomba || n != 0)
+    return true;
+
+  // Abre las casillas adyacentes
+  for(int i = -1; i <= 1; i++)
+    for(int j = -1; j <= 1; j++)
+      if(i != 0 || j != 0)
+        Abre(x + i, y + j);
 }
 
 bool CampoMinas::CoordCorrectas(int x, int y)
@@ -58,7 +81,7 @@ int CampoMinas::NumeroBombas(int x, int y)
   int n = 0;
   for(int i = -1; i <= 1; i++)
     for(int j = -1; j <= 1; j++)
-      n += (i + j) != 0 && HayBomba(x + i, y + j);
+      n += (i != 0 || j != 0) && HayBomba(x + i, y + j);
   return n;
 }
 
