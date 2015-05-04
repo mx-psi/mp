@@ -69,12 +69,17 @@ bool CampoMinas::Marca(int x, int y)
 bool CampoMinas::Abre(int x, int y){
   /* Abre una casilla y comprueba apertura del resto */
 
-  assert(CoordCorrectas(x, y));
+  if (!CoordCorrectas(x, y))
+    return false;
+
   Casilla cas = tab.Get(x, y);
 
   // Comprueba si está marcada o abierta
   if(cas.marcada || cas.abierta)
     return false;
+
+  cas.abierta = true;
+  tab.Set(x, y, cas);
 
   // Comprueba si tiene bombas alrededor
   int n = NumeroBombas(x, y);
