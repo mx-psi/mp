@@ -39,12 +39,16 @@ public:
 
   // Sobrecarga de operador de asignación
   &Tablero operator=(const Tablero& t)
-  :filas(t.filas), columnas(t.columnas)
   {
     if (&t != this)
     {
-      delete [] datos;
-      datos = new Casilla(filas*columnas);
+      if (t.filas*t.columnas != filas*columnas)
+      {
+        delete [] datos;
+        datos = new Casilla(filas*columnas);
+      }
+      filas = t.filas;
+      columnas = t.columnas;
       for (int i = 0; i < filas*columnas; i++)
         datos[i] = t.datos[i];
     }
