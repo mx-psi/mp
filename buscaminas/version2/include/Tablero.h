@@ -41,9 +41,13 @@ public:
   &Tablero operator=(const Tablero& t)
   :filas(t.filas), columnas(t.columnas)
   {
-    datos = new Casilla(filas*columnas);
-    for (int i = 0; i < filas*columnas; i++)
-      datos[i] = t.datos[i];
+    if (&t != this)
+    {
+      delete [] datos;
+      datos = new Casilla(filas*columnas);
+      for (int i = 0; i < filas*columnas; i++)
+        datos[i] = t.datos[i];
+    }
   }
 
   // Destructor
