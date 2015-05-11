@@ -87,33 +87,51 @@ public:
   }
 
   bool Abre(int x, int y){
-    /* Abre una casilla y comprueba apertura del resto */
+    /* Obtiene una lista de casillas a abrir y las abre */
 
     if (!CoordCorrectas(x, y))
       return false;
 
-    Casilla cas = tab.Get(x, y);
+    bool algun_cambio = false;
 
-    // Comprueba si está marcada o abierta
-    if(cas.marcada || cas.abierta)
-      return false;
+    struct CeldaPosicion
+    {
+      int fila, columna;
+      CeldaPosicion* siguiente;
+    };
 
-    cas.abierta = true;
-    explotado  |= cas.bomba
-    tab.Set(x, y, cas);
+    CeldaPosicion* pend = new CeldaPosicion;
+    pend.fila = x;
+    pend.columna = y;
+    pend.siguiente = 0;
 
-    // Comprueba si tiene bombas alrededor
-    int n = NumeroBombas(x, y);
-    if(cas.bomba || n != 0)
-      return true;
+    while(pend != 0)
+    {
+      Casilla cas = tab.get(pend.fila, pend.columna);
+      if (!cas.marcada && !cas.abierta)
+      {
+        algun_cambio = true;
+        cas.abierta = true;
+        explotado  |= cas.bomba
+        tab.Set(pend.fila, pend.columna, cas);
+        if (!cas.bomba && NumeroBombas(x, y) == 0
+          // Añade las casillas adyacentes
+          for(int i = -1; i <= 1; i++)
+            for(int j = -1; j <= 1; j++)
+              if(i != 0 || j != 0)
+              {
+                pend2 = new CeldaPosicion;
+                pend2.fila = pend.fila + i;
+                pend2.columna = pend.columna + i;
+                pend2.siguiente = pend;
+                pend = pend2;
+              }
 
-    // Abre las casillas adyacentes
-    for(int i = -1; i <= 1; i++)
-      for(int j = -1; j <= 1; j++)
-        if(i != 0 || j != 0)
-          Abre(x + i, y + j);
+      }
+      pend = pend.siguiente;
+    }
 
-    return true;
+    return algun_cambio;
   }
 
   void PrettyPrint(ostream& os = std::cout) const
