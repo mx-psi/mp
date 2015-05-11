@@ -27,8 +27,8 @@ CampoMinas::CampoMinas(int filas, int columnas, int minas)
     }
   }
 }
-int CampoMinas::Filas() const {return tab.Filas();}
-int CampoMinas::Columnas() const {return tab.Columnas();}
+inline int CampoMinas::Filas() const {return tab.Filas();}
+inline int CampoMinas::Columnas() const {return tab.Columnas();}
 
 bool CampoMinas::Explotado() const
 {
