@@ -57,10 +57,6 @@ public:
     }
   }
 
-  CampoMinas(const Tablero& tablero)
-  :tab(tablero)
-  {}
-
   inline int Filas() const {return tab.Filas();}
   inline int Columnas() const {return tab.Columnas();}
   inline bool Explotado() const {return explotado;}
