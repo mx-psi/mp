@@ -9,9 +9,9 @@ class CampoMinas{
   int NumeroBombas(int x, int y) const;
 public:
   CampoMinas(int filas, int columnas, int minas);
-  int Filas() const;
-  int Columnas() const;
-  bool Explotado() const;
+  inline int Filas() const;
+  inline int Columnas() const;
+  inline bool Explotado() const;
   bool Ganado() const;
   bool Marca(int x, int y);
   bool Abre(int x, int y);

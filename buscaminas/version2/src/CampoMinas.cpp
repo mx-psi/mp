@@ -27,19 +27,10 @@ CampoMinas::CampoMinas(int filas, int columnas, int minas)
     }
   }
 }
+
 inline int CampoMinas::Filas() const {return tab.Filas();}
 inline int CampoMinas::Columnas() const {return tab.Columnas();}
-
-bool CampoMinas::Explotado() const
-{
-  /* Comprueba si alguna mina ha explotado. */
-  for(int i = 0; i < Filas(); i++)
-    for(int j = 0; j < Columnas(); j++)
-      if(tab.Get(i,j).bomba && tab.Get(i,j).abierta)
-        return true;
-
-  return false;
-}
+inline bool CampoMinas::Explotado() const {return explotado;}
 
 bool CampoMinas::Ganado() const
 {
@@ -79,6 +70,7 @@ bool CampoMinas::Abre(int x, int y){
     return false;
 
   cas.abierta = true;
+  explotado  |= cas.bomba
   tab.Set(x, y, cas);
 
   // Comprueba si tiene bombas alrededor
