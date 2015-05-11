@@ -17,15 +17,15 @@ Accion LeerAccion(char* entrada)
 {
   Accion accion;
 
-  for (int x = 0; x < 100 && entrada[x] != ' ' && entrada[x] != '\0'; x++)
+  for (int x = 0; entrada[x] != ' ' && entrada[x] != '\0'; x++)
     entrada[x] = tolower(entrada[x]);
 
   bool un_caracter = isspace(entrada[1]);
-  if ((!un_caracter && strcmp(entrada, "abrir")) || (un_caracter && entrada[0] == 'a'))
+  if ((!un_caracter && !strcmp(entrada, "abrir")) || (un_caracter && entrada[0] == 'a'))
     accion.tipo = ABRIR;
-  if ((!un_caracter && strcmp(entrada, "marcar")) || (un_caracter && entrada[0] == 'm'))
+  if ((!un_caracter && !strcmp(entrada, "marcar")) || (un_caracter && entrada[0] == 'm'))
     accion.tipo = MARCAR;
-  if ((!un_caracter && strcmp(entrada, "salvar")) || (un_caracter && entrada[0] == 's'))
+  if ((!un_caracter && !strcmp(entrada, "salvar")) || (un_caracter && entrada[0] == 's'))
     accion.tipo = SALVAR;
   else
     accion.tipo = ERROR;
@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
       campo.PrettyPrint();
 
     char* entrada;
-    getline(cin, entrada);
+    cin.getline(entrada, 100);
     Accion accion = LeerAccion(entrada);
 
     if (accion.tipo == ABRIR)

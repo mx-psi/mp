@@ -101,35 +101,35 @@ public:
     };
 
     CeldaPosicion* pend = new CeldaPosicion;
-    pend.fila = x;
-    pend.columna = y;
-    pend.siguiente = 0;
+    pend->fila = x;
+    pend->columna = y;
+    pend->siguiente = 0;
 
     while(pend != 0)
     {
-      Casilla cas = tab.get(pend.fila, pend.columna);
+      Casilla cas = tab.Get(pend->fila, pend->columna);
       if (!cas.marcada && !cas.abierta)
       {
         algun_cambio = true;
         cas.abierta = true;
-        explotado  |= cas.bomba
-        tab.Set(pend.fila, pend.columna, cas);
-        if (!cas.bomba && NumeroBombas(x, y) == 0
+        explotado  |= cas.bomba;
+        tab.Set(pend->fila, pend->columna, cas);
+        if (!cas.bomba && NumeroBombas(x, y) == 0)
           // Añade las casillas adyacentes
           for(int i = -1; i <= 1; i++)
             for(int j = -1; j <= 1; j++)
               if(i != 0 || j != 0)
               {
-                pend2 = new CeldaPosicion;
-                pend2.fila = pend.fila + i;
-                pend2.columna = pend.columna + i;
-                pend2.siguiente = pend;
+                CeldaPosicion* pend2 = new CeldaPosicion;
+                pend2->fila = pend->fila + i;
+                pend2->columna = pend->columna + i;
+                pend2->siguiente = pend;
                 delete pend;
                 pend = pend2;
               }
 
       }
-      pend = pend.siguiente;
+      pend = pend->siguiente;
     }
 
     return algun_cambio;
