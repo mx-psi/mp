@@ -57,10 +57,7 @@ public:
   }
 
   // Destructor
-  ~Tablero()
-  {
-    delete [] datos;
-  }
+  ~Tablero() {delete [] datos;}
 
   // Devuelve el número de filas del tablero
   int Filas() const;

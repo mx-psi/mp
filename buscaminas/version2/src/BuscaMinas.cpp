@@ -91,7 +91,8 @@ int main(int argc, char* argv[])
 
   if (filas < 4 || columnas < 4 || minas < 5 || minas*2 >= filas*columnas)
   {
-    cout << "Debe haber al menos 4 filas y 4 columnas, y el número de minas debe ser mayor que 4 y menor que la mitad de las casillas" << endl;
+    cout << "Debe haber al menos 4 filas y 4 columnas." << endl;
+    cout << "El número de minas debe estar entre 4 y la mitad de las casillas" << endl;
     return 1;
   }
 
