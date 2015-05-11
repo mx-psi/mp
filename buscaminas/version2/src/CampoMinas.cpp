@@ -109,46 +109,46 @@ int CampoMinas::NumeroBombas(int x, int y) const
   return n;
 }
 
-void CampoMinas::PrettyPrint() const
+void CampoMinas::PrettyPrint(ostream& os = cout) const
 {
   /* Imprime el estado actual del tablero. */
 
   // Columnas
-  cout << ' ';
+  os << ' ';
   for(int i = 0; i < Columnas(); i++)
-    cout << setw(3) << i;
-  cout << endl;
+    os << setw(3) << i;
+  os << endl;
 
   // Linea
   for(int i = 0; i < Columnas(); i++)
-    cout << "----";
+    os << "----";
 
   // Tablero
   for(int i = 0; i < Filas(); i++)
   {
-    cout << endl << " " << i << "|";
+    os << endl << " " << i << "|";
     for(int j = 0; j < Columnas(); j++)
     {
       Casilla actual = tab.Get(i,j);
       if(actual.marcada)
-        cout << " ?|";
+        os << " ?|";
       else if(!actual.abierta)
-        cout << " *|";
+        os << " *|";
       else{
         int n = NumeroBombas(i, j);
         if(n == 0)
-          cout << "  |";
+          os << "  |";
         else
-          cout << n << " |";
+          os << n << " |";
       }
     }
   }
 
   // Linea
-  cout << endl;
+  os << endl;
   for(int i = 0; i < Columnas(); i++)
-    cout << "----";
-  cout << endl;
+    os << "----";
+  os << endl;
 }
 
 void CampoMinas::ImprimeTablero() const
