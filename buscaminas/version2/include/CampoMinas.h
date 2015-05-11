@@ -124,6 +124,7 @@ public:
                 pend2.fila = pend.fila + i;
                 pend2.columna = pend.columna + i;
                 pend2.siguiente = pend;
+                delete pend;
                 pend = pend2;
               }
 
