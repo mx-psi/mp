@@ -25,19 +25,19 @@ public:
   :filas(f), columnas(c)
   {}
 
-  // Devuelve el número de filas del tablero
-  int Filas() const;
+  inline int Filas() const {return filas;}
+  inline int Columnas() const {return columnas;}
 
-  // Devuelve el número de filas del tablero
-  int Columnas() const;
+  Casilla Get(int fila, int columna) const
+  {
+    return datos[fila][columna];
+  }
 
-  // Obtiene la estructura de una casilla
-  // Prec: fila <= 0 < filas, columna <= 0 < columnas
-  Casilla Get(int fila, int columna) const;
+  void Set(int fila, int columna, const Casilla &c)
+  {
+    datos[fila][columna] = c;
+  }
 
-  // Fija la estructura de una casilla
-  // Prec: fila <= 0 < filas, columna <= 0 < columnas
-  void Set(int fila, int columna, const Casilla &c);
 };
 
 #endif
