@@ -4,7 +4,7 @@
 #include <iostream> // cin, os
 #include <iomanip>  // setw
 #include <assert.h>
-#include "CampoMinas.h" // Tablero.h
+using namespace std;
 
 /* Cabeceras de las funciones del módulo CampoMinas.cpp */
 
@@ -94,12 +94,12 @@ public:
 
     Casilla cas = tab.Get(x, y);
 
-    // Comprueba si está marcada o abierta
     if(cas.marcada || cas.abierta)
       return false;
 
+    // Comprueba si está marcada o abierta
     cas.abierta = true;
-    explotado  |= cas.bomba
+    explotado  |= cas.bomba;
     tab.Set(x, y, cas);
 
     // Comprueba si tiene bombas alrededor
@@ -116,7 +116,7 @@ public:
     return true;
   }
 
-  void PrettyPrint(ostream& os = std::cout) const
+  void PrettyPrint(ostream& os = cout) const
   {
     /* Imprime el estado actual del tablero. */
 

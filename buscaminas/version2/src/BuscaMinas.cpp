@@ -1,9 +1,10 @@
 // Módulo principal del programa
 #include <iostream>
+#include <cstring>
 #include "CampoMinas.h" // Tablero.h, fstream
 using namespace std;
 
-enum TipoAccion = { ABRIR, MARCAR, SALVAR, ERROR }
+enum TipoAccion { ABRIR, MARCAR, SALVAR, ERROR };
 
 struct Accion
 {
@@ -35,7 +36,7 @@ Accion LeerAccion(char* entrada)
       entrada++;
 
     if (entrada[0] == '\0')
-      accion.tipo == ERROR;
+      accion.tipo = ERROR;
     else
       accion.fila = atoi(++entrada);
 
@@ -43,20 +44,20 @@ Accion LeerAccion(char* entrada)
       entrada++;
 
     if (entrada[0] == '\0')
-      accion.tipo == ERROR;
+      accion.tipo = ERROR;
     else
       accion.columna = atoi(++entrada);
   }
   else
-    accion.filas = accion.columnas = 0;
-  
+    accion.fila = accion.columna = 0;
+
   if (accion.tipo == SALVAR)
   {
     while (!isspace(entrada[0]) && entrada[0] != '\0')
-      entrada++;  
+      entrada++;
 
     if (entrada[0] == '\0')
-      accion.tipo == ERROR;
+      accion.tipo = ERROR;
     else
       accion.archivo = ++entrada;
   }
@@ -73,10 +74,10 @@ int main(int argc, char* argv[])
   CampoMinas campo;
   if (argc == 4)
   {
-    filas = atoi(argv[1]);
+    filas    = atoi(argv[1]);
     columnas = atoi(argv[2]);
-    minas = atoi(argv[3]);
-    campo = CampoMinas(filas, columnas, minas);
+    minas    = atoi(argv[3]);
+    campo    = CampoMinas(filas, columnas, minas);
   }
   else if (argc == 2)
     if (!Leer(argv[1], campo))
@@ -111,7 +112,7 @@ int main(int argc, char* argv[])
       algo_ha_pasado = campo.Marca(accion.fila, accion.columna);
     else if (accion.tipo == SALVAR)
     {
-      if Escribir(accion.archivo, campo);
+      if (Escribir(accion.archivo, campo))
       {
         cout << "Partida guardada correctamente" << endl;
         return 0;

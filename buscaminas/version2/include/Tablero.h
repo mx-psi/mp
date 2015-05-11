@@ -32,26 +32,28 @@ public:
   Tablero(const Tablero& t)
   :filas(t.filas), columnas(t.columnas)
   {
-    datos = new Casilla(filas*columnas);
+    datos = new Casilla[filas*columnas];
     for (int i = 0; i < filas*columnas; i++)
       datos[i] = t.datos[i];
   }
 
   // Sobrecarga de operador de asignación
-  &Tablero operator=(const Tablero& t)
+  Tablero& operator=(const Tablero& t)
   {
     if (&t != this)
     {
       if (t.filas*t.columnas != filas*columnas)
       {
         delete [] datos;
-        datos = new Casilla(filas*columnas);
+        datos = new Casilla[filas*columnas];
       }
       filas = t.filas;
       columnas = t.columnas;
       for (int i = 0; i < filas*columnas; i++)
         datos[i] = t.datos[i];
     }
+
+    return *this;
   }
 
   // Destructor
