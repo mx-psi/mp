@@ -80,8 +80,10 @@ int main(int argc, char* argv[])
     campo    = CampoMinas(filas, columnas, minas);
   }
   else if (argc == 2)
+  {
     if (!Leer(argv[1], campo))
-      return 1;  // TODO: Leer desde archivo
+      return 1;
+  }
   else
   {
     return 1;  // TODO: Instrucciones
