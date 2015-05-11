@@ -3,6 +3,69 @@
 #include "CampoMinas.h" // Tablero.h, fstream
 using namespace std;
 
+enum TipoAccion = { ABRIR, MARCAR, SALVAR, ERROR }
+
+struct Accion
+{
+  TipoAccion tipo;
+  int fila, columna;
+  char* archivo;
+};
+
+Accion LeerAccion(char* entrada)
+{
+  Accion accion;
+
+  for (int x = 0; x < 100 && entrada[x] != ' ' && entrada[x] != '\0'; x++)
+    entrada[x] = tolower(entrada[x]);
+
+  bool un_caracter = isspace(entrada[1]);
+  if ((!un_caracter && strcmp(entrada, "abrir")) || (un_caracter && entrada[0] == 'a'))
+    accion.tipo = ABRIR;
+  if ((!un_caracter && strcmp(entrada, "marcar")) || (un_caracter && entrada[0] == 'm'))
+    accion.tipo = MARCAR;
+  if ((!un_caracter && strcmp(entrada, "salvar")) || (un_caracter && entrada[0] == 's'))
+    accion.tipo = SALVAR;
+  else
+    accion.tipo = ERROR;
+
+  if (accion.tipo == ABRIR || accion.tipo == MARCAR)
+  {
+    while (!isspace(entrada[0]) && entrada[0] != '\0')
+      entrada++;
+
+    if (entrada[0] == '\0')
+      accion.tipo == ERROR;
+    else
+      accion.fila = atoi(++entrada);
+
+    while (!isspace(entrada[0]) && entrada[0] != '\0')
+      entrada++;
+
+    if (entrada[0] == '\0')
+      accion.tipo == ERROR;
+    else
+      accion.columna = atoi(++entrada);
+  }
+  else
+    accion.filas = accion.columnas = 0;
+  
+  if (accion.tipo == SALVAR)
+  {
+    while (!isspace(entrada[0]) && entrada[0] != '\0')
+      entrada++;  
+
+    if (entrada[0] == '\0')
+      accion.tipo == ERROR;
+    else
+      accion.archivo = ++entrada;
+  }
+  else
+    accion.archivo = 0;
+
+  return accion;
+}
+
 int main(int argc, char* argv[])
 {
   // Se inicializa el campo de minas
@@ -38,14 +101,29 @@ int main(int argc, char* argv[])
     if (algo_ha_pasado)
       campo.PrettyPrint();
 
-    char accion;
-    int fila, columna;
-    cout << "Acción y posición (fila y columna): ";
-    cin >> accion >> fila >> columna;
-    if (accion == 'a')
-      algo_ha_pasado = campo.Abre(fila, columna);
-    else  // (accion == 'm')
-      algo_ha_pasado = campo.Marca(fila, columna);
+    char* entrada;
+    getline(cin, entrada);
+    Accion accion = LeerAccion(entrada);
+
+    if (accion.tipo == ABRIR)
+      algo_ha_pasado = campo.Abre(accion.fila, accion.columna);
+    else if (accion.tipo == MARCAR)
+      algo_ha_pasado = campo.Marca(accion.fila, accion.columna);
+    else if (accion.tipo == SALVAR)
+    {
+      if Escribir(accion.archivo, campo);
+      {
+        cout << "Partida guardada correctamente" << endl;
+        return 0;
+      }
+      else
+        cout << "Error al intentar guardar la partida" << endl;
+    }
+    else  // accion.tipo == ERROR
+    {
+      cout << "Acción incorrecta" << endl;
+      algo_ha_pasado = false;
+    }
   }
 
   // Se muestra si el jugador ha ganado o perdido
