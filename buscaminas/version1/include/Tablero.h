@@ -18,7 +18,7 @@ struct Casilla
 class Tablero
 {
   Casilla datos[20][20];
-  int filas, columnas;
+  const int filas, columnas;
 
 public:
   Tablero(int f, int c)
