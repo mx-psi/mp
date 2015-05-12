@@ -20,7 +20,7 @@ void Tablero::Set(int fila, int columna, const Casilla &c)
   datos[Columnas()*fila+columna] = c;
 }
 
-ostream& operator << (ostream& os, const Casilla& c)
+std::ostream& operator << (std::ostream& os, const Casilla& c)
 {
   os << c.bomba;
   os << c.abierta;
@@ -28,12 +28,21 @@ ostream& operator << (ostream& os, const Casilla& c)
   return os;
 }
 
-istream& operator >> (istream& is, Casilla& c)
+std::istream& operator >> (std::istream& is, Casilla& c)
 {
-  while(isspace(is.peek()))
+  while(isspace(is.peek())) //TODO: No sé si esto es necesario
     is.ignore();
-  c.bomba   = is.get() == '1' ? 1 : 0;
-  c.abierta = is.get() == '1' ? 1 : 0;
+  c.bomba   = is.get() == '1' ? 1 : 0; //TODO: Debería fallar si es 'a' p.ej.?
+  c.abierta = is.get() == '1' ? 1 : 0; //TODO: Poner fallos
   c.marcada = is.get() == '1' ? 1 : 0;
   return is;
+}
+
+std::ostream& operator << (std::ostream& os, const Tablero& t)
+{
+  os << t.Filas() << " " << t.Columnas() << endl;
+  for(int i = 0; i < t.Filas(); i++)
+    for(int j = 0; j < t.Columnas(); j++)
+      os << t(i,j);
+  return os;
 }

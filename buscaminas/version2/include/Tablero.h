@@ -11,23 +11,6 @@ struct Casilla
   Casilla()
   :bomba(false),abierta(false),marcada(false)
   {}
-
-  ostream& operator << (ostream& os, const Casilla& c)
-  {
-    os << c.bomba;
-    os << c.abierta;
-    os << c.marcada;
-    return os;
-  }
-
-  istream& operator>>(istream& is, Casilla& c)
-  {
-    while(isspace(is.peek()))
-      is.ignore();
-    c.bomba   = is.get();
-    c.abierta = is.get();
-    c.marcada = is.get();
-  }
 };
 
 // Clase Tablero y cabeceras
