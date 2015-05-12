@@ -20,6 +20,7 @@ Accion LeerAccion(char* entrada)
   for (int x = 0; entrada[x] != ' ' && entrada[x] != '\0'; x++)
     entrada[x] = tolower(entrada[x]);
 
+  /* Clasificación de la acción */
   bool un_caracter = isspace(entrada[1]);
   if ((!un_caracter && !strcmp(entrada, "abrir")) || (un_caracter && entrada[0] == 'a'))
     accion.tipo = ABRIR;

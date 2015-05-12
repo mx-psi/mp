@@ -56,6 +56,16 @@ public:
     return *this;
   }
 
+  Casilla& operator()(int i, int j)
+  {
+    return matriz[i][j];
+  }
+
+  const Casilla& operator()(int i, int j) const
+  {
+    return matriz[i][j];
+  }
+
   // Destructor
   ~Tablero() {delete [] datos;}
 
