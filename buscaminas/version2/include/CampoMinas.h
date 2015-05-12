@@ -21,7 +21,7 @@ class CampoMinas{
   bool HayBomba(int x, int y) const
   {
     /* Devuelve si hay una bomba en la coordenada dada. */
-    return CoordCorrectas(x, y) && tab.Get(x, y).bomba;
+    return CoordCorrectas(x, y) && tab(x, y).bomba;
   }
 
   int NumeroBombas(int x, int y) const
@@ -49,9 +49,9 @@ public:
       aleatorio = rand()%(filas*columnas);
       int fila = aleatorio/columnas;
       int columna = aleatorio%columnas;
-      if (!tab.Get(fila, columna).bomba)
+      if (!tab(fila, columna).bomba)
       {
-        tab.Set(fila, columna, con_bomba);
+        tab(fila,  columna) =  con_bomba;
         minas_puestas++;
       }
     }
@@ -66,7 +66,7 @@ public:
     /* Indica si se ha ganado la partida. */
     for(int i = 0; i < Filas(); i++)
       for(int j = 0; j < Columnas(); j++)
-        if(!tab.Get(i,j).bomba && !tab.Get(i,j).abierta)
+        if(!tab(i,j).bomba && !tab(i,j).abierta)
           return false;
 
     return true;
@@ -77,12 +77,10 @@ public:
     /* Marca o desmarca una casilla cerrada. Devuelve éxito. */
     assert(CoordCorrectas(x, y));
 
-    if(tab.Get(x,y).abierta)
+    if(tab(x,y).abierta)
       return false;
 
-    Casilla nueva = tab.Get(x,y);
-    nueva.marcada = !nueva.marcada;
-    tab.Set(x,y,nueva);
+    tab(x, y).marcada = !tab(x, y).marcada;
     return true;
   }
 
@@ -107,13 +105,13 @@ public:
 
     while(pend != 0)
     {
-      Casilla cas = tab.Get(pend->fila, pend->columna);
+      Casilla cas = tab(pend->fila, pend->columna);
       if (!cas.marcada && !cas.abierta)
       {
         algun_cambio = true;
         cas.abierta = true;
         explotado  |= cas.bomba;
-        tab.Set(pend->fila, pend->columna, cas);
+        tab(pend->fila,  pend->columna) = cas;
         if (!cas.bomba && NumeroBombas(x, y) == 0)
           // Añade las casillas adyacentes
           for(int i = -1; i <= 1; i++)
@@ -155,7 +153,7 @@ public:
       os << std::endl << " " << i << "|";
       for(int j = 0; j < Columnas(); j++)
       {
-        Casilla actual = tab.Get(i,j);
+        Casilla actual = tab(i,j);
         if(actual.marcada)
           os << " ?|";
         else if(!actual.abierta)
@@ -201,7 +199,7 @@ public:
         os << std::endl << i << " |";
         for(int j = 0; j < Columnas(); j++)
         {
-          Casilla actual = tab.Get(i,j);
+          Casilla actual = tab(i,j);
           if(actual.bomba)
             os << " X|";
           else{
