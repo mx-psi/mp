@@ -3,6 +3,7 @@ SRC = src
 OBJ = obj
 INC = include
 OBJS = $(wildcard "obj/*.o")
+INCS = $(wildcard "include/*.h")
 CXX = g++
 CPPFLAGS = -Wall -g -Wextra -pedantic -std=c++03 -I$(INC)
 
@@ -13,7 +14,7 @@ CPPFLAGS = -Wall -g -Wextra -pedantic -std=c++03 -I$(INC)
 all: $(BIN)/BuscaMinas
 
 # Compilación de módulo central
-$(OBJ)/BuscaMinas.o: $(SRC)/BuscaMinas.cpp $(INC)/CampoMinas.h
+$(OBJ)/BuscaMinas.o: $(SRC)/BuscaMinas.cpp $(INCS)
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 # Compilación de módulos

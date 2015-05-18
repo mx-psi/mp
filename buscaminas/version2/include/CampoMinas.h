@@ -1,14 +1,14 @@
+#ifndef _CAMPOMINAS_H_
+#define _CAMPOMINAS_H_
+
 #include <cstdlib>
 #include <ctime>
-#include <iostream> // cin, os
 #include <iomanip>  // setw
 #include <fstream>
 #include <cstring>
 #include <assert.h>
-#include "Tablero.h"
+#include "Tablero.h" // iostream
 using namespace std;
-
-char* CABECERA = "#MP-BUSCAMINAS-V1";   // Cabecera de archivo de partida
 
 /* Cabeceras de las funciones del módulo CampoMinas.cpp */
 
@@ -52,7 +52,7 @@ public:
   bool Ganado() const;
   bool Marca(int x, int y);
   bool Abre(int x, int y);
-  void PrettyPrint(ostream& os = cout) const;
+  void PrettyPrint(ostream& os = std::cout) const;
   void ImprimeTablero(ostream& os = std::cout) const;
 
 
@@ -61,3 +61,5 @@ public:
   // Escritura a archivo
   bool Escribir(const char* nombre);
  };
+
+#endif

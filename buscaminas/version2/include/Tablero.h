@@ -1,6 +1,8 @@
 #ifndef _TABLERO_H_
 #define _TABLERO_H_
 
+#include <iostream>
+
 // Estructura con información para cada casilla
 struct Casilla
 {

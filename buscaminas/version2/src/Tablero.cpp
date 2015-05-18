@@ -38,17 +38,26 @@ std::istream& operator >> (std::istream& is, Casilla& c)
   while(isspace(is.peek()))
     is.ignore();
 
-  bool& campos[3] = {&c.bomba, &c.abierta, &c.marcada};
+  actual = is.get();
 
-  for(int i = 0; i < 3; i++)
-  {
-    actual = is.get();
+  if(actual != '1' || actual != '0')
+    is.setstate(std::ios_base::badbit);
 
-    if(actual != '1' || actual != '0')
-      is.setstate(std::ios_base::badbit);
+  c.bomba =  actual == '1' ? 1 : 0;
 
-    campo[i] = actual == '1' ? 1 : 0;
-  }
+  actual = is.get();
+
+  if(actual != '1' || actual != '0')
+    is.setstate(std::ios_base::badbit);
+
+  c.abierta =  actual == '1' ? 1 : 0;
+
+  actual = is.get();
+
+  if(actual != '1' || actual != '0')
+    is.setstate(std::ios_base::badbit);
+
+  c.marcada =  actual == '1' ? 1 : 0;
 
   return is;
 }
@@ -56,12 +65,12 @@ std::istream& operator >> (std::istream& is, Casilla& c)
 // Lee un tablero desde flujo
 std::ostream& operator << (std::ostream& os, const Tablero& t)
 {
-  os << t.Filas() << " " << t.Columnas() << endl;
+  os << t.Filas() << " " << t.Columnas() << std::endl;
 
   for(int i = 0; i < t.Filas(); i++)
     for(int j = 0; j < t.Columnas(); j++)
       os << t(i,j);
-      
+
   return os;
 }
 

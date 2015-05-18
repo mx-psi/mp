@@ -1,14 +1,7 @@
-#include <cstdlib>
-#include <ctime>
-#include <iostream> // cin, os
-#include <iomanip>  // setw
-#include <fstream>
-#include <cstring>
-#include <assert.h>
-#include "Tablero.h"
+#include "CampoMinas.h"
 using namespace std;
 
-char* CABECERA = "#MP-BUSCAMINAS-V1";   // Cabecera de archivo de partida
+const char* CABECERA = "#MP-BUSCAMINAS-V1";   // Cabecera de archivo de partida
 
 /* Cabeceras de las funciones del módulo CampoMinas.cpp */
 
@@ -107,7 +100,7 @@ bool CampoMinas::Abre(int x, int y){
   return algun_cambio;
 }
 
-void CampoMinas::PrettyPrint(ostream& os = cout) const
+void CampoMinas::PrettyPrint(ostream& os) const
 {
   /* Imprime el estado actual del tablero. */
 
@@ -156,7 +149,7 @@ void CampoMinas::PrettyPrint(ostream& os = cout) const
   os << std::endl;
 }
 
-void CampoMinas::ImprimeTablero(ostream& os = std::cout) const
+void CampoMinas::ImprimeTablero(ostream& os) const
 {
   /* Imprime el estado final del tablero. */
 
