@@ -62,7 +62,7 @@ public:
   }
 
   // Constructor para lectura de archivo
-  CampoMinas() {}
+  CampoMinas(const Tablero& t):tab(t) {}
 
   inline int Filas() const {return tab.Filas();}
   inline int Columnas() const {return tab.Columnas();}

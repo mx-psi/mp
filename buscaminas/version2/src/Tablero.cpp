@@ -58,6 +58,7 @@ std::ostream& operator << (std::ostream& os, const Tablero& t)
   for(int i = 0; i < t.Filas(); i++)
     for(int j = 0; j < t.Columnas(); j++)
       os << t(i,j);
+      
   return os;
 }
 
