@@ -1,7 +1,6 @@
 // Módulo principal del programa
 #include <iostream>
-#include <cstring>
-#include "CampoMinas.h" // Tablero.h, fstream
+#include "CampoMinas.h" // Tablero.h, fstream, cstream
 using namespace std;
 
 enum TipoAccion { ABRIR, MARCAR, SALVAR, ERROR };
@@ -82,7 +81,7 @@ int main(int argc, char* argv[])
   }
   else if (argc == 2)
   {
-    if (!Leer(argv[1], campo))
+    if (!campo.Leer(argv[1]))
       return 1;
   }
   else
@@ -116,7 +115,7 @@ int main(int argc, char* argv[])
       algo_ha_pasado = campo.Marca(accion.fila, accion.columna);
     else if (accion.tipo == SALVAR)
     {
-      if (Escribir(accion.archivo, campo))
+      if (campo.Escribir(accion.archivo))
       {
         cout << "Partida guardada correctamente" << endl;
         return 0;

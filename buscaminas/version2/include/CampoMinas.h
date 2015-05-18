@@ -1,10 +1,14 @@
-#include "Tablero.h"
 #include <cstdlib>
 #include <ctime>
 #include <iostream> // cin, os
 #include <iomanip>  // setw
+#include <fstream>
+#include <cstring>
 #include <assert.h>
+#include "Tablero.h"
 using namespace std;
+
+char* CABECERA = "#MP-BUSCAMINAS-V1";   // Cabecera de archivo de partida
 
 /* Cabeceras de las funciones del módulo CampoMinas.cpp */
 
@@ -56,6 +60,9 @@ public:
       }
     }
   }
+
+  // Constructor para lectura de archivo
+  CampoMinas() {}
 
   inline int Filas() const {return tab.Filas();}
   inline int Columnas() const {return tab.Columnas();}
@@ -218,5 +225,27 @@ public:
         os << "----";
       os << std::endl;
     }
+  }
+
+  // Lectura desde archivo
+  bool Leer(const char* nombre)
+  {
+    ifstream f(nombre);
+    if (!f)
+      return false;
+
+    char* cabecera;
+    f.getline(cabecera, 17);
+    if (strcmp(cabecera, CABECERA))
+      return false;
+
+    return f >> tab;
+  }
+
+  // Escritura a archivo
+  bool Escribir(const char* nombre)
+  {
+    ofstream f(nombre);
+    return f << CABECERA << '\n' << tab;
   }
 };
