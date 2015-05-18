@@ -146,6 +146,9 @@ public:
 
     // Columnas
     os << ' ';
+    if (Filas() > 10)
+      os << ' ';
+
     for(int i = 0; i < Columnas(); i++)
       os << setw(3) << i;
     os << std::endl;
@@ -157,7 +160,11 @@ public:
     // Tablero
     for(int i = 0; i < Filas(); i++)
     {
-      os << std::endl << " " << i << "|";
+      os << endl;
+      if (i <= 10 && Filas() > 10)
+        os << ' ';
+
+      os << i << "|";
       for(int j = 0; j < Columnas(); j++)
       {
         Casilla actual = tab(i,j);
@@ -192,6 +199,9 @@ public:
     {
       // Columnas
       os << ' ';
+      if (Filas() > 10)
+        os << ' ';
+
       for(int i = 0; i < Filas(); i++)
         os << setw(3) << i;
       os << std::endl;
@@ -203,7 +213,11 @@ public:
       // Tablero
       for(int i = 0; i < Filas(); i++)
       {
-        os << std::endl << i << " |";
+        cout << endl;
+        if (i <= 10 && Filas() > 10)
+          cout << ' ';
+
+        cout << i << "|";
         for(int j = 0; j < Columnas(); j++)
         {
           Casilla actual = tab(i,j);

@@ -17,7 +17,7 @@ $(OBJ)/BuscaMinas.o: $(SRC)/BuscaMinas.cpp $(INC)/CampoMinas.h
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 # Compilación de módulos
-$(OBJ)/%.o: $(SRC)/%.cpp $(INC)/%.h
+$(OBJ)/%.o: $(INC)/%.h
 	$(CXX) $(CPPFLAGS) -c $< -o $@
 
 #  Compilación del programa final
