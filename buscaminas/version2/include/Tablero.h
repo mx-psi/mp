@@ -19,7 +19,6 @@ struct Casilla
 class Tablero
 {
   Casilla* datos;
-  Casilla matriz[20][20];
   int filas, columnas;
 
 public:
@@ -59,12 +58,12 @@ public:
 
   Casilla& operator()(int i, int j)
   {
-    return matriz[i][j];
+    return datos[Columnas()*i+j];
   }
 
   const Casilla& operator()(int i, int j) const
   {
-    return matriz[i][j];
+    return datos[Columnas()*i+j];
   }
 
   // Destructor
