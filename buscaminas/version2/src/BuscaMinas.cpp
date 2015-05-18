@@ -23,9 +23,9 @@ Accion LeerAccion(char* entrada)
   bool un_caracter = isspace(entrada[1]);
   if ((!un_caracter && !strcmp(entrada, "abrir")) || (un_caracter && entrada[0] == 'a'))
     accion.tipo = ABRIR;
-  if ((!un_caracter && !strcmp(entrada, "marcar")) || (un_caracter && entrada[0] == 'm'))
+  else if ((!un_caracter && !strcmp(entrada, "marcar")) || (un_caracter && entrada[0] == 'm'))
     accion.tipo = MARCAR;
-  if ((!un_caracter && !strcmp(entrada, "salvar")) || (un_caracter && entrada[0] == 's'))
+  else if ((!un_caracter && !strcmp(entrada, "salvar")) || (un_caracter && entrada[0] == 's'))
     accion.tipo = SALVAR;
   else
     accion.tipo = ERROR;
@@ -86,7 +86,9 @@ int main(int argc, char* argv[])
   }
   else
   {
-    return 1;  // TODO: Instrucciones
+    cout << "Posibles usos:\n" << argv[0] << " [filas] [columnas] [minas]\tInicia partida con tales parámetros\n"
+         << argv[0] << "[nombre de archivo]\t\tCarga una partida guardada" << endl;
+    return 1;
   }
 
   if (filas < 4 || columnas < 4 || minas < 5 || minas*2 >= filas*columnas)
