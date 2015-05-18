@@ -22,7 +22,7 @@ class CampoMinas{
 
 public:
   CampoMinas(int filas, int columnas, int minas)
-  :tab(filas, columnas)
+  :tab(filas, columnas),explotado(false)
   {
     int minas_puestas = 0;
     srand (time(0));

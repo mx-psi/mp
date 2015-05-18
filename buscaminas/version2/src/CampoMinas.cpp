@@ -96,7 +96,6 @@ bool CampoMinas::Abre(int x, int y){
   pend->siguiente = 0;
   while(pend != 0)
   {
-    CeldaPosicion* pend_actual = pend;
     if (CoordCorrectas(pend->fila, pend->columna))
     {
       Casilla cas = tab(pend->fila, pend->columna);
@@ -106,6 +105,7 @@ bool CampoMinas::Abre(int x, int y){
         cas.abierta = true;
         explotado  |= cas.bomba;
         tab(pend->fila,  pend->columna) = cas;
+        cout << "Abriendo casilla (" << pend->fila << ", " << pend->columna << "): tiene " << NumeroBombas(pend->fila, pend->columna) << " bombas\n";
         if (!cas.bomba && NumeroBombas(pend->fila, pend->columna) == 0)
           // Añade las casillas adyacentes
           for(int i = -1; i <= 1; i++)
@@ -113,16 +113,16 @@ bool CampoMinas::Abre(int x, int y){
               if(i != 0 || j != 0)
               {
                 CeldaPosicion* pend2 = new CeldaPosicion;
-                pend2->fila = pend_actual->fila + i;
-                pend2->columna = pend_actual->columna + j;
-                pend2->siguiente = pend;
-                pend = pend2;
+                pend2->fila = (pend->fila + i);
+                pend2->columna = (pend->columna + j);
+                pend2->siguiente = pend->siguiente;
+                pend->siguiente = pend2;
               }
       }
     }
-    CeldaPosicion* pend_aux = pend_actual->siguiente;
-    delete pend_actual;
-    pend_actual = pend_aux;
+    CeldaPosicion* pend_aux = pend->siguiente;
+    delete pend;
+    pend = pend_aux;
   }
   return algun_cambio;
 }
