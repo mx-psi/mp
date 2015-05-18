@@ -120,7 +120,7 @@ void CampoMinas::PrettyPrint() const
   for(int i = 0; i < Filas(); i++)
   {
     cout << endl;
-    if (i <= 10 && Filas() > 10)
+    if (i < 10 && Filas() > 10)
       cout << ' ';
 
     cout << i << "|";
@@ -173,7 +173,7 @@ void CampoMinas::ImprimeTablero() const
     for(int i = 0; i < Filas(); i++)
     {
       cout << endl;
-      if (i <= 10 && Filas() > 10)
+      if (i < 10 && Filas() > 10)
         cout << ' ';
 
       cout << i << "|";
