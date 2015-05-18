@@ -86,7 +86,9 @@ int main(int argc, char* argv[])
   }
   else
   {
-    return 1;  // TODO: Instrucciones
+    cout << "Posibles usos:\n" << argv[0] << " [filas] [columnas] [minas]\tInicia partida con tales parámetros\n"
+         << argv[0] << "[nombre de archivo]\t\tCarga una partida guardada" << endl;
+    return 1;
   }
 
   if (filas < 4 || columnas < 4 || minas < 5 || minas*2 >= filas*columnas)
