@@ -206,7 +206,7 @@ bool CampoMinas::Leer(const char* nombre)
     return false;
 
   char* cabecera = new char[17];
-  f.getline(cabecera, 17);
+  f.getline(cabecera, 18);
   if (strcmp(cabecera, CABECERA))
     return false;
 
