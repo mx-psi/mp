@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 {
   // Se inicializa el campo de minas
   int filas, columnas, minas;
-  CampoMinas campo;
+  CampoMinas campo(0, 0, 0);
   if (argc == 4)
   {
     filas    = atoi(argv[1]);

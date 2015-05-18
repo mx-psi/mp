@@ -83,4 +83,20 @@ public:
   void Set(int fila, int columna, const Casilla &c);
 };
 
+
+// Operaciones de E/S de contenido del tablero
+
+// Lee el contenido de una casilla desde flujo
+std::ostream& operator << (std::ostream& os, const Casilla& c);
+
+// Imprime en flujo el contenido de una casilla
+std::istream& operator >> (std::istream& is, Casilla& c);
+
+// Lee un tablero desde flujo
+std::ostream& operator << (std::ostream& os, const Tablero& t);
+
+// Imprime en flujo el tablero
+std::istream& operator >> (std::istream& is, Tablero& t);
+
+
 #endif
