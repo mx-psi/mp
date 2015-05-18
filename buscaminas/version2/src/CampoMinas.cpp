@@ -121,7 +121,7 @@ void CampoMinas::PrettyPrint(ostream& os) const
   for(int i = 0; i < Filas(); i++)
   {
     os << endl;
-    if (i <= 10 && Filas() > 10)
+    if (i < 10 && Filas() > 10)
       os << ' ';
 
     os << i << "|";
@@ -174,7 +174,7 @@ void CampoMinas::ImprimeTablero(ostream& os) const
     for(int i = 0; i < Filas(); i++)
     {
       cout << endl;
-      if (i <= 10 && Filas() > 10)
+      if (i < 10 && Filas() > 10)
         cout << ' ';
 
       cout << i << "|";
