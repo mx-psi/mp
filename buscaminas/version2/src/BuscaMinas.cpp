@@ -12,38 +12,47 @@ struct Accion
   char* archivo;
 };
 
+bool Coincide(const char* entrada, const char* largo, char corto)
+{
+  /* Devuelve si la entrada coincide con la salida. */
+  bool un_caracter = isspace(entrada[1]);
+  return (!un_caracter && !strcmp(entrada, largo)) || (un_caracter && *entrada == corto);
+}
+
+bool Avanzar(char* entrada)
+{
+  /* Avanza hasta el siguiente caracter y devuelve si se ha llegado al final. */
+  while (!isspace(*entrada) && *entrada != '\0')
+    entrada++;
+  return *entrada == '\0';
+}
+
 Accion LeerAccion(char* entrada)
 {
+  /* Lee una acción */
   Accion accion;
 
   for (int x = 0; entrada[x] != ' ' && entrada[x] != '\0'; x++)
     entrada[x] = tolower(entrada[x]);
 
   /* Clasificación de la acción */
-  bool un_caracter = isspace(entrada[1]);
-  if ((!un_caracter && !strcmp(entrada, "abrir")) || (un_caracter && entrada[0] == 'a'))
+  if (Coincide(entrada, "abrir", 'a'))
     accion.tipo = ABRIR;
-  else if ((!un_caracter && !strcmp(entrada, "marcar")) || (un_caracter && entrada[0] == 'm'))
+  else if (Coincide(entrada, "marcar", 'm'))
     accion.tipo = MARCAR;
-  else if ((!un_caracter && !strcmp(entrada, "salvar")) || (un_caracter && entrada[0] == 's'))
+  else if (Coincide(entrada, "salvar", 's'))
     accion.tipo = SALVAR;
   else
     accion.tipo = ERROR;
 
   if (accion.tipo == ABRIR || accion.tipo == MARCAR)
   {
-    while (!isspace(entrada[0]) && entrada[0] != '\0')
-      entrada++;
-
-    if (entrada[0] == '\0')
+    if (!Avanzar(entrada))
       accion.tipo = ERROR;
     else
       accion.fila = atoi(++entrada);
 
-    while (!isspace(entrada[0]) && entrada[0] != '\0')
-      entrada++;
-
-    if (entrada[0] == '\0')
+    if (!Avanzar(entrada))
       accion.tipo = ERROR;
     else
       accion.columna = atoi(++entrada);
@@ -53,10 +62,7 @@ Accion LeerAccion(char* entrada)
 
   if (accion.tipo == SALVAR)
   {
-    while (!isspace(entrada[0]) && entrada[0] != '\0')
-      entrada++;
-
-    if (entrada[0] == '\0')
+    if (!Avanzar(entrada))
       accion.tipo = ERROR;
     else
       accion.archivo = ++entrada;
@@ -74,31 +80,36 @@ int main(int argc, char* argv[])
   CampoMinas campo(0, 0, 0);
   if (argc == 4)
   {
+    /* Filas columnas y minas como argumento */
+
     filas    = atoi(argv[1]);
     columnas = atoi(argv[2]);
     minas    = atoi(argv[3]);
-    campo    = CampoMinas(filas, columnas, minas);
-  }
-  else if (argc == 2)
-  {
-    if (!campo.Leer(argv[1]))
+
+    if (filas < 4 || columnas < 4 || minas < 5 || minas*2 >= filas*columnas)
+    {
+      cout << "Debe haber al menos 4 filas y 4 columnas." << endl;
+      cout << "El número de minas debe estar entre 4 y la mitad de las casillas" << endl;
       return 1;
+    }
+    
+    CampoMinas aux(filas, columnas, minas);
+    campo = aux;
+  }
+  else if (argc == 2 && !campo.Leer(argv[1]))
+  {
+    cerr << "Error en la lectura de \"" << argv[1] << "\"" << endl;
+    return 1;
   }
   else
   {
-    cout << "Posibles usos:\n" << argv[0] << " [filas] [columnas] [minas]\tInicia partida con tales parámetros\n"
+    cout << "Posibles usos:\n" << argv[0]
+         << " [filas] [columnas] [minas]\tInicia partida con tales parámetros\n"
          << argv[0] << "[nombre de archivo]\t\tCarga una partida guardada" << endl;
     return 1;
   }
 
-  if (filas < 4 || columnas < 4 || minas < 5 || minas*2 >= filas*columnas)
-  {
-    cout << "Debe haber al menos 4 filas y 4 columnas." << endl;
-    cout << "El número de minas debe estar entre 4 y la mitad de las casillas" << endl;
-    return 1;
-  }
-
-
+  char* entrada = new char[100];
   bool algo_ha_pasado = true; // Almacena si ha pasado algo tras cada acción
 
   // Hasta que el juego termine, se pide una acción al usuario
@@ -107,10 +118,11 @@ int main(int argc, char* argv[])
     if (algo_ha_pasado)
       campo.PrettyPrint();
 
-    char* entrada;
+    // Lee la entrada
     cin.getline(entrada, 100);
     Accion accion = LeerAccion(entrada);
 
+    //
     if (accion.tipo == ABRIR)
       algo_ha_pasado = campo.Abre(accion.fila, accion.columna);
     else if (accion.tipo == MARCAR)
@@ -120,17 +132,20 @@ int main(int argc, char* argv[])
       if (campo.Escribir(accion.archivo))
       {
         cout << "Partida guardada correctamente" << endl;
+        delete[] entrada;
         return 0;
       }
       else
-        cout << "Error al intentar guardar la partida" << endl;
+        cerr << "Error al intentar guardar la partida" << endl;
     }
     else  // accion.tipo == ERROR
     {
-      cout << "Acción incorrecta" << endl;
+      cerr << "Acción incorrecta" << endl;
       algo_ha_pasado = false;
     }
   }
+
+  delete[] entrada;
 
   // Se muestra si el jugador ha ganado o perdido
   campo.ImprimeTablero();
