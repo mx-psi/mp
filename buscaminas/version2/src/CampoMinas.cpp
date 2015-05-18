@@ -52,53 +52,82 @@ bool CampoMinas::Marca(int x, int y)
 }
 
 bool CampoMinas::Abre(int x, int y){
-  /* Obtiene una lista de casillas a abrir y las abre */
+  /* Abre una casilla y comprueba apertura del resto */
 
   if (!CoordCorrectas(x, y))
     return false;
 
-  bool algun_cambio = false;
+  Casilla cas = tab.Get(x, y);
 
-  struct CeldaPosicion
-  {
-    int fila, columna;
-    CeldaPosicion* siguiente;
-  };
+  // Comprueba si estÃ¡ marcada o abierta
+  if(cas.marcada || cas.abierta)
+    return false;
 
-  CeldaPosicion* pend = new CeldaPosicion;
-  pend->fila = x;
-  pend->columna = y;
-  pend->siguiente = 0;
+  cas.abierta = true;
+  tab.Set(x, y, cas);
 
-  while(pend != 0)
-  {
-    Casilla cas = tab(pend->fila, pend->columna);
-    if (!cas.marcada && !cas.abierta)
-    {
-      algun_cambio = true;
-      cas.abierta = true;
-      explotado  |= cas.bomba;
-      tab(pend->fila,  pend->columna) = cas;
-      if (!cas.bomba && NumeroBombas(x, y) == 0)
-        // Añade las casillas adyacentes
-        for(int i = -1; i <= 1; i++)
-          for(int j = -1; j <= 1; j++)
-            if(i != 0 || j != 0)
-            {
-              CeldaPosicion* pend2 = new CeldaPosicion;
-              pend2->fila = pend->fila + i;
-              pend2->columna = pend->columna + i;
-              pend2->siguiente = pend;
-              delete pend;
-              pend = pend2;
-            }
+  // Comprueba si tiene bombas alrededor
+  int n = NumeroBombas(x, y);
+  if(cas.bomba || n != 0)
+    return true;
 
-    }
-    pend = pend->siguiente;
-  }
+  // Abre las casillas adyacentes
+  for(int i = -1; i <= 1; i++)
+    for(int j = -1; j <= 1; j++)
+      if(i != 0 || j != 0)
+        Abre(x + i, y + j);
 
-  return algun_cambio;
+  return true;
 }
+
+// bool CampoMinas::Abre(int x, int y){
+//   /* Obtiene una lista de casillas a abrir y las abre */
+//
+//   if (!CoordCorrectas(x, y))
+//     return false;
+//
+//   bool algun_cambio = false;
+//
+//   struct CeldaPosicion
+//   {
+//     int fila, columna;
+//     CeldaPosicion* siguiente;
+//   };
+//
+//   CeldaPosicion* pend = new CeldaPosicion;
+//   pend->fila = x;
+//   pend->columna = y;
+//   pend->siguiente = 0;
+//
+//   while(pend != 0)
+//   {
+//     Casilla cas = tab(pend->fila, pend->columna);
+//     if (!cas.marcada && !cas.abierta)
+//     {
+//       algun_cambio = true;
+//       cas.abierta = true;
+//       explotado  |= cas.bomba;
+//       tab(pend->fila,  pend->columna) = cas;
+//       if (!cas.bomba && NumeroBombas(x, y) == 0)
+//         // Añade las casillas adyacentes
+//         for(int i = -1; i <= 1; i++)
+//           for(int j = -1; j <= 1; j++)
+//             if(i != 0 || j != 0)
+//             {
+//               CeldaPosicion* pend2 = new CeldaPosicion;
+//               pend2->fila = pend->fila + i;
+//               pend2->columna = pend->columna + i;
+//               pend2->siguiente = pend;
+//               delete pend;
+//               pend = pend2;
+//             }
+//
+//     }
+//     pend = pend->siguiente;
+//   }
+//
+//   return algun_cambio;
+// }
 
 void CampoMinas::PrettyPrint(ostream& os) const
 {
@@ -173,11 +202,11 @@ void CampoMinas::ImprimeTablero(ostream& os) const
     // Tablero
     for(int i = 0; i < Filas(); i++)
     {
-      cout << endl;
+      os << endl;
       if (i < 10 && Filas() > 10)
-        cout << ' ';
+        os << ' ';
 
-      cout << i << "|";
+      os << i << "|";
       for(int j = 0; j < Columnas(); j++)
       {
         Casilla actual = tab(i,j);
@@ -208,7 +237,7 @@ bool CampoMinas::Leer(const char* nombre)
   if (!f)
     return false;
 
-  char* cabecera;
+  char* cabecera = new char[17];
   f.getline(cabecera, 17);
   if (strcmp(cabecera, CABECERA))
     return false;
