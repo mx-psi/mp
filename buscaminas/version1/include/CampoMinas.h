@@ -131,6 +131,9 @@ public:
 
     // Columnas
     cout << ' ';
+    if (Filas() > 10)
+      cout << ' ';
+
     for(int i = 0; i < Columnas(); i++)
       cout << setw(3) << i;
     cout << endl;
@@ -142,7 +145,11 @@ public:
     // Tablero
     for(int i = 0; i < Filas(); i++)
     {
-      cout << endl << " " << i << "|";
+      cout << endl;
+      if (i <= 10 && Filas() > 10)
+        cout << ' ';
+
+      cout << i << "|";
       for(int j = 0; j < Columnas(); j++)
       {
         Casilla actual = tab.Get(i,j);
@@ -177,6 +184,9 @@ public:
     {
       // Columnas
       cout << ' ';
+      if (Filas() > 10)
+        cout << ' ';
+
       for(int i = 0; i < Filas(); i++)
         cout << setw(3) << i;
       cout << endl;
@@ -188,7 +198,11 @@ public:
       // Tablero
       for(int i = 0; i < Filas(); i++)
       {
-        cout << endl << i << " |";
+        cout << endl;
+        if (i <= 10 && Filas() > 10)
+          cout << ' ';
+
+        cout << i << "|";
         for(int j = 0; j < Columnas(); j++)
         {
           Casilla actual = tab.Get(i,j);
