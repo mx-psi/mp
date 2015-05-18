@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 {
   // Se inicializa el campo de minas
   int filas, columnas, minas;
-  CampoMinas campo(0, 0, 0);
+  CampoMinas campo(20, 20, 0);
   if (argc == 4)
   {
     /* Filas columnas y minas como argumento */
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
       cout << "El número de minas debe estar entre 4 y la mitad de las casillas" << endl;
       return 1;
     }
-    
+
     CampoMinas aux(filas, columnas, minas);
     campo = aux;
   }
