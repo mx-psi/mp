@@ -19,12 +19,14 @@ bool Coincide(const char* entrada, const char* largo, char corto)
   return (!un_caracter && !strcmp(entrada, largo)) || (un_caracter && *entrada == corto);
 }
 
-bool Avanzar(char* entrada)
+bool Avanzar(char* &entrada)
 {
-  /* Avanza hasta el siguiente caracter y devuelve si se ha llegado al final. */
+  /* Avanza hasta el siguiente grupo de caracteres y devuelve si se ha llegado al final. */
   while (!isspace(*entrada) && *entrada != '\0')
     entrada++;
-  return *entrada == '\0';
+  while (isspace(*entrada) && *entrada != '\0')
+    entrada++;
+  return *entrada != '\0';
 }
 
 Accion LeerAccion(char* entrada)
@@ -50,12 +52,12 @@ Accion LeerAccion(char* entrada)
     if (!Avanzar(entrada))
       accion.tipo = ERROR;
     else
-      accion.fila = atoi(++entrada);
+      accion.fila = atoi(entrada);
 
     if (!Avanzar(entrada))
       accion.tipo = ERROR;
     else
-      accion.columna = atoi(++entrada);
+      accion.columna = atoi(entrada);
   }
   else
     accion.fila = accion.columna = 0;
@@ -65,7 +67,7 @@ Accion LeerAccion(char* entrada)
     if (!Avanzar(entrada))
       accion.tipo = ERROR;
     else
-      accion.archivo = ++entrada;
+      accion.archivo = entrada;
   }
   else
     accion.archivo = 0;
@@ -76,15 +78,14 @@ Accion LeerAccion(char* entrada)
 int main(int argc, char* argv[])
 {
   // Se inicializa el campo de minas
-  int filas, columnas, minas;
-  CampoMinas campo(20, 20, 0);
+  CampoMinas campo(0, 0, 0);
   if (argc == 4)
   {
     /* Filas columnas y minas como argumento */
 
-    filas    = atoi(argv[1]);
-    columnas = atoi(argv[2]);
-    minas    = atoi(argv[3]);
+    int filas    = atoi(argv[1]);
+    int columnas = atoi(argv[2]);
+    int minas    = atoi(argv[3]);
 
     if (filas < 4 || columnas < 4 || minas < 5 || minas*2 >= filas*columnas)
     {

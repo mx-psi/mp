@@ -45,10 +45,10 @@ public:
       if (t.filas*t.columnas != filas*columnas)
       {
         delete [] datos;
+        filas = t.filas;
+        columnas = t.columnas;
         datos = new Casilla[filas*columnas];
       }
-      filas = t.filas;
-      columnas = t.columnas;
       for (int i = 0; i < filas*columnas; i++)
         datos[i] = t.datos[i];
     }

@@ -116,7 +116,7 @@ bool CampoMinas::Abre(int x, int y){
 //             {
 //               CeldaPosicion* pend2 = new CeldaPosicion;
 //               pend2->fila = pend->fila + i;
-//               pend2->columna = pend->columna + i;
+//               pend2->columna = pend->columna + j;
 //               pend2->siguiente = pend;
 //               delete pend;
 //               pend = pend2;
