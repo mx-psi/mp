@@ -51,35 +51,6 @@ bool CampoMinas::Marca(int x, int y)
   return true;
 }
 
-/* TODO: Viejo Abre, quitar.
-bool CampoMinas::Abre(int x, int y){
-
-  if (!CoordCorrectas(x, y))
-    return false;
-
-  Casilla cas = tab.Get(x, y);
-
-  // Comprueba si estÃ¡ marcada o abierta
-  if(cas.marcada || cas.abierta)
-    return false;
-
-  cas.abierta = true;
-  tab.Set(x, y, cas);
-
-  // Comprueba si tiene bombas alrededor
-  int n = NumeroBombas(x, y);
-  if(cas.bomba || n != 0)
-    return true;
-
-  // Abre las casillas adyacentes
-  for(int i = -1; i <= 1; i++)
-    for(int j = -1; j <= 1; j++)
-      if(i != 0 || j != 0)
-        Abre(x + i, y + j);
-
-  return true;
-}*/
-
 bool CampoMinas::Abre(int x, int y){
   /* Obtiene una lista de casillas a abrir y las abre */
   if (!CoordCorrectas(x, y))
@@ -105,7 +76,6 @@ bool CampoMinas::Abre(int x, int y){
         cas.abierta = true;
         explotado  |= cas.bomba;
         tab(pend->fila,  pend->columna) = cas;
-        cout << "Abriendo casilla (" << pend->fila << ", " << pend->columna << "): tiene " << NumeroBombas(pend->fila, pend->columna) << " bombas\n";
         if (!cas.bomba && NumeroBombas(pend->fila, pend->columna) == 0)
           // Añade las casillas adyacentes
           for(int i = -1; i <= 1; i++)
