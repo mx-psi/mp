@@ -27,17 +27,8 @@ public:
 
   inline int Filas() const {return filas;}
   inline int Columnas() const {return columnas;}
-
-  Casilla Get(int fila, int columna) const
-  {
-    return datos[fila][columna];
-  }
-
-  void Set(int fila, int columna, const Casilla &c)
-  {
-    datos[fila][columna] = c;
-  }
-
+  Casilla Get(int fila, int columna) const;
+  void Set(int fila, int columna, const Casilla &c);
 };
 
 #endif
