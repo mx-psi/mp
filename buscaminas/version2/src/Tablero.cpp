@@ -40,21 +40,21 @@ std::istream& operator >> (std::istream& is, Casilla& c)
 
   actual = is.get();
 
-  if(actual != '1' || actual != '0')
+  if(actual != '1' && actual != '0')
     is.setstate(std::ios_base::badbit);
 
   c.bomba =  actual == '1' ? 1 : 0;
 
   actual = is.get();
 
-  if(actual != '1' || actual != '0')
+  if(actual != '1' && actual != '0')
     is.setstate(std::ios_base::badbit);
 
   c.abierta =  actual == '1' ? 1 : 0;
 
   actual = is.get();
 
-  if(actual != '1' || actual != '0')
+  if(actual != '1' && actual != '0')
     is.setstate(std::ios_base::badbit);
 
   c.marcada =  actual == '1' ? 1 : 0;
