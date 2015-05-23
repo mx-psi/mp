@@ -34,31 +34,20 @@ std::ostream& operator << (std::ostream& os, const Casilla& c)
 std::istream& operator >> (std::istream& is, Casilla& c)
 {
   char actual;
+  is >> std::ws;
 
-  while(isspace(is.peek()))
-    is.ignore();
+  bool* campos[3] = {&c.bomba, &c.abierta, &c.marcada};
 
-  actual = is.get();
+  for(int i = 0; i < 3; i++)
+  {
+    actual = is.get();
+    std::cout << actual << std::endl;
+    if(actual != '1' || actual != '0')
+      is.setstate(std::ios_base::badbit);
 
-  if(actual != '1' || actual != '0')
-    is.setstate(std::ios_base::badbit);
-
-  c.bomba =  actual == '1' ? 1 : 0;
-
-  actual = is.get();
-
-  if(actual != '1' || actual != '0')
-    is.setstate(std::ios_base::badbit);
-
-  c.abierta =  actual == '1' ? 1 : 0;
-
-  actual = is.get();
-
-  if(actual != '1' || actual != '0')
-    is.setstate(std::ios_base::badbit);
-
-  c.marcada =  actual == '1' ? 1 : 0;
-
+    *(campos[i]) =  actual == '1' ? 1 : 0;
+  }
+    std::cout << c << std::endl;
   return is;
 }
 
@@ -80,10 +69,12 @@ std::istream& operator >> (std::istream& is, Tablero& t)
   int filas, columnas;
   is >> filas >> columnas;
   Tablero leido(filas, columnas);
+  is.ignore();
 
   for(int i = 0; i < leido.Filas(); i++)
     for(int j = 0; j < leido.Columnas(); j++)
-      is >> leido(i,j);
+      if(is.good())
+        is >> leido(i,j);
 
   if(is.good())
     t = leido;
