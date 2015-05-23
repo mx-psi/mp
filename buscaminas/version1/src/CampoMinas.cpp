@@ -113,17 +113,14 @@ void CampoMinas::PrettyPrint() const
   cout << endl;
 
   // Linea
-  for(int i = 0; i < Columnas(); i++)
-    cout << "----";
+  for(int i = 0; i <= Columnas(); i++)
+    cout << "---";
 
   // Tablero
   for(int i = 0; i < Filas(); i++)
   {
     cout << endl;
-    if (i < 10 && Filas() > 10)
-      cout << ' ';
-
-    cout << i << "|";
+    cout << setw(2) << i << "|";
     for(int j = 0; j < Columnas(); j++)
     {
       Casilla actual = tab.Get(i,j);
@@ -136,15 +133,15 @@ void CampoMinas::PrettyPrint() const
         if(n == 0)
           cout << "  |";
         else
-          cout << n << " |";
+          cout << " " << n << "|";
       }
     }
   }
 
   // Linea
   cout << endl;
-  for(int i = 0; i < Columnas(); i++)
-    cout << "----";
+  for(int i = 0; i <= Columnas(); i++)
+    cout << "---";
   cout << endl;
 }
 
@@ -166,17 +163,14 @@ void CampoMinas::ImprimeTablero() const
     cout << endl;
 
     // Linea
-    for(int i = 0; i < Filas(); i++)
-      cout << "----";
+    for(int i = 0; i <= Columnas(); i++)
+      cout << "---";
 
     // Tablero
     for(int i = 0; i < Filas(); i++)
     {
       cout << endl;
-      if (i < 10 && Filas() > 10)
-        cout << ' ';
-
-      cout << i << "|";
+      cout << setw(2) << i << "|";
       for(int j = 0; j < Columnas(); j++)
       {
         Casilla actual = tab.Get(i,j);
@@ -187,15 +181,15 @@ void CampoMinas::ImprimeTablero() const
           if(n == 0)
             cout << "  |";
           else
-            cout << n << " |";
+            cout << " " << n << "|";
         }
       }
     }
 
     // Linea
     cout << endl;
-    for(int i = 0; i < Filas(); i++)
-      cout << "----";
+    for(int i = 0; i <= Columnas(); i++)
+      cout << "---";
     cout << endl;
   }
 }

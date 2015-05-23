@@ -111,17 +111,15 @@ void CampoMinas::PrettyPrint(ostream& os) const
   os << std::endl;
 
   // Linea
-  for(int i = 0; i < Columnas(); i++)
-    os << "----";
+  for(int i = 0; i <= Columnas(); i++)
+    os << "---";
 
   // Tablero
   for(int i = 0; i < Filas(); i++)
   {
     os << endl;
-    if (i < 10 && Filas() > 10)
-      os << ' ';
+    os << setw(2) << i << "|";
 
-    os << i << "|";
     for(int j = 0; j < Columnas(); j++)
     {
       Casilla actual = tab(i,j);
@@ -134,15 +132,15 @@ void CampoMinas::PrettyPrint(ostream& os) const
         if(n == 0)
           os << "  |";
         else
-          os << n << " |";
+          os << " " << n << "|";
       }
     }
   }
 
   // Linea
   os << std::endl;
-  for(int i = 0; i < Columnas(); i++)
-    os << "----";
+  for(int i = 0; i <= Columnas(); i++)
+    os << "---";
   os << std::endl;
 }
 
@@ -159,22 +157,19 @@ void CampoMinas::ImprimeTablero(ostream& os) const
     if (Filas() > 10)
       os << ' ';
 
-    for(int i = 0; i < Filas(); i++)
+    for(int i = 0; i < Columnas(); i++)
       os << setw(3) << i;
     os << std::endl;
 
     // Linea
-    for(int i = 0; i < Filas(); i++)
-      os << "----";
+    for(int i = 0; i <= Columnas(); i++)
+      os << "---";
 
     // Tablero
     for(int i = 0; i < Filas(); i++)
     {
       os << endl;
-      if (i < 10 && Filas() > 10)
-        os << ' ';
-
-      os << i << "|";
+      os << setw(2) << i << "|";
       for(int j = 0; j < Columnas(); j++)
       {
         Casilla actual = tab(i,j);
@@ -185,15 +180,15 @@ void CampoMinas::ImprimeTablero(ostream& os) const
           if(n == 0)
             os << "  |";
           else
-            os << n << " |";
+            os << " " << n << "|";
         }
       }
     }
 
     // Linea
     os << std::endl;
-    for(int i = 0; i < Filas(); i++)
-      os << "----";
+    for(int i = 0; i <= Columnas(); i++)
+      os << "---";
     os << std::endl;
   }
 }
