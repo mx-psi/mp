@@ -87,16 +87,16 @@ public:
 
 // Operaciones de E/S de contenido del tablero
 
-// Lee el contenido de una casilla desde flujo
+// Imprime en flujo el contenido de una casilla
 std::ostream& operator << (std::ostream& os, const Casilla& c);
 
-// Imprime en flujo el contenido de una casilla
+// Lee el contenido de una casilla desde flujo
 std::istream& operator >> (std::istream& is, Casilla& c);
 
-// Lee un tablero desde flujo
+// Imprime en flujo el tablero
 std::ostream& operator << (std::ostream& os, const Tablero& t);
 
-// Imprime en flujo el tablero
+// Lee un tablero desde flujo
 std::istream& operator >> (std::istream& is, Tablero& t);
 
 

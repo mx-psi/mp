@@ -20,7 +20,7 @@ void Tablero::Set(int fila, int columna, const Casilla &c)
   datos[Columnas()*fila+columna] = c;
 }
 
-// Lee el contenido de una casilla desde flujo
+// Imprime en flujo el contenido de una casilla
 std::ostream& operator << (std::ostream& os, const Casilla& c)
 {
   os << c.bomba;
@@ -30,7 +30,7 @@ std::ostream& operator << (std::ostream& os, const Casilla& c)
   return os;
 }
 
-// Imprime en flujo el contenido de una casilla
+// Lee el contenido de una casilla desde flujo
 std::istream& operator >> (std::istream& is, Casilla& c)
 {
   char actual;
@@ -41,17 +41,16 @@ std::istream& operator >> (std::istream& is, Casilla& c)
   for(int i = 0; i < 3; i++)
   {
     actual = is.get();
-    std::cout << actual << std::endl;
-    if(actual != '1' || actual != '0')
+
+    if(actual != '1' && actual != '0')
       is.setstate(std::ios_base::badbit);
 
     *(campos[i]) =  actual == '1' ? 1 : 0;
   }
-    std::cout << c << std::endl;
   return is;
 }
 
-// Lee un tablero desde flujo
+// Imprime en flujo el tablero
 std::ostream& operator << (std::ostream& os, const Tablero& t)
 {
   os << t.Filas() << " " << t.Columnas() << std::endl;
@@ -63,7 +62,7 @@ std::ostream& operator << (std::ostream& os, const Tablero& t)
   return os;
 }
 
-// Imprime en flujo el tablero
+// Lee un tablero desde flujo
 std::istream& operator >> (std::istream& is, Tablero& t)
 {
   int filas, columnas;

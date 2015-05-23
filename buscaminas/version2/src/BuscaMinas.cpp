@@ -97,10 +97,13 @@ int main(int argc, char* argv[])
     CampoMinas aux(filas, columnas, minas);
     campo = aux;
   }
-  else if (argc == 2 && !campo.Leer(argv[1]))
+  else if (argc == 2)
   {
-    cerr << "Error en la lectura de \"" << argv[1] << "\"" << endl;
-    return 1;
+    if (!campo.Leer(argv[1]))
+    {
+      cerr << "Error en la lectura de \"" << argv[1] << "\"" << endl;
+      return 1;
+    }
   }
   else
   {
