@@ -1,6 +1,7 @@
 #include "CampoMinas.h"
 using namespace std;
-const char* CABECERA = "#MP-BUSCAMINAS-V1"; // Cabecera de archivo de partida
+const char* CABECERA = "#MP-BUSCAMINAS-V1";     // Cabecera de archivo de partida
+const int LONGITUD_CABECERA = strlen(CABECERA);
 
 /* Métodos de la clase CampoMinas */
 
@@ -197,8 +198,8 @@ bool CampoMinas::Leer(const char* nombre)
   if (!f)
     return false;
 
-  char* cabecera = new char[17];
-  f.getline(cabecera, 18);
+  char* cabecera = new char[LONGITUD_CABECERA];
+  f.getline(cabecera, LONGITUD_CABECERA+1);
   if (strcmp(cabecera, CABECERA))
     return false;
 

@@ -35,7 +35,7 @@ istream& operator >> (istream& is, Casilla& c)
   {
     if(is.peek() != '1' && is.peek() != '0')
       is.setstate(ios_base::badbit);
-    *(campos[i]) =  is.get() == '1' ? 1 : 0;
+    *(campos[i]) = is.get() == '1';
   }
   return is;
 }
