@@ -97,13 +97,10 @@ public:
 
 // Imprime en flujo el contenido de una casilla
 std::ostream& operator << (std::ostream& os, const Casilla& c);
-
 // Lee el contenido de una casilla desde flujo
 std::istream& operator >> (std::istream& is, Casilla& c);
-
 // Imprime en flujo el tablero
 std::ostream& operator << (std::ostream& os, const Tablero& t);
-
 // Lee un tablero desde flujo
 std::istream& operator >> (std::istream& is, Tablero& t);
 

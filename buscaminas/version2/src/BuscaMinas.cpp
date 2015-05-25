@@ -1,5 +1,4 @@
-#include <iostream>
-#include "CampoMinas.h" // Tablero.h, fstream, cstream
+#include "CampoMinas.h" // Tablero.h, fstream, cstream, iostream
 using namespace std;
 
 /* Módulo principal del programa */

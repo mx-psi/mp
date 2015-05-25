@@ -5,7 +5,6 @@ const int LONGITUD_CABECERA = strlen(CABECERA);
 
 /* Métodos de la clase CampoMinas */
 
-
 // Devuelve si las coordenadas son correctas
 bool CampoMinas::CoordCorrectas(int x, int y) const
 {
