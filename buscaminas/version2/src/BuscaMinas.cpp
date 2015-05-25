@@ -1,7 +1,8 @@
-// Módulo principal del programa
 #include <iostream>
 #include "CampoMinas.h" // Tablero.h, fstream, cstream
 using namespace std;
+
+/* Módulo principal del programa */
 
 enum TipoAccion { ABRIR, MARCAR, SALVAR, ERROR };
 
@@ -23,17 +24,16 @@ bool PrimeraPalabra(const char* una, const char* otra)
   return otra[l] == ' ';
 }
 
-
+// Devuelve si la entrada coincide con la salida
 bool Coincide(const char* entrada, const char* largo, char corto)
 {
-  /* Devuelve si la entrada coincide con la salida. */
   bool un_caracter = isspace(entrada[1]);
   return (!un_caracter && PrimeraPalabra(largo, entrada)) || (un_caracter && *entrada == corto);
 }
 
+// Avanza hasta el siguiente grupo de caracteres y devuelve si se ha llegado al final
 bool Avanzar(char* &entrada)
 {
-  /* Avanza hasta el siguiente grupo de caracteres y devuelve si se ha llegado al final. */
   while (!isspace(*entrada) && *entrada != '\0')
     entrada++;
   while (isspace(*entrada) && *entrada != '\0')
@@ -41,9 +41,9 @@ bool Avanzar(char* &entrada)
   return *entrada != '\0';
 }
 
+// Lee una acción
 Accion LeerAccion(char* entrada)
 {
-  /* Lee una acción */
   Accion accion;
 
   for (int x = 0; entrada[x] != ' ' && entrada[x] != '\0'; x++)
@@ -111,6 +111,7 @@ int main(int argc, char* argv[])
   }
   else if (argc == 2)
   {
+    /* Lectura de archivo */
     if (!campo.Leer(argv[1]))
     {
       cerr << "Error en la lectura de \"" << argv[1] << "\"" << endl;
@@ -119,6 +120,7 @@ int main(int argc, char* argv[])
   }
   else
   {
+    /* Uso incorrecto */
     cout << "Posibles usos:\n" << argv[0]
          << " [filas] [columnas] [minas]\tInicia partida con tales parámetros\n"
          << argv[0] << "[nombre de archivo]\t\tCarga una partida guardada" << endl;
@@ -135,6 +137,7 @@ int main(int argc, char* argv[])
       campo.PrettyPrint();
 
     // Lee la entrada
+    cout << "Acción: ";
     cin.getline(entrada, 100);
     Accion accion = LeerAccion(entrada);
 

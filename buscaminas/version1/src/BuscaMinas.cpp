@@ -27,7 +27,7 @@ int main()
 
     char accion;
     int fila, columna;
-    cout << "Acción y posición (fila y columna): ";
+    cout << "Acción: ";
     cin >> accion >> fila >> columna;
     if (accion == 'a')
       algo_ha_pasado = campo.Abre(fila, columna);
