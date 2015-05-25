@@ -126,7 +126,7 @@ int main(int argc, char* argv[])
     return 1;
   }
 
-  char* entrada = new char[100];
+  char entrada[100];
   bool algo_ha_pasado = true; // Almacena si ha pasado algo tras cada acción
 
   // Hasta que el juego termine, se pide una acción al usuario
@@ -149,7 +149,6 @@ int main(int argc, char* argv[])
       if (campo.Escribir(accion.archivo))
       {
         cout << "Partida guardada correctamente" << endl;
-        delete[] entrada;
         return 0;
       }
       else
@@ -161,8 +160,6 @@ int main(int argc, char* argv[])
       algo_ha_pasado = false;
     }
   }
-
-  delete[] entrada;
 
   // Se muestra si el jugador ha ganado o perdido
   campo.ImprimeTablero();
