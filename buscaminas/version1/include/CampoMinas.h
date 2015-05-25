@@ -1,22 +1,27 @@
-/* Cabeceras de las funciones del módulo CampoMinas.cpp */
+#include <cstdlib>   // rand, srand
+#include <iostream>  // cin, cout, endl
+#include <iomanip>   // setw
+#include <assert.h>  // assert
+#include "Tablero.h" // Casilla y Tablero
 
-#include <cstdlib>  // rand, srand
-#include <iostream> // cin, cout
-#include <iomanip>  // setw
-#include <assert.h> // assert
-#include "Tablero.h"
+/* Cabeceras de las funciones del módulo CampoMinas.cpp */
 
 
 class CampoMinas{
   Tablero tab;
 
+  // Devuelve si las coordenadas son correctas
   bool CoordCorrectas(int x, int y) const;
+  // Devuelve si hay una bomba en la coordenada dada
   bool HayBomba(int x, int y) const;
+  // Devuelve el número de bombas en casillas adyacentes
   int NumeroBombas(int x, int y) const;
 
 
 public:
-    CampoMinas(int filas, int columnas, int minas)
+
+  // Constructor dadas filas, columnas y minas
+  CampoMinas(int filas, int columnas, int minas)
   :tab(filas, columnas)
   {
     int minas_puestas = 0;
@@ -38,14 +43,23 @@ public:
     }
   }
 
-  inline int Filas() const ;
-  inline int Columnas() const ;
+  // Devuelve el número de filas del campo
+  inline int Filas() const {return tab.Filas();}
+  // Devuelve el número de columnas del campo
+  inline int Columnas() const {return tab.Columnas();}
 
+  // Comprueba si alguna mina ha explotado
   bool Explotado() const;
+  // Indica si se ha ganado la partida
   bool Ganado() const;
-  bool Marca(int x, int y);
 
+  // Marca o desmarca una casilla cerrada. Devuelve éxito
+  bool Marca(int x, int y);
+  // Abre una casilla y comprueba apertura del resto
   bool Abre(int x, int y);
+
+  // Imprime el estado actual del tablero
   void PrettyPrint() const;
+  // Imprime el estado final del tablero
   void ImprimeTablero() const;
 };

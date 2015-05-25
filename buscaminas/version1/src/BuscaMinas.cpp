@@ -1,11 +1,11 @@
-// Módulo principal del programa
-#include <iostream>
-#include "CampoMinas.h" // Tablero.h
+#include "CampoMinas.h" // Tablero.h, iostream
 using namespace std;
+
+/* Módulo principal del programa */
 
 int main()
 {
-  // Se piden valores iniciales para el tablero (esta versión no comprueba la validez de valores)
+  // Valores iniciales para el tablero (en esta versión no se comprueban)
   int filas, columnas, minas;
 
   cout << "Dimensiones del tablero (filas y columnas): ";
@@ -14,7 +14,7 @@ int main()
   do
   {
     cin >> minas;
-  }while (minas < 5 || minas > filas*columnas/2);
+  } while (minas < 5 || minas > filas*columnas/2);
 
   CampoMinas campo(filas, columnas, minas);
   bool algo_ha_pasado = true; // Almacena si ha pasado algo tras cada acción
@@ -31,7 +31,7 @@ int main()
     cin >> accion >> fila >> columna;
     if (accion == 'a')
       algo_ha_pasado = campo.Abre(fila, columna);
-    else  // (accion == 'm')
+    else  // (accion == 'm'). En esta versión no comprobamos la validez
       algo_ha_pasado = campo.Marca(fila, columna);
   }
 

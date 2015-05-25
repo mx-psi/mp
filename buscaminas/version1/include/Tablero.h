@@ -25,9 +25,13 @@ public:
   :filas(f), columnas(c)
   {}
 
+  // Devuelve el número de filas del tablero
   inline int Filas() const {return filas;}
+  // Devuelve el número de columnas del tablero
   inline int Columnas() const {return columnas;}
+  // Obtiene el valor de una Casilla
   Casilla Get(int fila, int columna) const;
+  // Asigna un valor a una Casilla
   void Set(int fila, int columna, const Casilla &c);
 };
 

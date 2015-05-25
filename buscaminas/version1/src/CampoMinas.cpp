@@ -1,29 +1,23 @@
-
-/* Cabeceras de las funciones del módulo CampoMinas.cpp */
-
-#include <cstdlib>
-#include <ctime>
-#include <iostream> // cin, cout
-#include <iomanip>  // setw
-#include <assert.h>
 #include "CampoMinas.h"
 using namespace std;
 
+/* Métodos de la clase CampoMinas */
+
+// Devuelve si las coordenadas son correctas
 bool CampoMinas::CoordCorrectas(int x, int y) const
 {
-  /* Devuelve si las coordenadas son correctas. */
   return x < tab.Filas() && y < tab.Columnas() && x >= 0 && y >= 0;
 }
 
+// Devuelve si hay una bomba en la coordenada dada
 bool CampoMinas::HayBomba(int x, int y) const
 {
-  /* Devuelve si hay una bomba en la coordenada dada. */
   return CoordCorrectas(x, y) && tab.Get(x, y).bomba;
 }
 
+// Devuelve el número de bombas en casillas adyacentes
 int CampoMinas::NumeroBombas(int x, int y) const
 {
-  /* Devuelve el número de bombas en casillas adyacentes. */
   int n = 0;
   for(int i = -1; i <= 1; i++)
     for(int j = -1; j <= 1; j++)
@@ -31,12 +25,9 @@ int CampoMinas::NumeroBombas(int x, int y) const
   return n;
 }
 
-inline int CampoMinas::Filas() const {return tab.Filas();}
-inline int CampoMinas::Columnas() const {return tab.Columnas();}
-
+// Comprueba si alguna mina ha explotado
 bool CampoMinas::Explotado() const
 {
-  /* Comprueba si alguna mina ha explotado. */
   for(int i = 0; i < Filas(); i++)
     for(int j = 0; j < Columnas(); j++)
       if(tab.Get(i,j).bomba && tab.Get(i,j).abierta)
@@ -45,9 +36,9 @@ bool CampoMinas::Explotado() const
   return false;
 }
 
+// Indica si se ha ganado la partida
 bool CampoMinas::Ganado() const
 {
-  /* Indica si se ha ganado la partida. */
   for(int i = 0; i < Filas(); i++)
     for(int j = 0; j < Columnas(); j++)
       if(!tab.Get(i,j).bomba && !tab.Get(i,j).abierta)
@@ -56,9 +47,9 @@ bool CampoMinas::Ganado() const
   return true;
 }
 
+// Marca o desmarca una casilla cerrada. Devuelve éxito
 bool CampoMinas::Marca(int x, int y)
 {
-  /* Marca o desmarca una casilla cerrada. Devuelve éxito. */
   assert(CoordCorrectas(x, y));
 
   if(tab.Get(x,y).abierta)
@@ -70,9 +61,9 @@ bool CampoMinas::Marca(int x, int y)
   return true;
 }
 
-bool CampoMinas::Abre(int x, int y){
-  /* Abre una casilla y comprueba apertura del resto */
-
+// Abre una casilla y comprueba apertura del resto
+bool CampoMinas::Abre(int x, int y)
+{
   if (!CoordCorrectas(x, y))
     return false;
 
@@ -99,10 +90,9 @@ bool CampoMinas::Abre(int x, int y){
   return true;
 }
 
+// Imprime el estado actual del tablero
 void CampoMinas::PrettyPrint() const
 {
-  /* Imprime el estado actual del tablero. */
-
   // Columnas
   cout << ' ';
   if (Filas() > 10)
@@ -145,10 +135,9 @@ void CampoMinas::PrettyPrint() const
   cout << endl;
 }
 
+// Imprime el estado final del tablero
 void CampoMinas::ImprimeTablero() const
 {
-  /* Imprime el estado final del tablero. */
-
   if(!Ganado() && !Explotado())
     cout << "No hagas trampa.";
   else
