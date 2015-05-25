@@ -121,8 +121,8 @@ int main(int argc, char* argv[])
   {
     /* Uso incorrecto */
     cout << "Posibles usos:\n" << argv[0]
-         << " [filas] [columnas] [minas]\tInicia partida con tales parámetros\n"
-         << argv[0] << "[nombre de archivo]\t\tCarga una partida guardada" << endl;
+         << " [filas] [columnas] [minas]  Inicia partida con tales parámetros\n"
+         << argv[0] << " [nombre de archivo]\t     Carga una partida guardada" << endl;
     return 1;
   }
 
