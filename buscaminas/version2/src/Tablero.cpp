@@ -1,20 +1,24 @@
 #include "Tablero.h"
 
+// Devuelve el número de filas
 int Tablero::Filas() const
 {
   return filas;
 }
 
+// Devuelve el número de columnas
 int Tablero::Columnas() const
 {
   return columnas;
 }
 
+// OBSOLETA: Obtiene el valor de una casilla.
 Casilla Tablero::Get(int fila, int columna) const
 {
   return datos[Columnas()*fila+columna];
 }
 
+// OBSOLETA: Cambia el valor de una casilla
 void Tablero::Set(int fila, int columna, const Casilla &c)
 {
   datos[Columnas()*fila+columna] = c;
@@ -33,19 +37,14 @@ std::ostream& operator << (std::ostream& os, const Casilla& c)
 // Lee el contenido de una casilla desde flujo
 std::istream& operator >> (std::istream& is, Casilla& c)
 {
-  char actual;
-  is >> std::ws;
-
   bool* campos[3] = {&c.bomba, &c.abierta, &c.marcada};
+  is >> std::ws; //Salta espacios
 
   for(int i = 0; i < 3; i++)
   {
-    actual = is.get();
-
-    if(actual != '1' && actual != '0')
+    if(is.peek() != '1' && is.peek() != '0')
       is.setstate(std::ios_base::badbit);
-
-    *(campos[i]) =  actual == '1' ? 1 : 0;
+    *(campos[i]) =  is.get() == '1' ? 1 : 0;
   }
   return is;
 }
@@ -54,11 +53,9 @@ std::istream& operator >> (std::istream& is, Casilla& c)
 std::ostream& operator << (std::ostream& os, const Tablero& t)
 {
   os << t.Filas() << " " << t.Columnas() << std::endl;
-
   for(int i = 0; i < t.Filas(); i++)
     for(int j = 0; j < t.Columnas(); j++)
       os << t(i,j);
-
   return os;
 }
 
