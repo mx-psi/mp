@@ -108,7 +108,7 @@ void CampoMinas::PrettyPrint(ostream& os) const
 
   for(int i = 0; i < Columnas(); i++)
     os << setw(3) << i;
-  os << std::endl;
+  os << endl;
 
   // Linea
   for(int i = 0; i <= Columnas(); i++)
@@ -138,10 +138,10 @@ void CampoMinas::PrettyPrint(ostream& os) const
   }
 
   // Linea
-  os << std::endl;
+  os << endl;
   for(int i = 0; i <= Columnas(); i++)
     os << "---";
-  os << std::endl;
+  os << endl;
 }
 
 void CampoMinas::ImprimeTablero(ostream& os) const
@@ -159,7 +159,7 @@ void CampoMinas::ImprimeTablero(ostream& os) const
 
     for(int i = 0; i < Columnas(); i++)
       os << setw(3) << i;
-    os << std::endl;
+    os << endl;
 
     // Linea
     for(int i = 0; i <= Columnas(); i++)
@@ -186,10 +186,10 @@ void CampoMinas::ImprimeTablero(ostream& os) const
     }
 
     // Linea
-    os << std::endl;
+    os << endl;
     for(int i = 0; i <= Columnas(); i++)
       os << "---";
-    os << std::endl;
+    os << endl;
   }
 }
 
