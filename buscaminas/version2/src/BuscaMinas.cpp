@@ -12,11 +12,23 @@ struct Accion
   char* archivo;
 };
 
+// Devuelve si una cadena es igual a la primera palabra de otra cadena
+bool PrimeraPalabra(const char* una, const char* otra)
+{
+  int l = -1;
+  while(una[++l] != '\0')
+    if (una[l] != otra[l])
+      return false;
+
+  return otra[l] == ' ';
+}
+
+
 bool Coincide(const char* entrada, const char* largo, char corto)
 {
   /* Devuelve si la entrada coincide con la salida. */
   bool un_caracter = isspace(entrada[1]);
-  return (!un_caracter && !strcmp(entrada, largo)) || (un_caracter && *entrada == corto);
+  return (!un_caracter && PrimeraPalabra(largo, entrada)) || (un_caracter && *entrada == corto);
 }
 
 bool Avanzar(char* &entrada)
