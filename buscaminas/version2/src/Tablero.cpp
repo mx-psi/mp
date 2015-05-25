@@ -1,4 +1,5 @@
 #include "Tablero.h"
+using namespace std;
 
 // OBSOLETA: Obtiene la estructura de una casilla
 // Prec: fila <= 0 < filas, columna <= 0 < columnas
@@ -15,7 +16,7 @@ void Tablero::Set(int fila, int columna, const Casilla &c)
 }
 
 // Imprime en flujo el contenido de una casilla
-std::ostream& operator << (std::ostream& os, const Casilla& c)
+ostream& operator << (ostream& os, const Casilla& c)
 {
   os << c.bomba;
   os << c.abierta;
@@ -25,24 +26,24 @@ std::ostream& operator << (std::ostream& os, const Casilla& c)
 }
 
 // Lee el contenido de una casilla desde flujo
-std::istream& operator >> (std::istream& is, Casilla& c)
+istream& operator >> (istream& is, Casilla& c)
 {
   bool* campos[3] = {&c.bomba, &c.abierta, &c.marcada};
-  is >> std::ws; //Salta espacios
+  is >> ws; //Salta espacios
 
   for(int i = 0; i < 3; i++)
   {
     if(is.peek() != '1' && is.peek() != '0')
-      is.setstate(std::ios_base::badbit);
+      is.setstate(ios_base::badbit);
     *(campos[i]) =  is.get() == '1' ? 1 : 0;
   }
   return is;
 }
 
 // Imprime en flujo el tablero
-std::ostream& operator << (std::ostream& os, const Tablero& t)
+ostream& operator << (ostream& os, const Tablero& t)
 {
-  os << t.Filas() << " " << t.Columnas() << std::endl;
+  os << t.Filas() << " " << t.Columnas() << endl;
   for(int i = 0; i < t.Filas(); i++)
     for(int j = 0; j < t.Columnas(); j++)
       os << t(i,j);
@@ -50,7 +51,7 @@ std::ostream& operator << (std::ostream& os, const Tablero& t)
 }
 
 // Lee un tablero desde flujo
-std::istream& operator >> (std::istream& is, Tablero& t)
+istream& operator >> (istream& is, Tablero& t)
 {
   int filas, columnas;
   is >> filas >> columnas;
