@@ -56,11 +56,13 @@ public:
     return *this;
   }
 
+  // Accede a la casilla i, j
   Casilla& operator()(int i, int j)
   {
     return datos[Columnas()*i+j];
   }
 
+  // Accede a la casilla i, j (versión const)
   const Casilla& operator()(int i, int j) const
   {
     return datos[Columnas()*i+j];
@@ -70,22 +72,28 @@ public:
   ~Tablero() {delete [] datos;}
 
   // Devuelve el número de filas del tablero
-  int Filas() const;
+  inline int Filas() const
+  {
+    return filas;
+  }
 
-  // Devuelve el número de filas del tablero
-  int Columnas() const;
+  // Devuelve el número de columnas del tablero
+  inline int Columnas() const
+  {
+    return columnas;
+  }
 
-  // Obtiene la estructura de una casilla
+  // OBSOLETA: Obtiene la estructura de una casilla
   // Prec: fila <= 0 < filas, columna <= 0 < columnas
   Casilla Get(int fila, int columna) const;
 
-  // Fija la estructura de una casilla
+  // OBSOLETA: Fija la estructura de una casilla
   // Prec: fila <= 0 < filas, columna <= 0 < columnas
   void Set(int fila, int columna, const Casilla &c);
 };
 
 
-// Operaciones de E/S de contenido del tablero
+/* Operaciones de E/S de contenido del tablero */
 
 // Imprime en flujo el contenido de una casilla
 std::ostream& operator << (std::ostream& os, const Casilla& c);

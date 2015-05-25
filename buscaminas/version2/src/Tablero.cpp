@@ -1,24 +1,14 @@
 #include "Tablero.h"
 
-// Devuelve el número de filas
-int Tablero::Filas() const
-{
-  return filas;
-}
-
-// Devuelve el número de columnas
-int Tablero::Columnas() const
-{
-  return columnas;
-}
-
-// OBSOLETA: Obtiene el valor de una casilla.
+// OBSOLETA: Obtiene la estructura de una casilla
+// Prec: fila <= 0 < filas, columna <= 0 < columnas
 Casilla Tablero::Get(int fila, int columna) const
 {
   return datos[Columnas()*fila+columna];
 }
 
-// OBSOLETA: Cambia el valor de una casilla
+// OBSOLETA: Fija la estructura de una casilla
+// Prec: fila <= 0 < filas, columna <= 0 < columnas
 void Tablero::Set(int fila, int columna, const Casilla &c)
 {
   datos[Columnas()*fila+columna] = c;
