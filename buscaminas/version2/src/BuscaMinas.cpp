@@ -78,7 +78,7 @@ Accion LeerAccion(char* entrada)
 int main(int argc, char* argv[])
 {
   // Se inicializa el campo de minas
-  CampoMinas campo(0, 0, 0);
+  CampoMinas campo;
   if (argc == 4)
   {
     /* Filas columnas y minas como argumento */

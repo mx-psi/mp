@@ -43,6 +43,8 @@ public:
     }
   }
 
+  CampoMinas():tab(0,0),explotado(false){}
+
   // Para lectura de archivo
   CampoMinas& operator=(const CampoMinas& c)
   {
