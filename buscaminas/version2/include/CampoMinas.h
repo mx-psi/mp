@@ -1,12 +1,11 @@
 #ifndef _CAMPOMINAS_H_
 #define _CAMPOMINAS_H_
 
-#include <cstdlib>
-#include <ctime>
-#include <iomanip>  // setw
-#include <fstream>
-#include <cstring>
-#include <assert.h>
+#include <cstdlib>   // atoi, rand, srand
+#include <iomanip>   // setw
+#include <fstream>   // ifstream, ofstream
+#include <cstring>   // strcmp
+#include <assert.h>  // assert
 #include "Tablero.h" // iostream
 using namespace std;
 
