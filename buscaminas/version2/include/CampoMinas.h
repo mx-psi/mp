@@ -15,8 +15,13 @@ class CampoMinas{
   Tablero tab;
   bool explotado;
 
+  // Devuelve si las coordenadas son correctas
   bool CoordCorrectas(int x, int y) const;
+
+  // Devuelve si hay una bomba en la coordenada dada
   bool HayBomba(int x, int y) const;
+
+  // Devuelve el número de bombas en casillas adyacentes
   int NumeroBombas(int x, int y) const;
 
 public:
@@ -42,9 +47,10 @@ public:
     }
   }
 
+  // Constructor por defecto
   CampoMinas():tab(0,0),explotado(false){}
 
-  // Para lectura de archivo
+  // Operador de asignación
   CampoMinas& operator=(const CampoMinas& c)
   {
     if (&c != this)
@@ -56,16 +62,34 @@ public:
     return *this;
   }
 
+  /* Obtención de estado */
+  // Devuelve el número de filas del campo
   inline int Filas() const {return tab.Filas();}
+
+  // Devuelve el número de columnas del campo
   inline int Columnas() const {return tab.Columnas();}
+
+  // Indica si ha explotado
   inline bool Explotado() const {return explotado;}
+
+  // Indica si se ha ganado la partida
   bool Ganado() const;
+
+  /* Cambiar el estado */
+  // Marca o desmarca una casilla cerrada. Devuelve éxito
   bool Marca(int x, int y);
+
+  // Obtiene una lista de casillas a abrir y las abre
   bool Abre(int x, int y);
+
+  /* Impresión */
+  // Imprime el estado actual del tablero
   void PrettyPrint(ostream& os = std::cout) const;
+
+  // Imprime el estado final del tablero
   void ImprimeTablero(ostream& os = std::cout) const;
 
-
+  /* E/S */
   // Lectura desde archivo
   bool Leer(const char* nombre);
   // Escritura a archivo

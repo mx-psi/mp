@@ -1,26 +1,25 @@
 #include "CampoMinas.h"
 using namespace std;
+const char* CABECERA = "#MP-BUSCAMINAS-V1"; // Cabecera de archivo de partida
 
-const char* CABECERA = "#MP-BUSCAMINAS-V1";   // Cabecera de archivo de partida
-
-/* Cabeceras de las funciones del módulo CampoMinas.cpp */
+/* Métodos de la clase CampoMinas */
 
 
+// Devuelve si las coordenadas son correctas
 bool CampoMinas::CoordCorrectas(int x, int y) const
 {
-  /* Devuelve si las coordenadas son correctas. */
   return x < tab.Filas() && y < tab.Columnas() && x >= 0 && y >= 0;
 }
 
+// Devuelve si hay una bomba en la coordenada dada
 bool CampoMinas::HayBomba(int x, int y) const
 {
-  /* Devuelve si hay una bomba en la coordenada dada. */
   return CoordCorrectas(x, y) && tab(x, y).bomba;
 }
 
+// Devuelve el número de bombas en casillas adyacentes
 int CampoMinas::NumeroBombas(int x, int y) const
 {
-  /* Devuelve el número de bombas en casillas adyacentes. */
   int n = 0;
   for(int i = -1; i <= 1; i++)
     for(int j = -1; j <= 1; j++)
@@ -28,9 +27,9 @@ int CampoMinas::NumeroBombas(int x, int y) const
   return n;
 }
 
+// Indica si se ha ganado la partida
 bool CampoMinas::Ganado() const
 {
-  /* Indica si se ha ganado la partida. */
   for(int i = 0; i < Filas(); i++)
     for(int j = 0; j < Columnas(); j++)
       if(!tab(i,j).bomba && !tab(i,j).abierta)
@@ -39,9 +38,9 @@ bool CampoMinas::Ganado() const
   return true;
 }
 
+// Marca o desmarca una casilla cerrada. Devuelve éxito
 bool CampoMinas::Marca(int x, int y)
 {
-  /* Marca o desmarca una casilla cerrada. Devuelve éxito. */
   assert(CoordCorrectas(x, y));
 
   if(tab(x,y).abierta)
@@ -51,8 +50,8 @@ bool CampoMinas::Marca(int x, int y)
   return true;
 }
 
+// Obtiene una lista de casillas a abrir y las abre
 bool CampoMinas::Abre(int x, int y){
-  /* Obtiene una lista de casillas a abrir y las abre */
   if (!CoordCorrectas(x, y))
     return false;
   bool algun_cambio = false;
@@ -97,10 +96,9 @@ bool CampoMinas::Abre(int x, int y){
   return algun_cambio;
 }
 
+// Imprime el estado actual del tablero
 void CampoMinas::PrettyPrint(ostream& os) const
 {
-  /* Imprime el estado actual del tablero. */
-
   // Columnas
   os << ' ';
   if (Filas() > 10)
@@ -144,10 +142,9 @@ void CampoMinas::PrettyPrint(ostream& os) const
   os << endl;
 }
 
+// Imprime el estado final del tablero
 void CampoMinas::ImprimeTablero(ostream& os) const
 {
-  /* Imprime el estado final del tablero. */
-
   if(!Ganado() && !Explotado())
     os << "No hagas trampa.";
   else
