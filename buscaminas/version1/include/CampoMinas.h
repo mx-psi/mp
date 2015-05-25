@@ -1,11 +1,9 @@
 /* Cabeceras de las funciones del módulo CampoMinas.cpp */
 
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib>  // rand, srand
 #include <iostream> // cin, cout
 #include <iomanip>  // setw
-#include <assert.h>
-
+#include <assert.h> // assert
 #include "Tablero.h"
 
 
