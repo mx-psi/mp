@@ -21,7 +21,6 @@ ostream& operator << (ostream& os, const Casilla& c)
   os << c.bomba;
   os << c.abierta;
   os << c.marcada;
-  os << " ";
   return os;
 }
 
@@ -46,7 +45,7 @@ ostream& operator << (ostream& os, const Tablero& t)
   os << t.Filas() << " " << t.Columnas() << endl;
   for(int i = 0; i < t.Filas(); i++)
     for(int j = 0; j < t.Columnas(); j++)
-      os << t(i,j);
+      os << t(i,j) << " ";
   return os;
 }
 

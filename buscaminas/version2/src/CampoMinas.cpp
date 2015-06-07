@@ -72,8 +72,8 @@ bool CampoMinas::Abre(int x, int y){
       if (!cas.marcada && !cas.abierta)
       {
         algun_cambio = true;
-        cas.abierta = true;
-        explotado  |= cas.bomba;
+        cas.abierta  = true;
+        explotado   |= cas.bomba;
         tab(pend->fila,  pend->columna) = cas;
         if (!cas.bomba && NumeroBombas(pend->fila, pend->columna) == 0)
           // Añade las casillas adyacentes
