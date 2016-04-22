@@ -1,7 +1,7 @@
 # Prácticas MP
 Repositorio para prácticas de Metodología de la Programación.
 
-De [**@pbaeyens**](https://github.com/pbaeyens) y [**@josemam**](https://github.com/josemam)
+De [**@tzae**](https://github.com/tzae) y [**@josemam**](https://github.com/josemam)
 
 ## Prácticas
 
